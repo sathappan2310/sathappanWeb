@@ -30,7 +30,7 @@ export const profile: Profile = {
   },
   stats: [
     { value: "4+", label: "Years of Experience" },
-    { value: "15+", label: "Projects Delivered" },
+    { value: "5+", label: "Projects Worked In" },
     { value: "3", label: "Awards Received" },
   ],
   highlights: [
