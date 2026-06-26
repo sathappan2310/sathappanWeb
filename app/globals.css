@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme tokens */
+    --bg: 247 245 255;       /* #F7F5FF */
+    --surface: 255 255 255;  /* #FFFFFF */
+    --surface-2: 244 240 255;/* #F4F0FF */
+    --line: 229 222 247;     /* #E5DEF7 */
+    --text: 26 21 48;        /* #1A1530 */
+    --muted: 107 100 136;    /* #6B6488 */
+    --accent: 110 86 207;    /* #6E56CF */
+    --accent-2: 76 62 168;   /* #4C3EA8 */
+  }
+
+  .dark {
+    --bg: 11 10 20;          /* #0B0A14 */
+    --surface: 21 20 42;     /* #15142A */
+    --surface-2: 28 27 53;   /* #1C1B35 */
+    --line: 38 37 70;        /* #262546 */
+    --text: 236 234 247;     /* #ECEAF7 */
+    --muted: 163 159 196;    /* #A39FC4 */
+    --accent: 155 135 245;   /* #9B87F5 */
+    --accent-2: 124 107 217; /* #7C6BD9 */
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    transition: background-color 300ms ease, color 300ms ease;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.35);
+    color: rgb(var(--text));
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-7;
+  }
+
+  .section {
+    @apply py-[100px];
+  }
+
+  .heading {
+    @apply font-display font-bold tracking-tight;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #9b87f5 0%, #6e56cf 60%, #4c3ea8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgb(var(--surface) / 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgb(var(--line) / 0.7);
+  }
+
+  .card-base {
+    @apply rounded-lg border bg-surface;
+    border-color: rgb(var(--line));
+    transition: transform 300ms ease, box-shadow 300ms ease,
+      border-color 300ms ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgb(var(--accent) / 0.6);
+    box-shadow: 0 10px 40px -10px rgba(123, 86, 217, 0.45);
+  }
+}
