@@ -12,6 +12,7 @@ const links = [
   { href: '/skillnest', label: 'Home' },
   { href: '/skillnest/technologies', label: 'Technologies' },
   { href: '/skillnest/roadmaps', label: 'Roadmaps' },
+  { href: '/skillnest/interview-helper', label: 'Interview Helper' },
   { href: '/skillnest/search', label: 'Search' },
   { href: '/skillnest/about', label: 'About' },
 ]

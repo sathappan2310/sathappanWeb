@@ -54,6 +54,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link className="hover:text-brand-600 dark:hover:text-brand-400" href="/skillnest/interview-helper">
+                Interview Helper
+              </Link>
+            </li>
+            <li>
               <Link className="hover:text-brand-600 dark:hover:text-brand-400" href="/skillnest/search">
                 Search
               </Link>

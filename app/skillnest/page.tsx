@@ -101,6 +101,11 @@ export default function Home() {
               <Link href="/skillnest/technologies">
                 <Button leftIcon={<Layers className="h-4 w-4" />}>Browse Technologies</Button>
               </Link>
+              <Link href="/skillnest/interview-helper">
+                <Button variant="outline" leftIcon={<Sparkles className="h-4 w-4" />}>
+                  Interview Helper
+                </Button>
+              </Link>
               <Link href="/skillnest/roadmaps">
                 <Button variant="outline" leftIcon={<Compass className="h-4 w-4" />}>
                   Learning Roadmaps
