@@ -1,0 +1,462 @@
+[
+  {
+    "id": 1,
+    "title": "Optionals and optional binding",
+    "question": "What are optionals in Swift and how do you safely unwrap them?",
+    "answer": "An optional is a type that either holds a value or is `nil`, declared with a trailing `?` (e.g. `String?`). You safely unwrap it using optional binding (`if let` / `guard let`), the nil-coalescing operator (`??`), or optional chaining, rather than force-unwrapping with `!`.",
+    "explanation": "Optionals make the absence of a value explicit in the type system, eliminating the null-pointer surprises common in other languages. `if let`/`guard let` bind the wrapped value to a new constant only when it is non-nil, so the rest of the scope works with a guaranteed value.",
+    "codeExample": "let raw: String? = \"42\"\n\nif let text = raw, let number = Int(text) {\n    print(\"Parsed: \\(number)\")\n} else {\n    print(\"No valid number\")\n}\n\n// Nil-coalescing provides a default\nlet count = Int(raw ?? \"0\") ?? 0",
+    "language": "swift",
+    "difficulty": "Beginner",
+    "category": "Fundamentals",
+    "tags": ["swift", "optionals", "junior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Prefer optional binding or ?? over force-unwrapping with !.",
+      "Use guard let for early exits to keep the happy path un-indented."
+    ],
+    "commonMistakes": [
+      "Force-unwrapping (!) values that can actually be nil and crashing at runtime."
+    ],
+    "interviewTips": [
+      "Mention that Optional is really an enum with .some and .none cases."
+    ],
+    "relatedQuestions": [9, 11]
+  },
+  {
+    "id": 2,
+    "title": "Struct vs class (value vs reference)",
+    "question": "What is the difference between a struct and a class in Swift?",
+    "answer": "Structs are value types: they are copied on assignment or when passed to functions, and each copy is independent. Classes are reference types: variables hold a reference to a shared instance, and copies point to the same object. Classes also support inheritance, deinitializers, and identity comparison (`===`).",
+    "explanation": "Value semantics make structs safer for concurrency and easier to reason about because there is no unexpected shared mutable state. Swift's standard library favors structs (Array, String, Dictionary are all value types with copy-on-write optimization).",
+    "codeExample": "struct PointS { var x = 0 }\nclass PointC { var x = 0 }\n\nvar a = PointS(); var b = a\nb.x = 10\nprint(a.x, b.x) // 0 10  (independent copies)\n\nlet c = PointC(); let d = c\nd.x = 10\nprint(c.x, d.x) // 10 10 (shared reference)",
+    "language": "swift",
+    "difficulty": "Beginner",
+    "category": "Types",
+    "tags": ["swift", "struct", "class", "value-types", "junior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Default to structs; reach for classes only when you need identity or inheritance.",
+      "Use structs for models to get predictable value semantics."
+    ],
+    "commonMistakes": [
+      "Assuming a struct copy shares state with the original after mutation."
+    ],
+    "interviewTips": [
+      "Mention Apple's guidance: prefer value types unless reference semantics are required."
+    ],
+    "relatedQuestions": [3, 19]
+  },
+  {
+    "id": 3,
+    "title": "Automatic Reference Counting (ARC)",
+    "question": "How does ARC manage memory in Swift?",
+    "answer": "ARC (Automatic Reference Counting) automatically tracks how many strong references point to each class instance. When the count drops to zero, ARC frees the instance and calls its deinitializer. ARC only applies to reference types (classes), not to value types like structs and enums.",
+    "explanation": "The compiler inserts retain/release calls at compile time, so there is no runtime garbage collector pausing your app. The trade-off is that strong reference cycles can leak memory, which you must break manually with weak or unowned references.",
+    "codeExample": "class Sensor {\n    let id: String\n    init(id: String) { self.id = id }\n    deinit { print(\"Sensor \\(id) deallocated\") }\n}\n\nvar s1: Sensor? = Sensor(id: \"A\") // count 1\nvar s2 = s1                       // count 2\ns1 = nil                          // count 1\ns2 = nil                          // count 0 -> deinit runs",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Memory Management",
+    "tags": ["swift", "arc", "memory", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Rely on ARC but stay alert for reference cycles.",
+      "Use deinit during debugging to confirm objects are freed."
+    ],
+    "commonMistakes": [
+      "Thinking ARC is a tracing garbage collector — it is compile-time counting."
+    ],
+    "interviewTips": [
+      "Clarify ARC applies to classes only, not structs/enums."
+    ],
+    "relatedQuestions": [4, 2]
+  },
+  {
+    "id": 4,
+    "title": "weak, unowned and retain cycles",
+    "question": "What causes a retain cycle and how do weak and unowned references fix it?",
+    "answer": "A retain cycle happens when two class instances hold strong references to each other, so neither reference count ever reaches zero. You break the cycle by marking one side `weak` (becomes nil automatically, must be optional) or `unowned` (assumed to always outlive, non-optional, crashes if accessed after deallocation).",
+    "explanation": "Use `weak` when the referenced object can legitimately become nil (e.g. delegates). Use `unowned` when the reference is guaranteed to be valid for the object's lifetime (e.g. a child that never outlives its parent). Choosing wrong leads to leaks (too strong) or crashes (unowned accessed after dealloc).",
+    "codeExample": "class Customer {\n    var card: Card?\n}\nclass Card {\n    unowned let owner: Customer // card never outlives its owner\n    init(owner: Customer) { self.owner = owner }\n}\n\nclass ViewModel {\n    weak var delegate: AnyObject? // avoids delegate retain cycle\n}",
+    "language": "swift",
+    "difficulty": "Advanced",
+    "category": "Memory Management",
+    "tags": ["swift", "arc", "weak", "unowned", "retain-cycle", "senior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Make delegate properties weak.",
+      "Use [weak self] in escaping closures that self also retains."
+    ],
+    "commonMistakes": [
+      "Using unowned for a reference that can actually become nil, causing a crash."
+    ],
+    "interviewTips": [
+      "Explain weak becomes nil automatically while unowned does not."
+    ],
+    "relatedQuestions": [3, 5]
+  },
+  {
+    "id": 5,
+    "title": "Closures and capture lists",
+    "question": "What is a closure in Swift and why do capture lists matter?",
+    "answer": "A closure is a self-contained block of functionality that can be passed around and that captures references to variables from its surrounding scope. A capture list (e.g. `[weak self]`) lets you control how those variables are captured, most commonly to avoid strong reference cycles.",
+    "explanation": "By default closures capture variables strongly. If a closure stored by `self` also captures `self` strongly, you create a retain cycle. `[weak self]` or `[unowned self]` breaks it. Capture lists also let you capture a value snapshot at closure-creation time.",
+    "codeExample": "class Loader {\n    var onDone: (() -> Void)?\n    func start() {\n        onDone = { [weak self] in\n            guard let self else { return }\n            self.finish()\n        }\n    }\n    func finish() { print(\"done\") }\n}\n\nlet nums = [1, 2, 3]\nlet doubled = nums.map { $0 * 2 } // trailing closure",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Closures",
+    "tags": ["swift", "closures", "capture-list", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use [weak self] in long-lived, escaping closures.",
+      "Unwrap weak self early with guard let self else { return }."
+    ],
+    "commonMistakes": [
+      "Capturing self strongly in a closure the object itself stores."
+    ],
+    "interviewTips": [
+      "Explain the difference between capturing by reference vs a value snapshot."
+    ],
+    "relatedQuestions": [4, 10]
+  },
+  {
+    "id": 6,
+    "title": "Protocol-oriented programming",
+    "question": "What is a protocol and what does protocol-oriented programming mean in Swift?",
+    "answer": "A protocol defines a blueprint of methods, properties, and requirements that conforming types must implement. Protocol-oriented programming (POP) favors composing behavior through protocols and protocol extensions over deep class inheritance, allowing structs and enums to share behavior too.",
+    "explanation": "Protocol extensions can provide default implementations, so conforming types get behavior for free. Because value types can conform to protocols, POP gives you polymorphism without the reference-type baggage of class inheritance.",
+    "codeExample": "protocol Drawable {\n    func draw()\n}\n\nextension Drawable {\n    func draw() { print(\"Default drawing\") }\n}\n\nstruct Circle: Drawable {}\nstruct Square: Drawable {\n    func draw() { print(\"Square\") }\n}\n\nlet shapes: [Drawable] = [Circle(), Square()]\nshapes.forEach { $0.draw() }",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Protocols",
+    "tags": ["swift", "protocols", "pop", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Provide sensible defaults via protocol extensions.",
+      "Compose small, focused protocols instead of large ones."
+    ],
+    "commonMistakes": [
+      "Confusing static (protocol) dispatch of extension methods with dynamic dispatch."
+    ],
+    "interviewTips": [
+      "Mention Apple's 'Protocol-Oriented Programming in Swift' WWDC talk."
+    ],
+    "relatedQuestions": [7, 20]
+  },
+  {
+    "id": 7,
+    "title": "Extensions",
+    "question": "What are extensions in Swift and what can they add?",
+    "answer": "Extensions add new functionality to an existing type — including types you don't own — without subclassing. They can add computed properties, methods, initializers, subscripts, and protocol conformances, but cannot add stored properties or override existing methods.",
+    "explanation": "Extensions are great for organizing code (e.g. grouping protocol conformances into separate extensions) and for retroactively conforming standard library types to your protocols. They keep types focused while allowing incremental capability additions.",
+    "codeExample": "extension Int {\n    var isEven: Bool { self % 2 == 0 }\n    func times(_ action: () -> Void) {\n        for _ in 0..<self { action() }\n    }\n}\n\nprint(4.isEven) // true\n3.times { print(\"hi\") }",
+    "language": "swift",
+    "difficulty": "Beginner",
+    "category": "Extensions",
+    "tags": ["swift", "extensions", "junior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Group each protocol conformance into its own extension for readability.",
+      "Use extensions to add convenience helpers to standard types."
+    ],
+    "commonMistakes": [
+      "Trying to add stored properties in an extension (not allowed)."
+    ],
+    "interviewTips": [
+      "Note that extensions can add computed properties but not stored ones."
+    ],
+    "relatedQuestions": [6, 13]
+  },
+  {
+    "id": 8,
+    "title": "Generics",
+    "question": "How do generics work in Swift and why are they useful?",
+    "answer": "Generics let you write flexible, reusable functions and types that work with any type while preserving type safety. You declare type parameters (e.g. `<T>`) and can constrain them with `where` clauses or protocol conformances (e.g. `T: Comparable`).",
+    "explanation": "Instead of writing overloaded functions per type or falling back to Any, generics keep full compile-time type checking. Swift's Array, Dictionary, and Optional are all generic types. Constraints let you require capabilities like Equatable or Comparable.",
+    "codeExample": "func maxOf<T: Comparable>(_ a: T, _ b: T) -> T {\n    a > b ? a : b\n}\n\nprint(maxOf(3, 9))       // 9\nprint(maxOf(\"a\", \"z\"))  // z\n\nstruct Stack<Element> {\n    private var items: [Element] = []\n    mutating func push(_ x: Element) { items.append(x) }\n    mutating func pop() -> Element? { items.popLast() }\n}",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Generics",
+    "tags": ["swift", "generics", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Constrain type parameters with protocols to enable needed operations.",
+      "Prefer generics over Any to keep type safety."
+    ],
+    "commonMistakes": [
+      "Overusing Any where a constrained generic would preserve type info."
+    ],
+    "interviewTips": [
+      "Contrast generics (static, compile-time) with opaque/existential types."
+    ],
+    "relatedQuestions": [20, 2]
+  },
+  {
+    "id": 9,
+    "title": "Enums with associated values",
+    "question": "How do enums with associated values work in Swift?",
+    "answer": "Swift enums can attach associated values of any type to each case, letting a single case carry extra data. You extract those values by pattern-matching in a `switch` or with `if case let`. This makes enums ideal for modeling states and results.",
+    "explanation": "Unlike simple integer enums, associated values let each case store different data — for example a network result that is either success with data or failure with an error. Combined with exhaustive switch, the compiler guarantees you handle every case.",
+    "codeExample": "enum Result {\n    case success(data: String)\n    case failure(code: Int)\n}\n\nlet outcome = Result.failure(code: 404)\n\nswitch outcome {\ncase .success(let data):\n    print(\"Got \\(data)\")\ncase .failure(let code):\n    print(\"Failed with \\(code)\")\n}",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Enums",
+    "tags": ["swift", "enums", "associated-values", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Model mutually exclusive states with enums and associated values.",
+      "Rely on exhaustive switch to catch unhandled cases at compile time."
+    ],
+    "commonMistakes": [
+      "Adding a default case that silently hides newly added enum cases."
+    ],
+    "interviewTips": [
+      "Mention they enable algebraic data types / state machines."
+    ],
+    "relatedQuestions": [10, 1]
+  },
+  {
+    "id": 10,
+    "title": "Error handling with do/try/catch",
+    "question": "How does error handling work in Swift?",
+    "answer": "Functions that can fail are marked `throws` and throw types conforming to the `Error` protocol. Callers must handle errors using `do { try ... } catch { }`, convert them to optionals with `try?`, or assert success with `try!`. Errors propagate up until caught.",
+    "explanation": "Swift's error handling is explicit but does not use exceptions with stack unwinding. `try?` yields nil on failure, `try!` traps on failure, and a full do/catch lets you branch on specific error cases, often defined as enums.",
+    "codeExample": "enum FileError: Error { case notFound, noPermission }\n\nfunc readFile(_ name: String) throws -> String {\n    guard name == \"config\" else { throw FileError.notFound }\n    return \"contents\"\n}\n\ndo {\n    let text = try readFile(\"missing\")\n    print(text)\n} catch FileError.notFound {\n    print(\"File not found\")\n} catch {\n    print(\"Other error: \\(error)\")\n}",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Error Handling",
+    "tags": ["swift", "error-handling", "try", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Model domain errors as enums conforming to Error.",
+      "Reserve try! for cases that are truly guaranteed to succeed."
+    ],
+    "commonMistakes": [
+      "Overusing try! and crashing on recoverable errors."
+    ],
+    "interviewTips": [
+      "Explain the difference between try, try?, and try!."
+    ],
+    "relatedQuestions": [11, 9]
+  },
+  {
+    "id": 11,
+    "title": "The guard statement",
+    "question": "What is the guard statement and how does it differ from if?",
+    "answer": "`guard` checks a condition and, if it fails, must exit the current scope (via `return`, `break`, `continue`, or `throw`). Unlike `if`, any values bound with `guard let` remain in scope for the rest of the function, which keeps the main logic un-nested.",
+    "explanation": "Guard promotes the early-return pattern: validate preconditions up front and bail out on failure, leaving the happy path flat and readable. Its else block is required to leave the scope, which the compiler enforces.",
+    "codeExample": "func greet(_ name: String?) {\n    guard let name, !name.isEmpty else {\n        print(\"No name provided\")\n        return\n    }\n    // name is non-optional and non-empty here\n    print(\"Hello, \\(name)!\")\n}",
+    "language": "swift",
+    "difficulty": "Beginner",
+    "category": "Control Flow",
+    "tags": ["swift", "guard", "control-flow", "junior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use guard for early exits to avoid deeply nested if statements.",
+      "Bind optionals with guard let so they stay in scope."
+    ],
+    "commonMistakes": [
+      "Forgetting the guard else must exit the scope."
+    ],
+    "interviewTips": [
+      "Contrast guard's scope-persistent bindings with if let's local scope."
+    ],
+    "relatedQuestions": [1, 10]
+  },
+  {
+    "id": 12,
+    "title": "Property wrappers",
+    "question": "What are property wrappers in Swift?",
+    "answer": "A property wrapper is a type that adds reusable behavior to a property by wrapping its storage and access logic. You define a type with a `wrappedValue` and annotate it with `@propertyWrapper`, then apply it with `@` syntax. SwiftUI's `@State`, `@Published`, and `@Environment` are property wrappers.",
+    "explanation": "Property wrappers remove boilerplate by centralizing behavior like clamping, thread-safety, or persistence. The `projectedValue` (exposed via `$`) can provide extra API, such as a Combine publisher in `@Published`.",
+    "codeExample": "@propertyWrapper\nstruct Clamped {\n    private var value: Int\n    let range: ClosedRange<Int>\n    init(wrappedValue: Int, _ range: ClosedRange<Int>) {\n        self.range = range\n        self.value = min(max(wrappedValue, range.lowerBound), range.upperBound)\n    }\n    var wrappedValue: Int {\n        get { value }\n        set { value = min(max(newValue, range.lowerBound), range.upperBound) }\n    }\n}\n\nstruct Volume {\n    @Clamped(0...10) var level = 5\n}",
+    "language": "swift",
+    "difficulty": "Advanced",
+    "category": "Language Features",
+    "tags": ["swift", "property-wrapper", "swiftui", "senior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use property wrappers to eliminate repeated get/set logic.",
+      "Expose extra API through projectedValue when useful."
+    ],
+    "commonMistakes": [
+      "Putting complex side effects in a wrapper's setter unexpectedly."
+    ],
+    "interviewTips": [
+      "Give SwiftUI examples like @State and @Published."
+    ],
+    "relatedQuestions": [13, 16]
+  },
+  {
+    "id": 13,
+    "title": "Computed vs stored properties",
+    "question": "What is the difference between stored and computed properties?",
+    "answer": "A stored property holds an actual value in memory. A computed property does not store a value; it provides a getter (and optionally a setter) that calculates a value each time it is accessed. Computed properties can live in extensions, whereas stored ones cannot.",
+    "explanation": "Use stored properties for state and computed properties for derived values that depend on other state. Computed properties keep data in sync automatically since they recalculate on access, avoiding stale cached values.",
+    "codeExample": "struct Rectangle {\n    var width: Double   // stored\n    var height: Double  // stored\n\n    var area: Double {  // computed (read-only)\n        width * height\n    }\n\n    var diagonal: Double {\n        get { (width * width + height * height).squareRoot() }\n    }\n}",
+    "language": "swift",
+    "difficulty": "Beginner",
+    "category": "Properties",
+    "tags": ["swift", "properties", "computed", "junior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use computed properties for values derived from other stored state.",
+      "Add property observers (didSet/willSet) for side effects on stored ones."
+    ],
+    "commonMistakes": [
+      "Trying to store a value in a computed property or add a stored one in an extension."
+    ],
+    "interviewTips": [
+      "Note computed properties recalculate on every access."
+    ],
+    "relatedQuestions": [7, 12]
+  },
+  {
+    "id": 14,
+    "title": "Escaping closures",
+    "question": "What is an escaping closure and when do you need @escaping?",
+    "answer": "A closure escapes when it is stored or called after the function it was passed to returns — for example saved to a property or run asynchronously. You mark such parameters with `@escaping`. Non-escaping closures (the default) must run before the function returns.",
+    "explanation": "The distinction helps ARC and the compiler reason about lifetimes. Escaping closures can create retain cycles because they may capture and hold `self`, which is why you often need `[weak self]`. Non-escaping closures are cheaper and safer since their lifetime is bounded.",
+    "codeExample": "var handlers: [() -> Void] = []\n\nfunc store(_ handler: @escaping () -> Void) {\n    handlers.append(handler) // escapes: stored for later\n}\n\nfunc runNow(_ action: () -> Void) {\n    action() // non-escaping: runs before return\n}",
+    "language": "swift",
+    "difficulty": "Advanced",
+    "category": "Closures",
+    "tags": ["swift", "closures", "escaping", "senior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Only mark closures @escaping when they truly outlive the call.",
+      "Use [weak self] in escaping closures to prevent retain cycles."
+    ],
+    "commonMistakes": [
+      "Forgetting @escaping when storing a closure for later use."
+    ],
+    "interviewTips": [
+      "Explain why escaping closures often require capture lists."
+    ],
+    "relatedQuestions": [5, 4]
+  },
+  {
+    "id": 15,
+    "title": "Codable for JSON",
+    "question": "What is Codable and how do you use it for JSON?",
+    "answer": "`Codable` is a type alias for `Encodable & Decodable`. Conforming a type to Codable lets you encode it to and decode it from formats like JSON using `JSONEncoder` and `JSONDecoder`, with the compiler synthesizing the conformance automatically for matching property types.",
+    "explanation": "You customize behavior with `CodingKeys` to map differing JSON keys, or by implementing `init(from:)` / `encode(to:)` for full control. Codable removes most manual parsing boilerplate while staying type-safe.",
+    "codeExample": "struct User: Codable {\n    let id: Int\n    let fullName: String\n\n    enum CodingKeys: String, CodingKey {\n        case id\n        case fullName = \"full_name\"\n    }\n}\n\nlet json = \"{\\\"id\\\":1,\\\"full_name\\\":\\\"Ada\\\"}\".data(using: .utf8)!\nlet user = try JSONDecoder().decode(User.self, from: json)\nprint(user.fullName) // Ada",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Serialization",
+    "tags": ["swift", "codable", "json", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use CodingKeys to map snake_case JSON to camelCase properties.",
+      "Set decoder.keyDecodingStrategy = .convertFromSnakeCase for bulk mapping."
+    ],
+    "commonMistakes": [
+      "Not handling decoding errors, causing crashes on malformed JSON."
+    ],
+    "interviewTips": [
+      "Mention Codable = Encodable & Decodable."
+    ],
+    "relatedQuestions": [10, 2]
+  },
+  {
+    "id": 16,
+    "title": "Concurrency: async/await and actors",
+    "question": "How do async/await and actors work in Swift concurrency?",
+    "answer": "`async`/`await` let you write asynchronous code that reads sequentially: an `async` function can suspend at `await` without blocking the thread. Actors are reference types that protect their mutable state from data races by serializing access, so only one task touches their state at a time.",
+    "explanation": "Introduced in Swift 5.5, structured concurrency replaces nested completion handlers. `Task` starts asynchronous work, and actors provide compiler-enforced isolation. The `@MainActor` attribute ensures code runs on the main thread for UI updates.",
+    "codeExample": "actor Counter {\n    private var value = 0\n    func increment() { value += 1 }\n    func current() -> Int { value }\n}\n\nfunc load(from url: URL) async throws -> Data {\n    let (data, _) = try await URLSession.shared.data(from: url)\n    return data\n}\n\nTask {\n    let counter = Counter()\n    await counter.increment()\n    print(await counter.current())\n}",
+    "language": "swift",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": ["swift", "concurrency", "async-await", "actors", "senior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use actors to protect shared mutable state from data races.",
+      "Mark UI-updating code with @MainActor."
+    ],
+    "commonMistakes": [
+      "Blocking a thread with synchronous work inside an async function."
+    ],
+    "interviewTips": [
+      "Explain how actors serialize access and prevent data races."
+    ],
+    "relatedQuestions": [5, 14]
+  },
+  {
+    "id": 17,
+    "title": "Higher-order functions",
+    "question": "What do map, filter, and reduce do in Swift?",
+    "answer": "They are higher-order functions on collections. `map` transforms each element into a new value, `filter` keeps only elements matching a predicate, and `reduce` combines all elements into a single accumulated value. Each takes a closure and returns a result without mutating the original collection.",
+    "explanation": "These functional operators produce clear, declarative pipelines and avoid manual loops and mutable index tracking. `compactMap` additionally removes nils, and `flatMap` flattens nested collections.",
+    "codeExample": "let numbers = [1, 2, 3, 4, 5]\n\nlet squares = numbers.map { $0 * $0 }        // [1, 4, 9, 16, 25]\nlet evens   = numbers.filter { $0 % 2 == 0 } // [2, 4]\nlet total   = numbers.reduce(0, +)           // 15\n\nlet parsed = [\"1\", \"x\", \"3\"].compactMap { Int($0) } // [1, 3]",
+    "language": "swift",
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "tags": ["swift", "higher-order", "map-filter-reduce", "junior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Chain map/filter/reduce for readable data pipelines.",
+      "Use compactMap to transform and drop nils in one step."
+    ],
+    "commonMistakes": [
+      "Using map for side effects instead of forEach."
+    ],
+    "interviewTips": [
+      "Differentiate map, compactMap, and flatMap."
+    ],
+    "relatedQuestions": [5, 8]
+  },
+  {
+    "id": 18,
+    "title": "Access control",
+    "question": "What access control levels does Swift provide?",
+    "answer": "Swift has five access levels, from most to least restrictive: `private`, `fileprivate`, `internal` (the default), `public`, and `open`. They limit where a declaration can be used, controlling encapsulation across modules. Only `open` permits subclassing/overriding outside the defining module.",
+    "explanation": "`internal` is the default and scopes symbols to the current module. `public` exposes API to other modules but not for subclassing; `open` additionally allows external subclassing and overriding. `private` limits to the enclosing declaration, while `fileprivate` limits to the same file.",
+    "codeExample": "public struct BankAccount {\n    private var balance = 0.0            // hidden from everyone else\n    public private(set) var owner: String // readable, writable only internally\n\n    public init(owner: String) { self.owner = owner }\n    public mutating func deposit(_ amount: Double) {\n        balance += amount\n    }\n}",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Access Control",
+    "tags": ["swift", "access-control", "encapsulation", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Expose the smallest surface area needed; default to private for internals.",
+      "Use private(set) to allow read-only public access."
+    ],
+    "commonMistakes": [
+      "Confusing public and open — public does not allow external subclassing."
+    ],
+    "interviewTips": [
+      "Know the default level is internal, scoped to the module."
+    ],
+    "relatedQuestions": [2, 19]
+  },
+  {
+    "id": 19,
+    "title": "Mutating methods on structs",
+    "question": "Why do struct methods that change properties need the mutating keyword?",
+    "answer": "Because structs are value types, their methods cannot modify their own stored properties by default. Marking a method `mutating` signals that it changes the instance, allowing property mutation and even reassigning `self`. Mutating methods can only be called on variables (`var`), not constants (`let`).",
+    "explanation": "The `mutating` keyword makes value-type mutation explicit and safe. Classes do not need it because reference-type methods can always change properties through the shared reference. Calling a mutating method on a `let` struct is a compile-time error.",
+    "codeExample": "struct Counter {\n    private(set) var count = 0\n    mutating func increment() { count += 1 }\n    mutating func reset() { self = Counter() }\n}\n\nvar c = Counter()\nc.increment() // OK\n\nlet fixed = Counter()\n// fixed.increment() // compile error: cannot mutate a let",
+    "language": "swift",
+    "difficulty": "Intermediate",
+    "category": "Types",
+    "tags": ["swift", "mutating", "struct", "value-types", "mid", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Store structs you need to mutate in var, not let.",
+      "Keep mutating logic explicit to preserve value semantics."
+    ],
+    "commonMistakes": [
+      "Forgetting mutating on a struct method that changes properties."
+    ],
+    "interviewTips": [
+      "Explain why classes never need the mutating keyword."
+    ],
+    "relatedQuestions": [2, 13]
+  },
+  {
+    "id": 20,
+    "title": "Opaque types with some",
+    "question": "What are opaque return types (the some keyword) in Swift?",
+    "answer": "An opaque type, declared with `some Protocol`, means a function returns a specific concrete type that conforms to the protocol without exposing which type it is. The caller knows the return conforms to the protocol and that it is always the same underlying type, preserving type identity.",
+    "explanation": "Opaque types differ from returning a protocol (existential) because the compiler keeps the concrete type, avoiding boxing overhead and allowing associated-type protocols like SwiftUI's `View`. This is why SwiftUI `body` returns `some View` — the concrete type is hidden but fixed.",
+    "codeExample": "func makeNumbers() -> some Sequence<Int> {\n    Array(1...5)\n}\n\n// SwiftUI style\nvar body: some View {\n    Text(\"Hello\")\n}\n\n// Existential (any) hides identity, allows different types\nfunc makeShape(_ round: Bool) -> any Shape {\n    round ? Circle() : Rectangle()\n}",
+    "language": "swift",
+    "difficulty": "Advanced",
+    "category": "Language Features",
+    "tags": ["swift", "opaque-types", "some", "generics", "senior", "ios", "mobile", "apple"],
+    "bestPractices": [
+      "Use some when the concrete type is fixed but should stay hidden.",
+      "Use any when the returned type genuinely varies at runtime."
+    ],
+    "commonMistakes": [
+      "Returning different concrete types from a single some-typed function."
+    ],
+    "interviewTips": [
+      "Contrast opaque types (some) with existentials (any)."
+    ],
+    "relatedQuestions": [6, 8]
+  }
+]

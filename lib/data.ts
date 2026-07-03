@@ -105,6 +105,17 @@ export const experience: ExperienceItem[] = [
 
 export const projects: Project[] = [
   {
+    slug: "skillnest",
+    name: "SkillNest",
+    codename: "SKILLNEST",
+    description:
+      "A premium, frontend-only interview preparation platform with 200+ curated questions, syntax-highlighted code, visual roadmaps, and instant search across 25+ technologies — dark mode, fully responsive, and built into this site.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    href: "/skillnest",
+    featured: true,
+    internal: true,
+  },
+  {
     slug: "freckled-ai",
     name: "Freckled AI",
     codename: "FRECKLED",

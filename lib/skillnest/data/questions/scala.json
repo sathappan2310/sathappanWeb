@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "title": "val vs var vs def",
+    "question": "What is the difference between val, var, and def in Scala?",
+    "answer": "A val is an immutable binding evaluated once and never reassigned. A var is a mutable binding that can be reassigned. A def defines a method (or a lazily re-evaluated member) whose body runs every time it is invoked.",
+    "explanation": "val binds a name to a value computed immediately; the reference cannot change (though a mutable object it points to still can). var allows reassignment. def is a method definition — its right-hand side is re-evaluated on each call, which matters when the body has side effects or returns fresh values.",
+    "codeExample": "val pi = 3.14        // immutable, evaluated once\nvar count = 0        // mutable\ncount = count + 1\ndef now() = System.currentTimeMillis() // re-evaluated each call\n\nprintln(now()) // different value each invocation",
+    "language": "scala",
+    "difficulty": "Beginner",
+    "category": "Fundamentals",
+    "tags": ["scala", "junior", "backend", "jvm", "immutability"],
+    "bestPractices": [
+      "Prefer val over var to keep code referentially transparent.",
+      "Use def for computations that must run each time."
+    ],
+    "commonMistakes": [
+      "Reaching for var by default when a val would do.",
+      "Assuming a val makes the referenced object immutable."
+    ],
+    "interviewTips": [
+      "Stress that val fixes the binding, not the object's internal state."
+    ],
+    "relatedQuestions": [5, 15]
+  },
+  {
+    "id": 2,
+    "title": "Case classes",
+    "question": "What are case classes in Scala and what do they generate for you?",
+    "answer": "A case class is an immutable data-holding class for which the compiler auto-generates a companion object with apply/unapply, plus equals, hashCode, toString, copy, and pattern-matching support. Constructor parameters become public vals by default.",
+    "explanation": "Case classes are ideal for modelling immutable data. The generated apply lets you construct without new, unapply enables pattern matching, structural equals/hashCode compare by field values, and copy produces modified duplicates while keeping immutability.",
+    "codeExample": "case class User(name: String, age: Int)\n\nval u = User(\"Ada\", 36)     // no 'new' needed\nval older = u.copy(age = 37) // structural copy\nprintln(u == User(\"Ada\", 36)) // true (value equality)",
+    "language": "scala",
+    "difficulty": "Beginner",
+    "category": "Data Modeling",
+    "tags": ["scala", "junior", "backend", "data", "jvm"],
+    "bestPractices": [
+      "Use case classes for immutable domain models and DTOs.",
+      "Use copy for updates instead of mutation."
+    ],
+    "commonMistakes": [
+      "Adding mutable var fields, defeating value equality.",
+      "Using case classes for large mutable entities."
+    ],
+    "interviewTips": [
+      "List the members the compiler generates automatically."
+    ],
+    "relatedQuestions": [3, 18, 19]
+  },
+  {
+    "id": 3,
+    "title": "Pattern matching",
+    "question": "How does pattern matching work in Scala and why is it powerful?",
+    "answer": "Pattern matching uses the match expression to test a value against a series of patterns, binding variables and deconstructing structures in one step. It works with literals, types, case classes, tuples, lists, and guards, and returns a value.",
+    "explanation": "Unlike a plain switch, Scala matching can destructure case classes and collections, bind extracted parts to names, apply guard conditions, and is exhaustiveness-checked against sealed hierarchies. It is central to idiomatic Scala.",
+    "codeExample": "def describe(x: Any): String = x match {\n  case 0            => \"zero\"\n  case n: Int if n > 0 => \"positive int\"\n  case s: String    => s\"string of length ${s.length}\"\n  case _            => \"something else\"\n}\n\nprintln(describe(42)) // positive int",
+    "language": "scala",
+    "difficulty": "Beginner",
+    "category": "Pattern Matching",
+    "tags": ["scala", "junior", "backend", "jvm"],
+    "bestPractices": [
+      "Match on sealed hierarchies to get exhaustiveness warnings.",
+      "Use guards to refine cases instead of nesting ifs."
+    ],
+    "commonMistakes": [
+      "Forgetting a default case on open types, risking MatchError.",
+      "Lowercase identifiers in patterns are binders, not references."
+    ],
+    "interviewTips": [
+      "Explain how matching combines type-testing and destructuring."
+    ],
+    "relatedQuestions": [4, 17, 18]
+  },
+  {
+    "id": 4,
+    "title": "Option, Some, None",
+    "question": "What is Option in Scala and how does it improve on null?",
+    "answer": "Option[A] models a value that may be absent: Some(value) when present or None when missing. It replaces null with a type-safe container the compiler forces you to handle, eliminating many NullPointerExceptions.",
+    "explanation": "Because Option is a monad with map, flatMap, getOrElse, and pattern-matching support, you compose optional values without null checks. The type signature makes absence explicit and self-documenting.",
+    "codeExample": "def find(id: Int): Option[String] =\n  if (id == 1) Some(\"Ada\") else None\n\nval name = find(1).map(_.toUpperCase).getOrElse(\"unknown\")\nprintln(name) // ADA\n\nfind(2) match {\n  case Some(n) => println(n)\n  case None    => println(\"missing\")\n}",
+    "language": "scala",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": ["scala", "junior", "backend", "data", "jvm"],
+    "bestPractices": [
+      "Return Option instead of null from functions that may find nothing.",
+      "Prefer getOrElse/map over calling .get, which can throw."
+    ],
+    "commonMistakes": [
+      "Calling .get on a None and crashing.",
+      "Wrapping values in Option but still returning null inside."
+    ],
+    "interviewTips": [
+      "Mention Option chains via map/flatMap and for-comprehensions."
+    ],
+    "relatedQuestions": [7, 20, 12]
+  },
+  {
+    "id": 5,
+    "title": "Immutability & persistent collections",
+    "question": "How do Scala's immutable persistent collections work?",
+    "answer": "Scala's default collections in scala.collection.immutable are persistent: operations that 'modify' them return a new collection while structurally sharing most of the underlying data with the original, so the old version remains valid and unchanged.",
+    "explanation": "Structural sharing (via trees/tries) makes updates efficient without copying everything. This gives thread-safety by default and predictable code, since no one can mutate a collection out from under you.",
+    "codeExample": "val a = List(1, 2, 3)\nval b = 0 :: a        // prepend -> new list\nprintln(a) // List(1, 2, 3) unchanged\nprintln(b) // List(0, 1, 2, 3)\n\nval m = Map(\"x\" -> 1)\nval m2 = m + (\"y\" -> 2) // new map, m unchanged",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Collections",
+    "tags": ["scala", "mid", "backend", "data", "jvm", "immutability"],
+    "bestPractices": [
+      "Default to immutable collections for safety and concurrency.",
+      "Rely on structural sharing rather than defensive copying."
+    ],
+    "commonMistakes": [
+      "Importing scala.collection.mutable unintentionally.",
+      "Assuming immutable updates copy the whole structure."
+    ],
+    "interviewTips": [
+      "Explain structural sharing and why old references stay valid."
+    ],
+    "relatedQuestions": [1, 12, 20]
+  },
+  {
+    "id": 6,
+    "title": "Higher-order functions",
+    "question": "What are higher-order functions in Scala and where are they used?",
+    "answer": "A higher-order function is one that takes other functions as parameters or returns a function. Scala treats functions as first-class values, so combinators like map, filter, and fold accept function arguments to abstract over behaviour.",
+    "explanation": "Functions can be passed, stored, and returned. This enables concise, reusable abstractions: instead of writing loops you pass the per-element logic to a combinator. Function literals (lambdas) provide the behaviour inline.",
+    "codeExample": "def applyTwice(f: Int => Int, x: Int): Int = f(f(x))\nprintln(applyTwice(_ + 1, 10)) // 12\n\nval nums = List(1, 2, 3, 4)\nprintln(nums.filter(_ % 2 == 0)) // List(2, 4)\nprintln(nums.map(_ * 10))        // List(10, 20, 30, 40)",
+    "language": "scala",
+    "difficulty": "Beginner",
+    "category": "Functional Programming",
+    "tags": ["scala", "junior", "backend", "data", "jvm"],
+    "bestPractices": [
+      "Favour combinators over manual loops for clarity.",
+      "Keep passed functions pure and side-effect free."
+    ],
+    "commonMistakes": [
+      "Overusing underscore placeholders until code is unreadable.",
+      "Confusing a method reference with an invoked call."
+    ],
+    "interviewTips": [
+      "Note that functions are first-class values in Scala."
+    ],
+    "relatedQuestions": [10, 16, 20]
+  },
+  {
+    "id": 7,
+    "title": "For-comprehensions",
+    "question": "What is a for-comprehension and how does it desugar?",
+    "answer": "A for-comprehension is syntactic sugar for chaining map, flatMap, filter (withFilter), and foreach on monadic types like Option, List, Future, and Either. Multiple generators desugar into nested flatMap calls with a final map (or foreach if there is no yield).",
+    "explanation": "for (a <- xs; b <- ys) yield f(a, b) becomes xs.flatMap(a => ys.map(b => f(a, b))). Because it works on anything providing these methods, the same syntax composes Options, collections, and Futures uniformly.",
+    "codeExample": "val result =\n  for {\n    a <- Some(2)\n    b <- Some(3)\n    if a < b\n  } yield a + b\nprintln(result) // Some(5)\n\n// desugars to:\nSome(2).withFilter(a => true).flatMap(a => Some(3).map(b => a + b))",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Functional Programming",
+    "tags": ["scala", "mid", "backend", "data", "jvm"],
+    "bestPractices": [
+      "Use for-comprehensions to flatten nested map/flatMap chains.",
+      "Keep all generators the same monad type within one comprehension."
+    ],
+    "commonMistakes": [
+      "Mixing Option and Future generators in one comprehension.",
+      "Forgetting yield and getting Unit instead of a value."
+    ],
+    "interviewTips": [
+      "Be able to desugar a comprehension into flatMap/map by hand."
+    ],
+    "relatedQuestions": [4, 13, 20]
+  },
+  {
+    "id": 8,
+    "title": "Traits & mixins",
+    "question": "What are traits in Scala and how do mixins work?",
+    "answer": "A trait is a reusable unit of behaviour and state that can be mixed into classes. Unlike Java interfaces of old, traits can hold concrete methods and fields, and a class can mix in multiple traits with the 'with' keyword, enabling composition.",
+    "explanation": "Traits support code reuse without single-inheritance limits. When multiple traits define the same member, Scala uses linearization to determine which implementation wins, resolving the diamond problem deterministically.",
+    "codeExample": "trait Greeter { def greet(n: String) = s\"Hi $n\" }\ntrait Loud { def shout(s: String) = s.toUpperCase }\n\nclass Host extends Greeter with Loud\n\nval h = new Host\nprintln(h.shout(h.greet(\"Ada\"))) // HI ADA",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "OOP",
+    "tags": ["scala", "mid", "backend", "jvm", "architect"],
+    "bestPractices": [
+      "Use traits to compose small, focused behaviours.",
+      "Understand linearization order for stackable traits."
+    ],
+    "commonMistakes": [
+      "Assuming trait resolution is left-to-right instead of linearized.",
+      "Putting heavy mutable state in widely mixed traits."
+    ],
+    "interviewTips": [
+      "Explain linearization and how it solves the diamond problem."
+    ],
+    "relatedQuestions": [9, 18, 11]
+  },
+  {
+    "id": 9,
+    "title": "Companion objects",
+    "question": "What is a companion object and why is it useful?",
+    "answer": "A companion object is a singleton object with the same name as a class, defined in the same file. It can access the class's private members and typically holds factory methods (apply), constants, and unapply extractors, serving as the class's static side.",
+    "explanation": "Scala has no static members; companion objects fill that role. The apply method enables construction without new, and unapply supports pattern matching. Case classes generate a companion object automatically.",
+    "codeExample": "class Circle private (val r: Double)\n\nobject Circle {\n  def apply(r: Double): Circle = new Circle(r)\n  val Unit = new Circle(1.0)\n}\n\nval c = Circle(2.0) // uses apply, no 'new'",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "OOP",
+    "tags": ["scala", "mid", "backend", "jvm"],
+    "bestPractices": [
+      "Put factory methods and constants in the companion object.",
+      "Keep constructors private and expose apply for validation."
+    ],
+    "commonMistakes": [
+      "Defining the object in a different file, losing companion status.",
+      "Expecting static keyword semantics from Java."
+    ],
+    "interviewTips": [
+      "Mention private-member access between class and its companion."
+    ],
+    "relatedQuestions": [2, 17, 10]
+  },
+  {
+    "id": 10,
+    "title": "Implicits and given/using",
+    "question": "How do implicits (Scala 2) and given/using (Scala 3) provide contextual parameters?",
+    "answer": "Implicit parameters let the compiler supply arguments automatically from in-scope implicit/given values. In Scala 2 you use implicit parameters and implicit vals; Scala 3 replaces them with the clearer given definitions and using clauses. They power type classes and context passing.",
+    "explanation": "When a method has an implicit/using parameter, the compiler searches the implicit scope for a matching given/implicit value and injects it. This underpins type classes, ExecutionContext propagation, and ordering/serialization instances without boilerplate.",
+    "codeExample": "// Scala 3\ntrait Show[A] { def show(a: A): String }\n\ngiven Show[Int] with\n  def show(a: Int) = s\"Int($a)\"\n\ndef print[A](a: A)(using s: Show[A]) = println(s.show(a))\nprint(42) // Int(42)",
+    "language": "scala",
+    "difficulty": "Advanced",
+    "category": "Type System",
+    "tags": ["scala", "senior", "backend", "jvm", "architect"],
+    "bestPractices": [
+      "Use given/using for type classes and cross-cutting context.",
+      "Keep implicit scope small and unambiguous."
+    ],
+    "commonMistakes": [
+      "Creating ambiguous implicits that fail to resolve.",
+      "Overusing implicits until behaviour becomes hard to trace."
+    ],
+    "interviewTips": [
+      "Contrast Scala 2 implicit with Scala 3 given/using syntax."
+    ],
+    "relatedQuestions": [9, 11, 8]
+  },
+  {
+    "id": 11,
+    "title": "Type inference",
+    "question": "How does Scala's type inference work and what are its limits?",
+    "answer": "Scala infers types locally, so you can omit annotations for local vals, expression results, and lambda parameters when the compiler can deduce them from context. However, inference is not global: recursive methods and public API return types often need explicit annotations.",
+    "explanation": "Scala uses local, flow-based inference rather than the global Hindley-Milner style of ML. This keeps overload resolution and subtyping tractable but means method return types (especially recursive ones) sometimes must be stated explicitly.",
+    "codeExample": "val n = 42            // inferred Int\nval xs = List(1, 2)    // List[Int]\nval f = (x: Int) => x + 1 // Int => Int\n\n// recursive method needs explicit return type\ndef fact(n: Int): Int = if (n <= 1) 1 else n * fact(n - 1)",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Type System",
+    "tags": ["scala", "mid", "backend", "jvm"],
+    "bestPractices": [
+      "Annotate public method return types for clarity and stability.",
+      "Let inference handle obvious local values."
+    ],
+    "commonMistakes": [
+      "Omitting return types on recursive methods.",
+      "Assuming Scala infers as globally as Haskell/ML."
+    ],
+    "interviewTips": [
+      "Explain why recursive and public members need annotations."
+    ],
+    "relatedQuestions": [10, 12, 15]
+  },
+  {
+    "id": 12,
+    "title": "Variance annotations",
+    "question": "What are covariance and contravariance in Scala generics?",
+    "answer": "Variance controls subtyping of generic types. A covariant type parameter +A means Box[Cat] is a subtype of Box[Animal] (outputs). A contravariant -A means the reverse (inputs), so Printer[Animal] is a subtype of Printer[Cat]. Invariant (no marker) allows neither.",
+    "explanation": "Covariance is safe for producers (positions that return A), contravariance for consumers (positions that accept A). Function types are contravariant in inputs and covariant in output. Immutable collections like List are covariant; mutable ones are invariant for safety.",
+    "codeExample": "class Box[+A](val value: A)          // covariant\nval b: Box[Any] = new Box[Int](1)    // OK\n\ntrait Printer[-A] { def print(a: A): Unit } // contravariant\nval p: Printer[Int] = new Printer[Any] { def print(a: Any) = println(a) }",
+    "language": "scala",
+    "difficulty": "Advanced",
+    "category": "Type System",
+    "tags": ["scala", "senior", "backend", "jvm", "architect"],
+    "bestPractices": [
+      "Use +A for producers and -A for consumers.",
+      "Keep mutable containers invariant to avoid unsoundness."
+    ],
+    "commonMistakes": [
+      "Making a mutable collection covariant, breaking type safety.",
+      "Confusing which position each variance is safe for."
+    ],
+    "interviewTips": [
+      "Explain the producer/consumer (PECS-like) rule for variance."
+    ],
+    "relatedQuestions": [11, 8, 5]
+  },
+  {
+    "id": 13,
+    "title": "Futures & concurrency",
+    "question": "How does Scala's Future model asynchronous concurrency?",
+    "answer": "A Future[T] represents a computation that will complete asynchronously with a value or an exception. It runs on an implicit ExecutionContext (thread pool) and is composed non-blockingly with map, flatMap, recover, and for-comprehensions rather than by blocking on results.",
+    "explanation": "Futures decouple 'what to compute' from 'when it finishes'. You register transformations that run when the value is available. Blocking with Await defeats the purpose; idiomatic code chains callbacks/combinators and propagates failures through recover/recoverWith.",
+    "codeExample": "import scala.concurrent.Future\nimport scala.concurrent.ExecutionContext.Implicits.global\n\nval f: Future[Int] = Future { 21 * 2 }\nval g = f.map(_ + 1).recover { case _ => -1 }\ng.foreach(println) // 43",
+    "language": "scala",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": ["scala", "senior", "backend", "jvm", "data"],
+    "bestPractices": [
+      "Compose Futures with map/flatMap instead of blocking on Await.",
+      "Provide an appropriate ExecutionContext for the workload."
+    ],
+    "commonMistakes": [
+      "Calling Await.result everywhere and blocking threads.",
+      "Swallowing failures by ignoring recover/onComplete."
+    ],
+    "interviewTips": [
+      "Explain the role of the implicit ExecutionContext."
+    ],
+    "relatedQuestions": [7, 20, 4]
+  },
+  {
+    "id": 14,
+    "title": "Partial functions",
+    "question": "What is a PartialFunction in Scala and how does it differ from a total function?",
+    "answer": "A PartialFunction[A, B] is defined only for a subset of its input domain. It adds isDefinedAt to test applicability, so callers can check before applying. It is commonly written as a block of case clauses without a match subject.",
+    "explanation": "Unlike a total function that handles every input, a partial function may not be defined for some values. Methods like collect use isDefinedAt to filter and transform in one pass, and partial functions can be combined with orElse.",
+    "codeExample": "val half: PartialFunction[Int, Int] = {\n  case x if x % 2 == 0 => x / 2\n}\n\nprintln(half.isDefinedAt(4)) // true\nval r = List(1, 2, 3, 4).collect(half) // List(1, 2)",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Functional Programming",
+    "tags": ["scala", "mid", "backend", "jvm"],
+    "bestPractices": [
+      "Use collect with a partial function to filter and map together.",
+      "Combine partial functions with orElse for fallbacks."
+    ],
+    "commonMistakes": [
+      "Applying a partial function to an undefined input, causing MatchError.",
+      "Confusing a partial function with a partially applied function."
+    ],
+    "interviewTips": [
+      "Mention isDefinedAt and the difference from partial application."
+    ],
+    "relatedQuestions": [3, 16, 6]
+  },
+  {
+    "id": 15,
+    "title": "Tail recursion & @tailrec",
+    "question": "What is tail recursion in Scala and what does @tailrec do?",
+    "answer": "A recursive call is in tail position when it is the last operation of the method, allowing the compiler to reuse the current stack frame (a loop) instead of growing the stack. The @tailrec annotation asks the compiler to verify this and fail compilation if optimization is not possible.",
+    "explanation": "Tail-call optimization avoids StackOverflowError for deep recursion. @tailrec is a safety net: if the call is not truly in tail position (e.g. it multiplies the result afterwards), compilation fails so you catch the problem early.",
+    "codeExample": "import scala.annotation.tailrec\n\n@tailrec\ndef sum(xs: List[Int], acc: Int = 0): Int = xs match {\n  case Nil     => acc\n  case h :: t  => sum(t, acc + h) // tail position\n}\n\nprintln(sum(List(1, 2, 3, 4))) // 10",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Functional Programming",
+    "tags": ["scala", "mid", "backend", "jvm"],
+    "bestPractices": [
+      "Use an accumulator to make recursion tail-recursive.",
+      "Annotate with @tailrec to enforce the optimization."
+    ],
+    "commonMistakes": [
+      "Doing work after the recursive call, breaking tail position.",
+      "Assuming Scala optimizes mutual recursion (it does not)."
+    ],
+    "interviewTips": [
+      "Explain why @tailrec fails to compile non-tail recursion."
+    ],
+    "relatedQuestions": [1, 6, 11]
+  },
+  {
+    "id": 16,
+    "title": "Currying",
+    "question": "What is currying in Scala and when is it useful?",
+    "answer": "Currying transforms a function of multiple arguments into a chain of functions each taking one argument (or one parameter list). Scala supports multiple parameter lists natively, enabling partial application, better type inference for lambdas, and cleaner DSLs.",
+    "explanation": "With multiple parameter lists, you can supply some arguments now and get back a function awaiting the rest. This aids type inference (later lists can infer from earlier ones) and is used for implicit parameter lists and fluent APIs.",
+    "codeExample": "def add(a: Int)(b: Int): Int = a + b\nval add5 = add(5) _   // partially applied: Int => Int\nprintln(add5(10))     // 15\n\ndef repeat(n: Int)(f: => Unit): Unit = (1 to n).foreach(_ => f)\nrepeat(2) { println(\"hi\") }",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Functional Programming",
+    "tags": ["scala", "mid", "backend", "jvm"],
+    "bestPractices": [
+      "Use a trailing function parameter list for block-style DSLs.",
+      "Leverage currying for partial application and reuse."
+    ],
+    "commonMistakes": [
+      "Forgetting the underscore when partially applying a method.",
+      "Confusing multiple parameter lists with a single tupled list."
+    ],
+    "interviewTips": [
+      "Show how currying improves type inference on later parameters."
+    ],
+    "relatedQuestions": [6, 17, 10]
+  },
+  {
+    "id": 17,
+    "title": "By-name parameters",
+    "question": "What are by-name parameters in Scala and how do they differ from by-value?",
+    "answer": "A by-name parameter, declared with => before its type, is not evaluated at the call site; its expression is passed unevaluated and re-evaluated each time it is referenced inside the method. By-value parameters are evaluated once before the call.",
+    "explanation": "By-name parameters enable lazy evaluation and control-flow abstractions (custom loops, short-circuiting, logging that only runs if needed). The argument acts like a zero-argument function that runs on demand.",
+    "codeExample": "def unless(cond: Boolean)(body: => Unit): Unit =\n  if (!cond) body\n\nunless(false) { println(\"runs\") } // runs\n\ndef time[A](block: => A): A = { val a = block; a } // block evaluated inside",
+    "language": "scala",
+    "difficulty": "Advanced",
+    "category": "Functional Programming",
+    "tags": ["scala", "senior", "backend", "jvm"],
+    "bestPractices": [
+      "Use by-name parameters to build lazy control structures.",
+      "Cache the value in a val if it must be used multiple times."
+    ],
+    "commonMistakes": [
+      "Referencing a by-name param repeatedly and re-running side effects.",
+      "Confusing by-name (=> T) with a function parameter (() => T)."
+    ],
+    "interviewTips": [
+      "Explain repeated re-evaluation and lazy semantics."
+    ],
+    "relatedQuestions": [16, 6, 9]
+  },
+  {
+    "id": 18,
+    "title": "Sealed traits & ADTs",
+    "question": "How do sealed traits enable algebraic data types in Scala?",
+    "answer": "A sealed trait (or sealed abstract class) restricts its subtypes to the same file, letting the compiler know all cases. Combined with case classes/objects, it forms a sum type (ADT), and pattern matches over it get exhaustiveness checking.",
+    "explanation": "ADTs model 'this OR that' choices. Because the hierarchy is sealed, the compiler warns when a match is not exhaustive, catching missing cases at compile time. This is the foundation of type-safe domain modelling in Scala.",
+    "codeExample": "sealed trait Shape\ncase class Circle(r: Double) extends Shape\ncase class Rect(w: Double, h: Double) extends Shape\n\ndef area(s: Shape): Double = s match {\n  case Circle(r)  => math.Pi * r * r\n  case Rect(w, h) => w * h\n} // compiler checks all cases are covered",
+    "language": "scala",
+    "difficulty": "Intermediate",
+    "category": "Data Modeling",
+    "tags": ["scala", "mid", "backend", "data", "jvm", "architect"],
+    "bestPractices": [
+      "Model finite alternatives as sealed trait hierarchies.",
+      "Rely on exhaustiveness warnings to catch missing cases."
+    ],
+    "commonMistakes": [
+      "Adding a default case that hides non-exhaustive matches.",
+      "Defining subtypes in a different file, breaking sealing."
+    ],
+    "interviewTips": [
+      "Connect sealed traits to exhaustiveness and sum types."
+    ],
+    "relatedQuestions": [2, 3, 19]
+  },
+  {
+    "id": 19,
+    "title": "Extractors and unapply",
+    "question": "How do extractors (unapply) power custom pattern matching?",
+    "answer": "An extractor is an object with an unapply method that deconstructs a value during pattern matching. When you write case Pattern(a, b), the compiler calls Pattern.unapply, and a successful Some(...) result binds the extracted parts to a and b.",
+    "explanation": "unapply returns Option (Some for a match, None otherwise) or Boolean for parameterless patterns. Case classes generate one automatically, but you can define custom extractors for validation, parsing, or exposing a different structural view of data.",
+    "codeExample": "object Email {\n  def unapply(s: String): Option[(String, String)] =\n    s.split(\"@\") match {\n      case Array(user, domain) => Some((user, domain))\n      case _                   => None\n    }\n}\n\n\"ada@x.com\" match {\n  case Email(user, domain) => println(s\"$user at $domain\")\n  case _                   => println(\"invalid\")\n}",
+    "language": "scala",
+    "difficulty": "Advanced",
+    "category": "Pattern Matching",
+    "tags": ["scala", "senior", "backend", "jvm"],
+    "bestPractices": [
+      "Return Option from unapply to signal match success or failure.",
+      "Use custom extractors to encapsulate parsing/validation."
+    ],
+    "commonMistakes": [
+      "Throwing instead of returning None on a non-match.",
+      "Confusing unapply with unapplySeq for variable-arity patterns."
+    ],
+    "interviewTips": [
+      "Explain the Some/None contract that drives matching."
+    ],
+    "relatedQuestions": [3, 18, 2]
+  },
+  {
+    "id": 20,
+    "title": "Either and collection combinators",
+    "question": "How do you use Either for error handling and combinators like map/flatMap/fold?",
+    "answer": "Either[A, B] represents one of two possibilities: Left (conventionally an error) or Right (a success). Since Scala 2.12 Either is right-biased, so map/flatMap operate on the Right value, letting you chain computations that short-circuit on the first Left. fold collapses both sides into a single result.",
+    "explanation": "Either makes error information explicit in the type without exceptions. Combinators such as map and flatMap transform the success path, while fold handles error and success cases together. Collections share the same map/flatMap/fold vocabulary, giving a uniform functional style.",
+    "codeExample": "def parse(s: String): Either[String, Int] =\n  s.toIntOption.toRight(s\"invalid: $s\")\n\nval result =\n  for {\n    a <- parse(\"2\")\n    b <- parse(\"3\")\n  } yield a + b\n\nprintln(result.fold(err => s\"Error $err\", n => s\"Ok $n\")) // Ok 5\nprintln(List(1, 2, 3).fold(0)(_ + _)) // 6",
+    "language": "scala",
+    "difficulty": "Advanced",
+    "category": "Error Handling",
+    "tags": ["scala", "senior", "backend", "data", "jvm"],
+    "bestPractices": [
+      "Use Either to carry typed error information without exceptions.",
+      "Chain with for-comprehensions to short-circuit on the first Left."
+    ],
+    "commonMistakes": [
+      "Assuming Either is left-biased in modern Scala.",
+      "Using exceptions where a typed Either would be clearer."
+    ],
+    "interviewTips": [
+      "Mention right-bias and how fold unifies both branches."
+    ],
+    "relatedQuestions": [4, 7, 13]
+  }
+]

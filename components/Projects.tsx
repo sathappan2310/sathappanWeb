@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { projects } from "@/lib/data";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Chip } from "./ui/Chip";
@@ -34,8 +34,18 @@ export function Projects() {
                 ease: "easeOut",
                 delay: idx * 0.1,
               }}
-              className="group card-base relative overflow-hidden p-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow hover:border-accent/60"
+              className={`group card-base relative overflow-hidden p-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow hover:border-accent/60 ${
+                p.featured
+                  ? "lg:col-span-2 border-accent/40 shadow-glow"
+                  : ""
+              }`}
             >
+              {p.featured && (
+                <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-semibold text-accent backdrop-blur">
+                  <Sparkles className="h-3.5 w-3.5" /> Featured · Live
+                </span>
+              )}
+
               {/* Gradient top bar */}
               <div className="h-1 w-full bg-brand-gradient" />
 
@@ -77,6 +87,12 @@ export function Projects() {
                     <Chip key={t}>{t}</Chip>
                   ))}
                 </div>
+                {p.internal && (
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent">
+                    Explore SkillNest
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                )}
               </div>
             </motion.a>
           ))}

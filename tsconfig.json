@@ -14,7 +14,14 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{ "name": "next" }],
-    "paths": { "@/*": ["./*"] }
+    "paths": {
+      "@/data": ["./lib/skillnest/data/index.ts"],
+      "@/data/*": ["./lib/skillnest/data/*"],
+      "@/hooks/*": ["./lib/skillnest/hooks/*"],
+      "@/utils/*": ["./lib/skillnest/utils/*"],
+      "@/types": ["./lib/skillnest/types/index.ts"],
+      "@/*": ["./*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

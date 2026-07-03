@@ -70,6 +70,8 @@ export interface Project {
   description: string;
   tags: string[];
   href: string;
+  featured?: boolean;
+  internal?: boolean;
 }
 
 export interface EducationItem {

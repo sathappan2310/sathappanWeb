@@ -56,6 +56,12 @@ export function Navbar() {
               {l.label}
             </a>
           ))}
+          <Link
+            href="/skillnest"
+            className="ml-1 inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
+          >
+            SkillNest <span aria-hidden>↗</span>
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
@@ -95,6 +101,13 @@ export function Navbar() {
               {l.label}
             </a>
           ))}
+          <Link
+            href="/skillnest"
+            onClick={close}
+            className="rounded-md px-3 py-3 text-base font-medium text-accent transition-colors hover:bg-surface-2"
+          >
+            SkillNest ↗
+          </Link>
           <Button href="#contact" size="md" className="mt-2 self-start" >
             Hire Me <span aria-hidden>→</span>
           </Button>

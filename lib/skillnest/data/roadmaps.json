@@ -1,0 +1,107 @@
+[
+  {
+    "id": "react",
+    "title": "React Developer Roadmap",
+    "tagline": "From JSX beginner to production-grade React engineer.",
+    "color": "from-cyan-400 to-blue-500",
+    "icon": "Atom",
+    "steps": [
+      { "id": "js", "title": "Master JavaScript Fundamentals", "description": "ES6+, closures, promises, modules, event loop.", "topics": ["ES6+","Promises","Modules","Async/Await"], "level": "Beginner" },
+      { "id": "jsx", "title": "Learn JSX & Components", "description": "Composition, props, and rendering lists.", "topics": ["JSX","Props","Composition"], "level": "Beginner" },
+      { "id": "hooks", "title": "Hooks in Depth", "description": "useState, useEffect, useMemo, useCallback, custom hooks.", "topics": ["useState","useEffect","Custom hooks"], "level": "Intermediate" },
+      { "id": "state", "title": "State Management", "description": "Context, Zustand, Redux Toolkit, Jotai.", "topics": ["Context","Redux Toolkit","Zustand"], "level": "Intermediate" },
+      { "id": "routing", "title": "Routing & Data Loading", "description": "React Router 6, loaders, actions, TanStack Query.", "topics": ["React Router","TanStack Query"], "level": "Intermediate" },
+      { "id": "perf", "title": "Performance & Patterns", "description": "Memoization, code splitting, suspense, concurrent features.", "topics": ["Memo","Suspense","Code splitting"], "level": "Advanced" },
+      { "id": "testing", "title": "Testing", "description": "Vitest, RTL, Playwright, MSW.", "topics": ["RTL","Vitest","Playwright"], "level": "Advanced" },
+      { "id": "ssr", "title": "SSR & Frameworks", "description": "Next.js / Remix rendering strategies.", "topics": ["Next.js","Remix","Streaming"], "level": "Advanced" }
+    ]
+  },
+  {
+    "id": "javascript",
+    "title": "JavaScript Roadmap",
+    "tagline": "The language that runs everywhere — master it end-to-end.",
+    "color": "from-yellow-400 to-amber-500",
+    "icon": "FileCode",
+    "steps": [
+      { "id": "basics", "title": "Language Basics", "description": "Variables, types, operators, control flow.", "topics": ["var/let/const","Types","Operators"], "level": "Beginner" },
+      { "id": "functions", "title": "Functions & Scope", "description": "Closures, hoisting, this, arrow functions.", "topics": ["Closures","this","Arrow fns"], "level": "Beginner" },
+      { "id": "objects", "title": "Objects & Prototypes", "description": "Prototype chain, classes, inheritance.", "topics": ["Prototype","Class","Inheritance"], "level": "Intermediate" },
+      { "id": "async", "title": "Async JavaScript", "description": "Promises, async/await, event loop, microtasks.", "topics": ["Promises","Event Loop"], "level": "Intermediate" },
+      { "id": "modules", "title": "Modules & Tooling", "description": "ESM, bundlers, package managers.", "topics": ["ESM","Vite","pnpm"], "level": "Intermediate" },
+      { "id": "browser", "title": "Browser APIs", "description": "DOM, Fetch, Storage, Workers.", "topics": ["DOM","Fetch","Web Workers"], "level": "Advanced" },
+      { "id": "perf", "title": "Performance & Patterns", "description": "Debounce, throttle, memoization, lazy loading.", "topics": ["Perf","Patterns"], "level": "Advanced" }
+    ]
+  },
+  {
+    "id": "csharp",
+    "title": "C# / .NET Roadmap",
+    "tagline": "Build modern cross-platform apps with the .NET ecosystem.",
+    "color": "from-violet-500 to-indigo-600",
+    "icon": "Hash",
+    "steps": [
+      { "id": "syntax", "title": "C# Syntax & Types", "description": "Value/reference types, records, patterns.", "topics": ["Types","Records","Patterns"], "level": "Beginner" },
+      { "id": "oop", "title": "OOP & SOLID", "description": "Encapsulation, inheritance, polymorphism, SOLID.", "topics": ["OOP","SOLID"], "level": "Intermediate" },
+      { "id": "linq", "title": "LINQ & Collections", "description": "Query, deferred execution, IEnumerable.", "topics": ["LINQ","Deferred"], "level": "Intermediate" },
+      { "id": "async", "title": "async / await", "description": "Task, cancellation, ConfigureAwait.", "topics": ["Task","Cancellation"], "level": "Intermediate" },
+      { "id": "aspnet", "title": "ASP.NET Core", "description": "Minimal APIs, MVC, DI, middleware.", "topics": ["Minimal API","DI"], "level": "Advanced" },
+      { "id": "ef", "title": "EF Core", "description": "DbContext, migrations, performance.", "topics": ["EF Core","Migrations"], "level": "Advanced" }
+    ]
+  },
+  {
+    "id": "aspnet",
+    "title": "ASP.NET Core Roadmap",
+    "tagline": "Design production APIs and web apps the .NET way.",
+    "color": "from-indigo-500 to-purple-600",
+    "icon": "Server",
+    "steps": [
+      { "id": "basics", "title": "Kestrel & Hosting", "description": "Program.cs, configuration, environments.", "topics": ["Kestrel","Config"], "level": "Beginner" },
+      { "id": "di", "title": "Dependency Injection", "description": "Service lifetimes, scoped/transient/singleton.", "topics": ["DI","Lifetimes"], "level": "Beginner" },
+      { "id": "mw", "title": "Middleware Pipeline", "description": "Custom middleware, ordering, short-circuiting.", "topics": ["Middleware"], "level": "Intermediate" },
+      { "id": "auth", "title": "Authentication / Authorization", "description": "JWT, Identity, policies, roles.", "topics": ["JWT","Identity","Policies"], "level": "Intermediate" },
+      { "id": "api", "title": "APIs at Scale", "description": "Versioning, OpenAPI, rate limiting, caching.", "topics": ["Versioning","Rate limiting"], "level": "Advanced" },
+      { "id": "obs", "title": "Observability", "description": "Logging, tracing, health checks, OpenTelemetry.", "topics": ["Logging","OTel"], "level": "Advanced" }
+    ]
+  },
+  {
+    "id": "sql",
+    "title": "SQL Roadmap",
+    "tagline": "From SELECT to query tuning and indexing mastery.",
+    "color": "from-red-500 to-orange-500",
+    "icon": "Database",
+    "steps": [
+      { "id": "query", "title": "Querying Basics", "description": "SELECT, WHERE, JOIN, GROUP BY.", "topics": ["SELECT","JOIN"], "level": "Beginner" },
+      { "id": "design", "title": "Schema Design", "description": "Normalization, keys, constraints.", "topics": ["Normalization"], "level": "Intermediate" },
+      { "id": "index", "title": "Indexing", "description": "Clustered, non-clustered, covering, statistics.", "topics": ["Indexes"], "level": "Intermediate" },
+      { "id": "tx", "title": "Transactions", "description": "ACID, isolation levels, deadlocks.", "topics": ["ACID","Isolation"], "level": "Advanced" },
+      { "id": "perf", "title": "Performance Tuning", "description": "Execution plans, hints, partitioning.", "topics": ["Plans","Partitioning"], "level": "Advanced" }
+    ]
+  },
+  {
+    "id": "azure",
+    "title": "Azure Cloud Roadmap",
+    "tagline": "Design, deploy, and scale on Microsoft Azure.",
+    "color": "from-blue-500 to-sky-500",
+    "icon": "Cloud",
+    "steps": [
+      { "id": "fundamentals", "title": "Cloud Fundamentals", "description": "IaaS, PaaS, SaaS, regions, availability.", "topics": ["Regions","Availability"], "level": "Beginner" },
+      { "id": "compute", "title": "Compute", "description": "VMs, App Service, Functions, Container Apps.", "topics": ["App Service","Functions"], "level": "Intermediate" },
+      { "id": "data", "title": "Data & Storage", "description": "Blob, SQL DB, Cosmos DB, Redis.", "topics": ["Blob","Cosmos DB"], "level": "Intermediate" },
+      { "id": "iac", "title": "Infra as Code", "description": "Bicep, Terraform, ARM.", "topics": ["Bicep","Terraform"], "level": "Advanced" },
+      { "id": "sec", "title": "Security & Identity", "description": "Entra ID, Managed Identity, Key Vault.", "topics": ["Entra","Key Vault"], "level": "Advanced" }
+    ]
+  },
+  {
+    "id": "git",
+    "title": "Git Roadmap",
+    "tagline": "Confident version control from clone to rebase.",
+    "color": "from-orange-500 to-red-500",
+    "icon": "GitBranch",
+    "steps": [
+      { "id": "basics", "title": "Basics", "description": "init, add, commit, status, log.", "topics": ["commit","log"], "level": "Beginner" },
+      { "id": "branch", "title": "Branching", "description": "branch, checkout/switch, merge.", "topics": ["branch","merge"], "level": "Beginner" },
+      { "id": "remote", "title": "Remotes & Collaboration", "description": "push, pull, fetch, PRs.", "topics": ["remote","PRs"], "level": "Intermediate" },
+      { "id": "rebase", "title": "Rebasing & History", "description": "rebase, cherry-pick, reflog.", "topics": ["rebase","reflog"], "level": "Advanced" },
+      { "id": "flow", "title": "Workflows", "description": "GitFlow, trunk-based, conventional commits.", "topics": ["GitFlow","Trunk-based"], "level": "Advanced" }
+    ]
+  }
+]
