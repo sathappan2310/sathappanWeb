@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "title": "Memory Safety in Zig",
+    "question": "How does Zig ensure memory safety without a garbage collector?",
+    "answer": "Zig uses a combination of compile-time checks and manual memory management to ensure memory safety.",
+    "explanation": "Zig's approach to memory safety involves compile-time checks to identify potential issues, such as dereferencing null pointers or buffer overflows. It also allows developers to manage memory manually, giving them control over allocation and deallocation, while still maintaining safety through rigorous compile-time checks.",
+    "codeExample": "const std = @import(\"std\");\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    var array = try allocator.alloc(u32, 10);\n    defer allocator.free(array);\n    // Do something with the array\n}",
+    "language": "zig",
+    "difficulty": "Intermediate",
+    "category": "Memory Management",
+    "tags": [
+      "senior",
+      "memory management",
+      "safety"
+    ],
+    "bestPractices": [
+      "Use manual memory management judiciously",
+      "Leverage compile-time checks",
+      "Avoid unnecessary allocations"
+    ],
+    "commonMistakes": [
+      "Neglecting deallocation leading to memory leaks",
+      "Ignoring compile-time warnings",
+      "Improper buffer sizes"
+    ],
+    "interviewTips": [
+      "Understand Zig's memory model",
+      "Familiarize with allocator usage",
+      "Be prepared to explain safety features"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Error Handling in Zig",
+    "question": "What is Zig's approach to error handling, and how does it differ from exceptions?",
+    "answer": "Zig uses a simple error union type for handling errors, which is explicit and avoids the complexities of exceptions.",
+    "explanation": "Instead of using exceptions, Zig utilizes an error union type, allowing functions to return either a successful value or an error. This makes error handling explicit, as the programmer must handle all potential errors directly, improving code clarity and maintainability.",
+    "codeExample": "const std = @import(\"std\");\n\nfn division(a: f64, b: f64) !f64 {\n    if (b == 0) return error.DivideByZero;\n    return a / b;\n}\n\npub fn main() !void {\n    const result = try division(10.0, 0.0);\n}",
+    "language": "zig",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": [
+      "junior",
+      "error handling",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use explicit error types",
+      "Always handle possible errors",
+      "Document error cases"
+    ],
+    "commonMistakes": [
+      "Ignoring error handling",
+      "Using exceptions instead of error unions",
+      "Assuming all operations succeed"
+    ],
+    "interviewTips": [
+      "Understand error handling syntax",
+      "Be ready to discuss advantages over exceptions",
+      "Practice writing error handling code"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 3,
+    "title": "Compile-time Code Execution",
+    "question": "How can you execute code at compile time in Zig, and what are its benefits?",
+    "answer": "Zig allows executing code at compile time using the `@compileTime` function, which can improve performance and safety.",
+    "explanation": "By allowing code to be executed at compile time, Zig can evaluate constant expressions and generate optimized code before runtime. This leads to faster execution, reduced runtime overhead, and the capability to enforce compile-time checks.",
+    "codeExample": "const std = @import(\"std\");\n\nconst result = @compileTime(@intCast(u32, 5) * @intCast(u32, 10));\n\npub fn main() void {\n    std.debug.print(\"Compile-time result: {}\n\", .{result});\n}",
+    "language": "zig",
+    "difficulty": "Advanced",
+    "category": "Compile-time Features",
+    "tags": [
+      "senior",
+      "compile-time",
+      "optimization"
+    ],
+    "bestPractices": [
+      "Use compile-time execution for constants",
+      "Avoid excessive complexity in compile-time code",
+      "Document compile-time calculations"
+    ],
+    "commonMistakes": [
+      "Overcomplicating compile-time logic",
+      "Neglecting the impact on build time",
+      "Misusing compile-time for dynamic values"
+    ],
+    "interviewTips": [
+      "Study compile-time function features",
+      "Be ready to showcase examples",
+      "Understand performance implications"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 4,
+    "title": "Concurrency in Zig",
+    "question": "What are the concurrency primitives in Zig, and how do they compare to other languages?",
+    "answer": "Zig provides goroutines and channels, allowing for safe and efficient concurrent programming.",
+    "explanation": "Zig's concurrency model emphasizes simplicity and safety, using lightweight goroutines for concurrent execution and channels for communication. This model avoids the pitfalls of shared state by promoting message-passing concurrency, similar to Go.",
+    "codeExample": "const std = @import(\"std\");\n\ngfn worker(id: u32) void {\n    std.debug.print(\"Worker {} is running\n\", .{id});\n}\n\npub fn main() !void {\n    for (i in 0..5) {\n        std.Thread.spawn(worker, i);\n    }\n}",
+    "language": "zig",
+    "difficulty": "Intermediate",
+    "category": "Concurrency",
+    "tags": [
+      "mid",
+      "concurrency",
+      "parallelism"
+    ],
+    "bestPractices": [
+      "Use goroutines for lightweight tasks",
+      "Communicate via channels",
+      "Avoid shared state"
+    ],
+    "commonMistakes": [
+      "Ignoring race conditions",
+      "Overusing goroutines",
+      "Failing to handle thread lifetimes"
+    ],
+    "interviewTips": [
+      "Know concurrency primitives well",
+      "Discuss practical use cases",
+      "Be prepared to compare with other languages"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 5,
+    "title": "Using Zig C Interop",
+    "question": "How does Zig facilitate interoperability with C, and what are the advantages?",
+    "answer": "Zig provides seamless interop with C by allowing direct inclusion of C headers and calling C functions.",
+    "explanation": "Zig's interoperability with C is straightforward, enabling developers to include C headers directly in Zig code and call C functions seamlessly. This facilitates code reuse and leveraging existing C libraries while maintaining Zig's safety features.",
+    "codeExample": "const std = @import(\"std\");\nconst c = @cImport(@cInclude(\"time.h\"));\n\npub fn main() void {\n    const t = c.time(null);\n    std.debug.print(\"Current time: {}\n\", .{t});\n}",
+    "language": "zig",
+    "difficulty": "Intermediate",
+    "category": "Interoperability",
+    "tags": [
+      "mid",
+      "C interop",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use `@cImport` for C headers",
+      "Be aware of type conversions",
+      "Handle C errors appropriately"
+    ],
+    "commonMistakes": [
+      "Ignoring C function signatures",
+      "Mismanaging memory across languages",
+      "Overrelying on C interoperability"
+    ],
+    "interviewTips": [
+      "Familiarize with `@cImport` usage",
+      "Prepare examples of C interop",
+      "Discuss benefits and drawbacks of C interoperability"
+    ],
+    "relatedQuestions": []
+  }
+]

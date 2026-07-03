@@ -59,6 +59,7 @@ import bash from '@/data/questions/bash.json'
 import powershell from '@/data/questions/powershell.json'
 import cobol from '@/data/questions/cobol.json'
 import assembly from '@/data/questions/assembly.json'
+import zig from '@/data/questions/zig.json'
 
 const questionMap: Record<string, Question[]> = {
   react,
@@ -114,6 +115,7 @@ const questionMap: Record<string, Question[]> = {
   powershell,
   cobol,
   assembly,
+  zig,
 } as unknown as Record<string, Question[]>
 
 export function getTechnologies(): Technology[] {
