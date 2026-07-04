@@ -52,5 +52,6 @@
   {"id":"git","name":"Git","category":"Tools","description":"Distributed version control that powers modern development.","color":"from-orange-500 to-red-500","icon":"GitBranch","tags":["vcs","cli"]},
   {"id":"github","name":"GitHub","category":"Tools","description":"Collaborative code hosting and automation platform.","color":"from-slate-700 to-slate-900","icon":"Github","tags":["ci","pr"]},
   {"id":"postman","name":"Postman","category":"Tools","description":"The complete API development environment.","color":"from-orange-500 to-rose-500","icon":"Send","tags":["api","testing"]},
-  {"id":"zig","name":"Zig","category":"Languages","description":"A modern systems language focused on simplicity and control.","color":"from-amber-500 to-orange-600","icon":"Zap","tags":["systems","low-level"]}
+  {"id":"zig","name":"Zig","category":"Languages","description":"A modern systems language focused on simplicity and control.","color":"from-amber-500 to-orange-600","icon":"Zap","tags":["systems","low-level"]},
+  {"id":"mojo","name":"Mojo","category":"Languages","description":"A Python-superset language for AI and high-performance computing.","color":"from-red-500 to-orange-500","icon":"Flame","tags":["ai","performance"]}
 ]

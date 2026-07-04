@@ -1,0 +1,149 @@
+[
+  {
+    "id": 1,
+    "title": "Understanding Mojo Syntax",
+    "question": "What are the key differences in syntax between Mojo and Python?",
+    "answer": "Mojo introduces new syntax elements for better performance and type safety, such as explicit type declarations and optimized function definitions.",
+    "explanation": "Mojo aims to improve upon Python's syntax by offering constructs that make it easier to write high-performance code while maintaining readability.",
+    "codeExample": "def add(a: int, b: int) -> int:\n    return a + b\n\nresult = add(5, 3)\nprint(result)",
+    "language": "Mojo",
+    "difficulty": "Beginner",
+    "category": "Syntax",
+    "tags": [
+      "junior",
+      "language",
+      "syntax"
+    ],
+    "bestPractices": [
+      "Use type annotations consistently",
+      "Follow naming conventions"
+    ],
+    "commonMistakes": [
+      "Not using type annotations",
+      "Confusing Mojo syntax with Python"
+    ],
+    "interviewTips": [
+      "Focus on clarity in syntax",
+      "Be prepared to explain your code choices"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Performance Optimization",
+    "question": "How does Mojo enhance performance when compared to Python?",
+    "answer": "Mojo introduces features like ahead-of-time compilation and native code generation, allowing for significant performance gains over traditional Python execution.",
+    "explanation": "These optimizations help Mojo run faster by compiling the code into machine language rather than interpreting it at runtime.",
+    "codeExample": "def optimized_sum(n: int) -> int:\n    return sum(range(n))\n\n# Expected to run significantly faster than an interpreted version",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Performance",
+    "tags": [
+      "mid",
+      "performance",
+      "optimization"
+    ],
+    "bestPractices": [
+      "Profile your code before optimization",
+      "Understand the trade-offs of optimization"
+    ],
+    "commonMistakes": [
+      "Assuming all optimizations apply similarly to Python",
+      "Neglecting readability for performance"
+    ],
+    "interviewTips": [
+      "Discuss specific scenarios where performance matters",
+      "Highlight the importance of profiling"
+    ],
+    "relatedQuestions": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Concurrency in Mojo",
+    "question": "What concurrency models does Mojo support, and how do they differ from Python's?",
+    "answer": "Mojo supports lightweight threads and asynchronous programming models, providing more efficient concurrency than Python's Global Interpreter Lock (GIL).",
+    "explanation": "Mojo's concurrency models allow developers to write scalable applications without being hindered by the GIL, which is a common limitation in Python.",
+    "codeExample": "async def fetch_data(url: str):\n    response = await http.get(url)\n    return response\n\n# Example of non-blocking IO operation",
+    "language": "Mojo",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "concurrency",
+      "asynchronous"
+    ],
+    "bestPractices": [
+      "Utilize async/await for non-blocking operations",
+      "Manage state carefully in concurrent environments"
+    ],
+    "commonMistakes": [
+      "Ignoring potential deadlocks",
+      "Forgetting to await async functions"
+    ],
+    "interviewTips": [
+      "Explain concurrency concepts clearly",
+      "Provide examples of when to use concurrency"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 4,
+    "title": "Type Inference",
+    "question": "How does Mojo's type inference work, and what advantages does it offer over Python's dynamic typing?",
+    "answer": "Mojo offers static type inference, which allows it to catch type errors at compile time, improving code safety and performance compared to Python's dynamic typing.",
+    "explanation": "By inferring types, Mojo can optimize the generated code and provide better tooling support, such as autocompletion and refactoring.",
+    "codeExample": "def multiply(x: float, y: float) -> float:\n    return x * y\n\n# Type inference allows for compile-time checks",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Type System",
+    "tags": [
+      "mid",
+      "type-system",
+      "safety"
+    ],
+    "bestPractices": [
+      "Leverage type annotations for clarity",
+      "Check for type mismatches during development"
+    ],
+    "commonMistakes": [
+      "Overusing 'any' type",
+      "Ignoring type hints in parameters and return types"
+    ],
+    "interviewTips": [
+      "Discuss the benefits of static vs dynamic typing",
+      "Provide real-world examples of type issues fixed with static typing"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 5,
+    "title": "Interfacing with Libraries",
+    "question": "How can Mojo interact with existing Python libraries, and what challenges might arise?",
+    "answer": "Mojo can interface with Python libraries using interop features, but challenges include potential type mismatches and performance overhead when crossing the boundary.",
+    "explanation": "While Mojo aims for compatibility with Python's ecosystem, developers must be aware of the performance implications and type consistency when calling Python code.",
+    "codeExample": "import some_python_lib\n\nresult = some_python_lib.calculate()\n# Ensure types match Mojo expectations",
+    "language": "Mojo",
+    "difficulty": "Advanced",
+    "category": "Interoperability",
+    "tags": [
+      "senior",
+      "interop",
+      "libraries"
+    ],
+    "bestPractices": [
+      "Test interop code thoroughly",
+      "Document any type assumptions clearly"
+    ],
+    "commonMistakes": [
+      "Assuming seamless compatibility",
+      "Neglecting performance implications during interop"
+    ],
+    "interviewTips": [
+      "Prepare to discuss specific libraries",
+      "Highlight challenges and solutions in interop scenarios"
+    ],
+    "relatedQuestions": []
+  }
+]
