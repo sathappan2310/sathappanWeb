@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "title": "Pattern Matching in Gleam",
+    "question": "How does pattern matching work in Gleam, and can you provide an example?",
+    "answer": "Pattern matching in Gleam is used to decompose data structures, enabling powerful and concise ways to handle different shapes of data. For example, you can use pattern matching to destructure tuples or lists.",
+    "explanation": "In Gleam, pattern matching allows you to match values against patterns to extract data in a clean and readable way. It enhances code clarity and reduces conditional logic.",
+    "codeExample": "fn match_example(value: Int) -> String {\n    match value {\n        1 -> \"One\",\n        2 -> \"Two\",\n        _ -> \"Other\"\n    }\n}",
+    "language": "gleam",
+    "difficulty": "Intermediate",
+    "category": "Language Features",
+    "tags": [
+      "mid",
+      "developer",
+      "software engineer"
+    ],
+    "bestPractices": [
+      "Use pattern matching to simplify conditional logic",
+      "Keep match cases concise"
+    ],
+    "commonMistakes": [
+      "Forgetting to handle all cases",
+      "Using complex patterns unnecessarily"
+    ],
+    "interviewTips": [
+      "Explain your thought process while matching",
+      "Provide multiple examples if possible"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Gleam's Type System",
+    "question": "What are the key features of Gleam's type system, and how do they contribute to reliability?",
+    "answer": "Gleam features a strong, static type system with type inference, which helps catch errors at compile time. It supports algebraic data types and type unions, enhancing expressiveness and safety.",
+    "explanation": "The static nature of the type system means errors are caught earlier, leading to more robust applications. Type inference reduces boilerplate while maintaining type safety.",
+    "codeExample": "type Result = Ok(Int) | Error(String);\n\nfn process(value: Int) -> Result {\n    if value > 0 {\n        Ok(value)\n    } else {\n        Error(\"Negative value\")\n    }\n}",
+    "language": "gleam",
+    "difficulty": "Advanced",
+    "category": "Type System",
+    "tags": [
+      "senior",
+      "developer",
+      "software engineer"
+    ],
+    "bestPractices": [
+      "Utilize type aliases for complex types",
+      "Leverage type unions for clearer APIs"
+    ],
+    "commonMistakes": [
+      "Ignoring type mismatches",
+      "Overusing type annotations unnecessarily"
+    ],
+    "interviewTips": [
+      "Discuss how type systems impact software design",
+      "Be ready to illustrate concepts with examples"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 3,
+    "title": "Concurrency in Gleam",
+    "question": "How does Gleam handle concurrency, and what features facilitate concurrent programming?",
+    "answer": "Gleam employs lightweight processes for concurrency, allowing for asynchronous programming. Its model is based on message passing, which avoids shared state issues.",
+    "explanation": "The message-passing model simplifies concurrency by allowing processes to communicate without sharing memory, minimizing the risk of race conditions.",
+    "codeExample": "fn spawn_example() {\n    spawn fn do_work() {\n        // Simulate some work\n        delay(1000);\n    }\n}",
+    "language": "gleam",
+    "difficulty": "Intermediate",
+    "category": "Concurrency",
+    "tags": [
+      "mid",
+      "developer",
+      "software engineer"
+    ],
+    "bestPractices": [
+      "Avoid shared state",
+      "Use message passing for communication"
+    ],
+    "commonMistakes": [
+      "Using shared mutable state",
+      "Neglecting to handle errors in concurrent processes"
+    ],
+    "interviewTips": [
+      "Explain the advantages of the message-passing model",
+      "Discuss real-world concurrency issues you've faced"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 4,
+    "title": "Error Handling in Gleam",
+    "question": "What are the methods available for error handling in Gleam, and how do they compare to exceptions?",
+    "answer": "Gleam uses algebraic data types for error handling, primarily the `Result` type, which allows explicit management of error cases instead of relying on exceptions.",
+    "explanation": "This approach promotes better control over error handling, making it clear when a function can fail and encouraging the programmer to handle those cases appropriately.",
+    "codeExample": "fn divide(a: Int, b: Int) -> Result {\n    if b == 0 {\n        Error(\"Division by zero\")\n    } else {\n        Ok(a / b)\n    }\n}",
+    "language": "gleam",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": [
+      "junior",
+      "developer",
+      "software engineer"
+    ],
+    "bestPractices": [
+      "Document potential errors in function signatures",
+      "Use `Result` types for functions that can fail"
+    ],
+    "commonMistakes": [
+      "Ignoring error cases",
+      "Using exceptions for control flow"
+    ],
+    "interviewTips": [
+      "Discuss how error handling can affect program stability",
+      "Provide clear examples of error handling"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 5,
+    "title": "Gleam's Module System",
+    "question": "How do modules work in Gleam, and what is their role in structuring code?",
+    "answer": "Modules in Gleam encapsulate related functions and types, promoting better organization and reusability of code. They help in grouping functionality logically.",
+    "explanation": "By using modules, you create a clear namespace for your functions and types, reducing naming collisions and improving code maintainability.",
+    "codeExample": "module Math {\n    pub fn add(a: Int, b: Int) -> Int {\n        a + b\n    }\n}",
+    "language": "gleam",
+    "difficulty": "Beginner",
+    "category": "Code Organization",
+    "tags": [
+      "junior",
+      "developer",
+      "software engineer"
+    ],
+    "bestPractices": [
+      "Group related functionality into modules",
+      "Use meaningful names for modules"
+    ],
+    "commonMistakes": [
+      "Creating overly large modules",
+      "Not properly exporting functions"
+    ],
+    "interviewTips": [
+      "Emphasize the importance of code organization",
+      "Explain how modules can enhance collaboration in teams"
+    ],
+    "relatedQuestions": []
+  }
+]
