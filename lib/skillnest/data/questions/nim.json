@@ -1,0 +1,157 @@
+[
+  {
+    "id": 1,
+    "title": "Nim Basics: Syntax and Types",
+    "question": "What are the basic data types in Nim and how do you declare a variable?",
+    "answer": "var myInt: int = 42\nvar myString: string = \"Hello, Nim!\"\nvar myBool: bool = true",
+    "explanation": "Nim supports several basic data types including int, string, and bool. Variables are declared using the 'var' keyword.",
+    "codeExample": "var myInt: int = 42\nvar myString: string = \"Hello, Nim!\"\nvar myBool: bool = true",
+    "language": "nim",
+    "difficulty": "Beginner",
+    "category": "Programming",
+    "tags": [
+      "junior",
+      "nim",
+      "programming basics"
+    ],
+    "bestPractices": [
+      "Always initialize variables.",
+      "Use meaningful variable names."
+    ],
+    "commonMistakes": [
+      "Forgetting to declare variable types.",
+      "Using incorrect syntax."
+    ],
+    "interviewTips": [
+      "Understand the syntax of variable declaration.",
+      "Practice defining different data types."
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Nim Control Structures",
+    "question": "How do you implement a for loop in Nim to iterate over a range?",
+    "answer": "for i in 0..5:\n  echo i",
+    "explanation": "Nim uses a for loop syntax similar to Python for iterating over ranges. The '..' operator defines the range.",
+    "codeExample": "for i in 0..5:\n  echo i",
+    "language": "nim",
+    "difficulty": "Intermediate",
+    "category": "Programming",
+    "tags": [
+      "mid",
+      "nim",
+      "control structures"
+    ],
+    "bestPractices": [
+      "Use range iterators for better readability.",
+      "Avoid modifying the loop variable inside the loop."
+    ],
+    "commonMistakes": [
+      "Using incorrect range syntax.",
+      "Forgetting to include the loop body indentation."
+    ],
+    "interviewTips": [
+      "Practice writing loops using different range scenarios.",
+      "Understand the difference between for and while loops."
+    ],
+    "relatedQuestions": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Nim Functions and Procedures",
+    "question": "What is the difference between a function and a procedure in Nim?",
+    "answer": "A function returns a value, while a procedure doesn’t return a value and is used for performing actions.",
+    "explanation": "In Nim, functions are defined to return values while procedures are for executing a sequence of statements without returning anything.",
+    "codeExample": "proc add(a: int, b: int): int =\n  return a + b\n\nproc printHello(): void =\n  echo \"Hello!\"",
+    "language": "nim",
+    "difficulty": "Intermediate",
+    "category": "Programming",
+    "tags": [
+      "mid",
+      "nim",
+      "functions"
+    ],
+    "bestPractices": [
+      "Use meaningful function names.",
+      "Keep functions and procedures focused on a single task."
+    ],
+    "commonMistakes": [
+      "Confusing the return type of functions and procedures.",
+      "Not using 'return' in functions."
+    ],
+    "interviewTips": [
+      "Clarify the difference between function and procedure during discussions.",
+      "Be prepared to write examples of both."
+    ],
+    "relatedQuestions": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Nim Error Handling",
+    "question": "How do you handle exceptions in Nim?",
+    "answer": "Using the 'try' and 'except' keywords to catch exceptions.",
+    "explanation": "Nim provides a built-in error handling mechanism using try-except blocks which allows developers to manage exceptions gracefully.",
+    "codeExample": "try:\n  let result = 10 / 0\nexcept DivideByZero:\n  echo \"Cannot divide by zero!\"",
+    "language": "nim",
+    "difficulty": "Advanced",
+    "category": "Programming",
+    "tags": [
+      "senior",
+      "nim",
+      "error handling"
+    ],
+    "bestPractices": [
+      "Always handle exceptions specific to your logic.",
+      "Log errors for debugging."
+    ],
+    "commonMistakes": [
+      "Catching all exceptions without specificity.",
+      "Neglecting to handle exceptions at all."
+    ],
+    "interviewTips": [
+      "Understand the types of exceptions in Nim.",
+      "Be ready to demonstrate your error handling skills through code."
+    ],
+    "relatedQuestions": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Nim Metaprogramming",
+    "question": "What is metaprogramming in Nim and how can it be useful?",
+    "answer": "Metaprogramming allows you to generate and manipulate code at compile time using macros.",
+    "explanation": "Nim's metaprogramming capabilities enable developers to write code that writes code, simplifying repetitive patterns and improving efficiency.",
+    "codeExample": "macro toUpperCase(name: string): untyped =\n  result = name.toUpper()",
+    "language": "nim",
+    "difficulty": "Advanced",
+    "category": "Programming",
+    "tags": [
+      "senior",
+      "nim",
+      "metaprogramming"
+    ],
+    "bestPractices": [
+      "Use metaprogramming judiciously to avoid complexity.",
+      "Document macros well for maintainability."
+    ],
+    "commonMistakes": [
+      "Overusing macros leading to confusing code.",
+      "Neglecting to test generated code."
+    ],
+    "interviewTips": [
+      "Familiarize yourself with existing macros in Nim.",
+      "Be prepared to discuss potential use cases for metaprogramming."
+    ],
+    "relatedQuestions": [
+      4
+    ]
+  }
+]
