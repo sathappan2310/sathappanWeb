@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "title": "Concurrency in Crystal",
+    "question": "How does Crystal handle concurrency and what are the main constructs used?",
+    "answer": "Crystal uses fibers for lightweight concurrency, allowing multiple tasks to run concurrently without the overhead of threads. The main constructs are 'spawn' for creating fibers and 'Channel' for communication between them.",
+    "explanation": "Fibers in Crystal are similar to coroutines, allowing the execution of concurrent tasks without true parallelism. This model is efficient for I/O-bound tasks but does not leverage multiple CPU cores without explicit threading.",
+    "codeExample": "fiber = spawn {\n  # Code to run concurrently\n}\n\nchannel = Channel(Int32).new\nspawn {\n  channel.send(42)\n}\nvalue = channel.receive\nputs value",
+    "language": "crystal",
+    "difficulty": "Intermediate",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "developer",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use fibers for lightweight concurrency",
+      "Prefer channels for inter-fiber communication"
+    ],
+    "commonMistakes": [
+      "Ignoring potential race conditions",
+      "Overusing threads instead of fibers"
+    ],
+    "interviewTips": [
+      "Understand the difference between fibers and threads",
+      "Be ready to discuss use cases for concurrency"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Macros in Crystal",
+    "question": "What are macros in Crystal and how do they enhance the language's capabilities?",
+    "answer": "Macros in Crystal are compile-time constructs that allow developers to generate code dynamically, enabling metaprogramming. They can be used to reduce boilerplate code and enhance language features.",
+    "explanation": "Macros are executed during compilation, which allows them to alter the structure of the code before it's run. This capability can lead to cleaner and more expressive code.",
+    "codeExample": "macro my_macro(name)\n  puts \"Hello, #{name}!\"\nend\n\nmy_macro(\"World\")",
+    "language": "crystal",
+    "difficulty": "Advanced",
+    "category": "Metaprogramming",
+    "tags": [
+      "senior",
+      "developer",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use macros to reduce repetitive code",
+      "Keep macro definitions simple and readable"
+    ],
+    "commonMistakes": [
+      "Overcomplicating macros",
+      "Not understanding their impact on compile time"
+    ],
+    "interviewTips": [
+      "Prepare examples of how you've used macros",
+      "Understand the limitations of macros in Crystal"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 3,
+    "title": "Type Inference in Crystal",
+    "question": "How does type inference work in Crystal and what are its benefits?",
+    "answer": "Crystal uses a strong type inference system that can determine the types of variables at compile time without explicit type annotations. This reduces boilerplate while maintaining type safety.",
+    "explanation": "The type inference allows developers to write cleaner code by omitting types where they are obvious, but it still enforces type constraints, leading to fewer runtime errors.",
+    "codeExample": "x = 42  # Type inferred as Int32\nputs x.class\n\narr = [1, 2, 3]  # Type inferred as Array(Int32)",
+    "language": "crystal",
+    "difficulty": "Beginner",
+    "category": "Type System",
+    "tags": [
+      "junior",
+      "developer",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use type inference to simplify code",
+      "Provide type annotations in complex scenarios"
+    ],
+    "commonMistakes": [
+      "Misunderstanding inferred types",
+      "Assuming type inference always works in all contexts"
+    ],
+    "interviewTips": [
+      "Be ready to explain your understanding of types",
+      "Discuss examples where type inference helped you"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 4,
+    "title": "Crystal's Standard Library",
+    "question": "What are some key features of Crystal's standard library that differentiate it from other languages?",
+    "answer": "Crystal's standard library includes powerful features like HTTP clients, database wrappers, and concurrency support. Its syntax is clean and similar to Ruby, making it accessible.",
+    "explanation": "The standard library provides built-in tools for common tasks, which reduces dependency on external libraries and enhances the development speed and efficiency.",
+    "codeExample": "require \"http/client\"\n\nresponse = HTTP::Client.get(\"https://example.com\")\nputs response.body",
+    "language": "crystal",
+    "difficulty": "Intermediate",
+    "category": "Standard Library",
+    "tags": [
+      "mid",
+      "developer",
+      "programming"
+    ],
+    "bestPractices": [
+      "Leverage the standard library for common tasks",
+      "Stay updated on library changes"
+    ],
+    "commonMistakes": [
+      "Reinventing the wheel instead of using standard features",
+      "Neglecting library documentation"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with the standard library",
+      "Be prepared to discuss specific features and their uses"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 5,
+    "title": "Error Handling in Crystal",
+    "question": "How does error handling work in Crystal, and what constructs are used to manage exceptions?",
+    "answer": "Crystal uses the 'raise' keyword to throw exceptions and 'begin...rescue' blocks to handle them. It allows for clear and concise error management.",
+    "explanation": "This approach helps maintain code readability and provides a structure for recovering from errors without cluttering the main logic.",
+    "codeExample": "begin\n  raise \"An error occurred\"\nrescue e : Exception\n  puts e.message\nend",
+    "language": "crystal",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": [
+      "junior",
+      "developer",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use specific exceptions for better handling",
+      "Avoid using rescue for control flow"
+    ],
+    "commonMistakes": [
+      "Catching all exceptions indiscriminately",
+      "Neglecting to log errors"
+    ],
+    "interviewTips": [
+      "Understand the difference between checked and unchecked exceptions",
+      "Discuss how you handle errors in real projects"
+    ],
+    "relatedQuestions": []
+  }
+]

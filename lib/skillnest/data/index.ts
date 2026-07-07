@@ -63,6 +63,7 @@ import zig from '@/data/questions/zig.json'
 import mojo from '@/data/questions/mojo.json'
 import gleam from '@/data/questions/gleam.json'
 import nim from '@/data/questions/nim.json'
+import crystal from '@/data/questions/crystal.json'
 
 const questionMap: Record<string, Question[]> = {
   react,
@@ -122,6 +123,7 @@ const questionMap: Record<string, Question[]> = {
   mojo,
   gleam,
   nim,
+  crystal,
 } as unknown as Record<string, Question[]>
 
 export function getTechnologies(): Technology[] {
