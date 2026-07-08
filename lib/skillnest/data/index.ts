@@ -64,6 +64,7 @@ import mojo from '@/data/questions/mojo.json'
 import gleam from '@/data/questions/gleam.json'
 import nim from '@/data/questions/nim.json'
 import crystal from '@/data/questions/crystal.json'
+import ocaml from '@/data/questions/ocaml.json'
 
 const questionMap: Record<string, Question[]> = {
   react,
@@ -124,6 +125,7 @@ const questionMap: Record<string, Question[]> = {
   gleam,
   nim,
   crystal,
+  ocaml,
 } as unknown as Record<string, Question[]>
 
 export function getTechnologies(): Technology[] {

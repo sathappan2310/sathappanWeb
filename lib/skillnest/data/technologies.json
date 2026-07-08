@@ -56,5 +56,6 @@
   {"id":"mojo","name":"Mojo","category":"Languages","description":"A Python-superset language for AI and high-performance computing.","color":"from-red-500 to-orange-500","icon":"Flame","tags":["ai","performance"]},
   {"id":"gleam","name":"Gleam","category":"Languages","description":"A type-safe, functional language for the Erlang VM.","color":"from-pink-500 to-rose-500","icon":"Sparkles","tags":["functional","beam"]},
   {"id":"nim","name":"Nim","category":"Languages","description":"An efficient, expressive systems language that compiles to C.","color":"from-yellow-500 to-amber-600","icon":"Crown","tags":["systems","metaprogramming"]},
-  {"id":"crystal","name":"Crystal","category":"Languages","description":"Ruby-like syntax with the speed of a compiled, statically typed language.","color":"from-slate-400 to-slate-600","icon":"Diamond","tags":["ruby-like","compiled"]}
+  {"id":"crystal","name":"Crystal","category":"Languages","description":"Ruby-like syntax with the speed of a compiled, statically typed language.","color":"from-slate-400 to-slate-600","icon":"Diamond","tags":["ruby-like","compiled"]},
+  {"id":"ocaml","name":"OCaml","category":"Languages","description":"An industrial-strength functional language with powerful type inference.","color":"from-orange-500 to-yellow-600","icon":"Camera","tags":["functional","types"]}
 ]

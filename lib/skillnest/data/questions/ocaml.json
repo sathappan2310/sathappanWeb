@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "title": "Pattern Matching Basics",
+    "question": "What is pattern matching in OCaml and how is it used?",
+    "answer": "Pattern matching allows you to destructure data types and execute code based on their structure.",
+    "explanation": "It is a powerful feature in OCaml that makes working with complex data types more manageable. You use pattern matching to check a value against a pattern, and it can be used with tuples, lists, and user-defined types.",
+    "codeExample": "let rec sum lst =\n  match lst with\n  | [] -> 0\n  | head :: tail -> head + sum tail",
+    "language": "ocaml",
+    "difficulty": "Beginner",
+    "category": "Languages",
+    "tags": [
+      "junior",
+      "ocaml",
+      "pattern matching"
+    ],
+    "bestPractices": [
+      "Use pattern matching for readability",
+      "Handle all cases explicitly"
+    ],
+    "commonMistakes": [
+      "Forgetting to cover all cases",
+      "Using pattern matching on the wrong types"
+    ],
+    "interviewTips": [
+      "Explain the structure being matched",
+      "Show understanding of matching against different data types"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Functional Programming Concepts",
+    "question": "How does OCaml support functional programming principles?",
+    "answer": "OCaml is designed as a functional language, supporting first-class functions, higher-order functions, and immutability.",
+    "explanation": "In OCaml, functions are first-class citizens, meaning they can be passed as arguments, returned from other functions, and assigned to variables. This supports a functional programming style that emphasizes immutability and function composition.",
+    "codeExample": "let apply_twice f x = f (f x)\nlet increment x = x + 1\nlet result = apply_twice increment 5",
+    "language": "ocaml",
+    "difficulty": "Intermediate",
+    "category": "Languages",
+    "tags": [
+      "mid",
+      "ocaml",
+      "functional programming"
+    ],
+    "bestPractices": [
+      "Emphasize immutability",
+      "Leverage higher-order functions"
+    ],
+    "commonMistakes": [
+      "Not understanding function scope",
+      "Confusing functional and imperative styles"
+    ],
+    "interviewTips": [
+      "Discuss the benefits of immutability",
+      "Provide examples of higher-order functions"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 3,
+    "title": "Module System",
+    "question": "Explain the module system in OCaml and its benefits.",
+    "answer": "The module system in OCaml allows for organizing code into reusable components, encapsulating types and functions.",
+    "explanation": "Modules can contain types, functions, and submodules, enabling better organization of code and namespace management. This helps prevent name clashes and enhances code reusability.",
+    "codeExample": "module Math = struct\n  let square x = x * x\n  let cube x = square x * x\nend\nlet result = Math.cube 3",
+    "language": "ocaml",
+    "difficulty": "Intermediate",
+    "category": "Languages",
+    "tags": [
+      "mid",
+      "ocaml",
+      "modules"
+    ],
+    "bestPractices": [
+      "Use modules for logical grouping",
+      "Expose only necessary components"
+    ],
+    "commonMistakes": [
+      "Overusing global variables",
+      "Not separating concerns effectively"
+    ],
+    "interviewTips": [
+      "Highlight the advantages of modularity",
+      "Mention real-world use cases in OCaml"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 4,
+    "title": "Type Inference",
+    "question": "What is type inference in OCaml and how does it work?",
+    "answer": "Type inference in OCaml automatically determines the types of expressions without explicit type annotations.",
+    "explanation": "The OCaml type system can deduce the types of variables and functions based on their usage, which allows for concise code while maintaining type safety.",
+    "codeExample": "let add x y = x + y\nlet sum = add 3 4",
+    "language": "ocaml",
+    "difficulty": "Advanced",
+    "category": "Languages",
+    "tags": [
+      "senior",
+      "ocaml",
+      "type inference"
+    ],
+    "bestPractices": [
+      "Use type annotations for clarity when needed",
+      "Understand inferred types for debugging"
+    ],
+    "commonMistakes": [
+      "Assuming all types are inferred correctly",
+      "Ignoring type errors"
+    ],
+    "interviewTips": [
+      "Discuss advantages of type inference",
+      "Provide examples where type inference is beneficial"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 5,
+    "title": "Concurrency with Lwt",
+    "question": "How does OCaml handle concurrency with Lwt?",
+    "answer": "Lwt is a cooperative threading library for OCaml that allows for concurrent programming using lightweight threads.",
+    "explanation": "Lwt enables asynchronous programming by using promises and allows for non-blocking I/O operations. This is often used in web servers and applications requiring concurrency.",
+    "codeExample": "let example () =\n  let%lwt result = Lwt_unix.sleep 1.0 in\n  Lwt_io.printf \"Done after 1 second: %d\\n\" result\nlet () = Lwt_main.run (example ())",
+    "language": "ocaml",
+    "difficulty": "Advanced",
+    "category": "Languages",
+    "tags": [
+      "senior",
+      "ocaml",
+      "concurrency"
+    ],
+    "bestPractices": [
+      "Use Lwt for I/O-bound tasks",
+      "Keep concurrency code clean and manageable"
+    ],
+    "commonMistakes": [
+      "Misunderstanding the event loop",
+      "Blocking the main thread unintentionally"
+    ],
+    "interviewTips": [
+      "Explain the difference between threads and Lwt's model",
+      "Show practical use cases for Lwt"
+    ],
+    "relatedQuestions": []
+  }
+]
