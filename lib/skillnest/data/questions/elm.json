@@ -1,0 +1,160 @@
+[
+  {
+    "id": 1,
+    "title": "Understanding Elm Architecture",
+    "question": "Can you explain the Elm Architecture and how it organizes an Elm application?",
+    "answer": "The Elm Architecture consists of three main components: Model, Update, and View. The Model holds the application state, the Update function modifies the state based on messages, and the View function generates HTML based on the current state.",
+    "explanation": "This architecture promotes a clear separation of concerns, making it easier to manage state and side effects in the application. It is a pattern that guides the development in Elm applications.",
+    "codeExample": "type alias Model = { count : Int }\n\ntype Msg = Increment | Decrement\n\nupdate : Msg -> Model -> Model\nupdate msg model =\n    case msg of\n        Increment -> { model | count = model.count + 1 }\n        Decrement -> { model | count = model.count - 1 }\n\nview : Model -> Html Msg\nview model =\n    div []\n        [ button [ onClick Increment ] [ text \"+\" ]\n        , text (String.fromInt model.count)\n        , button [ onClick Decrement ] [ text \"-\" ]\n        ]",
+    "language": "elm",
+    "difficulty": "Beginner",
+    "category": "Architecture",
+    "tags": [
+      "senior",
+      "frontend",
+      "developer"
+    ],
+    "bestPractices": [
+      "Keep your model simple",
+      "Use types to enforce invariants"
+    ],
+    "commonMistakes": [
+      "Mixing concerns in the Model",
+      "Not using the type system effectively"
+    ],
+    "interviewTips": [
+      "Focus on the separation of concerns",
+      "Be prepared to discuss advantages of this architecture"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Handling Effects",
+    "question": "How does Elm handle side effects, and what are the best practices for managing them?",
+    "answer": "Elm handles side effects using Commands and Subscriptions. Commands are used to perform effects like HTTP requests, while Subscriptions allow the application to react to external events.",
+    "explanation": "This model ensures that side effects are managed in a controlled manner, maintaining the functional purity of the core application logic.",
+    "codeExample": "import Http\n\nfetchData : Cmd Msg\nfetchData =\n    Http.get\n        { url = \"https://api.example.com/data\"\n        , expect = Http.expectJson ReceiveData ResponseDecoder\n        }\n\nsubscriptions : Model -> Sub Msg\nsubscriptions model =\n    Time.every (1 * Time.second) Tick",
+    "language": "elm",
+    "difficulty": "Intermediate",
+    "category": "Effects",
+    "tags": [
+      "mid",
+      "frontend",
+      "developer"
+    ],
+    "bestPractices": [
+      "Limit side effects to commands",
+      "Use subscriptions for real-time updates"
+    ],
+    "commonMistakes": [
+      "Ignoring the Elm architecture",
+      "Overusing effects"
+    ],
+    "interviewTips": [
+      "Discuss the role of Commands and Subscriptions",
+      "Be ready to explain how effects are isolated"
+    ],
+    "relatedQuestions": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Type System",
+    "question": "What are the advantages of Elm's type system, and how does it contribute to developer productivity?",
+    "answer": "Elm's type system is strong and static, which catches many errors at compile time. This reduces runtime errors and allows for better refactoring, as types serve as documentation.",
+    "explanation": "The type system helps in creating reliable and maintainable code, fostering confidence in code changes and allowing developers to catch errors early in the development process.",
+    "codeExample": "type alias User = { name : String, age : Int }\n\ntype Msg = UpdateUser User\n\nupdate : Msg -> Model -> Model\nupdate (UpdateUser user) model =\n    { model | user = user }",
+    "language": "elm",
+    "difficulty": "Advanced",
+    "category": "Type System",
+    "tags": [
+      "senior",
+      "frontend",
+      "developer"
+    ],
+    "bestPractices": [
+      "Use type aliases for complex structures",
+      "Leverage union types for better handling of state"
+    ],
+    "commonMistakes": [
+      "Ignoring compiler warnings",
+      "Using dynamic types excessively"
+    ],
+    "interviewTips": [
+      "Emphasize the role of the type system in preventing bugs",
+      "Discuss your experience with refactoring using types"
+    ],
+    "relatedQuestions": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Elm Packages",
+    "question": "How do you manage dependencies in Elm, and what are some commonly used packages?",
+    "answer": "Dependencies in Elm are managed using the package.elm.json file. Commonly used packages include elm/http for making HTTP requests and elm/json for decoding JSON data.",
+    "explanation": "Managing dependencies is crucial for maintaining the application's ecosystem, and using well-established packages can save time and effort in development.",
+    "codeExample": "elm install elm/http\nelm install elm/json",
+    "language": "elm",
+    "difficulty": "Intermediate",
+    "category": "Package Management",
+    "tags": [
+      "mid",
+      "frontend",
+      "developer"
+    ],
+    "bestPractices": [
+      "Regularly update dependencies",
+      "Use semantic versioning"
+    ],
+    "commonMistakes": [
+      "Forgetting to add dependencies to the file",
+      "Using outdated packages"
+    ],
+    "interviewTips": [
+      "Be prepared to discuss your experience with packages",
+      "Mention how you evaluate packages for use"
+    ],
+    "relatedQuestions": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Testing in Elm",
+    "question": "What strategies do you use for testing Elm applications, and how does Elm's tooling support this?",
+    "answer": "In Elm, you can use elm-test for unit testing. Strategies include testing individual functions, view components, and integration tests by simulating user interactions.",
+    "explanation": "Elm's tooling provides a solid foundation for writing tests, and its type system helps ensure that tests are robust and reliable.",
+    "codeExample": "import Test exposing (..)\n\nmain : Test\nmain =\n    describe \"Counter tests\"\n        [ test \"Incrementing\" <| \\_ ->\n            assert (increment 1 == 2)\n        ]",
+    "language": "elm",
+    "difficulty": "Intermediate",
+    "category": "Testing",
+    "tags": [
+      "mid",
+      "frontend",
+      "developer"
+    ],
+    "bestPractices": [
+      "Write tests for critical functions",
+      "Use descriptive test names"
+    ],
+    "commonMistakes": [
+      "Neglecting to test edge cases",
+      "Writing tests that are too broad"
+    ],
+    "interviewTips": [
+      "Discuss your experience with the testing framework",
+      "Be ready to share specific examples of tests you've written"
+    ],
+    "relatedQuestions": [
+      1,
+      2,
+      4
+    ]
+  }
+]
