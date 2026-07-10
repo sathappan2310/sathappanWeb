@@ -58,5 +58,6 @@
   {"id":"nim","name":"Nim","category":"Languages","description":"An efficient, expressive systems language that compiles to C.","color":"from-yellow-500 to-amber-600","icon":"Crown","tags":["systems","metaprogramming"]},
   {"id":"crystal","name":"Crystal","category":"Languages","description":"Ruby-like syntax with the speed of a compiled, statically typed language.","color":"from-slate-400 to-slate-600","icon":"Diamond","tags":["ruby-like","compiled"]},
   {"id":"ocaml","name":"OCaml","category":"Languages","description":"An industrial-strength functional language with powerful type inference.","color":"from-orange-500 to-yellow-600","icon":"Camera","tags":["functional","types"]},
-  {"id":"elm","name":"Elm","category":"Languages","description":"A delightful functional language for building reliable web front-ends.","color":"from-green-500 to-teal-600","icon":"Trees","tags":["functional","frontend"]}
+  {"id":"elm","name":"Elm","category":"Languages","description":"A delightful functional language for building reliable web front-ends.","color":"from-green-500 to-teal-600","icon":"Trees","tags":["functional","frontend"]},
+  {"id":"odin","name":"Odin","category":"Languages","description":"A data-oriented systems language built for high-performance programming.","color":"from-blue-500 to-indigo-600","icon":"Hammer","tags":["systems","gamedev"]}
 ]

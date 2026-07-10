@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "title": "Basic Data Structures",
+    "question": "What are the primary data structures available in Odin and how do they differ?",
+    "answer": "Odin primarily includes arrays, maps, and sets as its core data structures.",
+    "explanation": "Each data structure serves different purposes. Arrays are ordered collections, maps are key-value pairs allowing fast lookups, and sets are unique collections of items.",
+    "codeExample": "array_example := [1, 2, 3]\nmap_example := { 'key': 'value' }\nset_example := { 1, 2, 2, 3 }",
+    "language": "odin",
+    "difficulty": "Beginner",
+    "category": "Data Structures",
+    "tags": [
+      "junior",
+      "odin",
+      "data structures"
+    ],
+    "bestPractices": [
+      "Use the right data structure for your needs",
+      "Understand the time complexities"
+    ],
+    "commonMistakes": [
+      "Confusing arrays with maps",
+      "Using sets incorrectly to manage duplicates"
+    ],
+    "interviewTips": [
+      "Be clear about how each data structure works",
+      "Provide examples when explaining"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 2,
+    "title": "Function Types",
+    "question": "Can you explain the concept of first-class and higher-order functions in Odin?",
+    "answer": "First-class functions are functions treated as first-class citizens, allowing them to be passed as arguments, returned from other functions, and assigned to variables. Higher-order functions are functions that take other functions as parameters or return them.",
+    "explanation": "This concept is essential for functional programming paradigms, allowing for more abstract and flexible designs.",
+    "codeExample": "add := func(a int, b int) int {\n    return a + b\n}\nsquare := func(x int) int {\n    return x * x\n}\napply := func(f func(int) int, x int) int {\n    return f(x)\n}\nresult := apply(square, 5)",
+    "language": "odin",
+    "difficulty": "Intermediate",
+    "category": "Functions",
+    "tags": [
+      "mid",
+      "odin",
+      "functional programming"
+    ],
+    "bestPractices": [
+      "Use higher-order functions for cleaner code",
+      "Avoid unnecessary complexity"
+    ],
+    "commonMistakes": [
+      "Not understanding how to return functions",
+      "Overcomplicating simple tasks with higher-order functions"
+    ],
+    "interviewTips": [
+      "Discuss real-world scenarios where higher-order functions can be useful",
+      "Explain with code examples"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 3,
+    "title": "Concurrency Model",
+    "question": "How does Odin handle concurrency, and what mechanisms are provided for concurrent programming?",
+    "answer": "Odin uses goroutines and channels to manage concurrency, allowing for efficient multitasking and communication between threads.",
+    "explanation": "This model promotes easier management of concurrent tasks without the complexity of managing threads manually, making it suitable for modern applications.",
+    "codeExample": "counter := 0\nvar wg sync.WaitGroup\nincrement := func() {\n    defer wg.Done()\n    counter++\n}\n\nfor i := 0; i < 10; i++ {\n    wg.Add(1)\n    go increment()\n}\nwg.Wait()",
+    "language": "odin",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "odin",
+      "concurrency"
+    ],
+    "bestPractices": [
+      "Use goroutines for lightweight concurrent tasks",
+      "Always synchronize access to shared resources"
+    ],
+    "commonMistakes": [
+      "Neglecting to synchronize shared state",
+      "Overusing goroutines leading to resource exhaustion"
+    ],
+    "interviewTips": [
+      "Discuss the benefits of using concurrency in applications",
+      "Prepare to explain trade-offs between concurrency and parallelism"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 4,
+    "title": "Memory Management",
+    "question": "Describe Odin's approach to memory management and how it differs from garbage collection.",
+    "answer": "Odin employs a manual memory management approach, allowing developers to allocate and free memory explicitly while providing safe operation through its design.",
+    "explanation": "Unlike garbage-collected languages, Odin requires a more mindful approach to memory, reducing overhead and increasing performance in certain contexts.",
+    "codeExample": "arr := new_array(10)\n// Use arr\nfree(arr)",
+    "language": "odin",
+    "difficulty": "Intermediate",
+    "category": "Memory Management",
+    "tags": [
+      "mid",
+      "odin",
+      "memory management"
+    ],
+    "bestPractices": [
+      "Always free memory once it's no longer needed",
+      "Be cautious with pointer arithmetic"
+    ],
+    "commonMistakes": [
+      "Forgetting to free allocated memory",
+      "Dereferencing null or freed pointers"
+    ],
+    "interviewTips": [
+      "Show understanding of the implications of manual memory management",
+      "Mention strategies to avoid memory leaks"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 5,
+    "title": "Error Handling",
+    "question": "What is the error handling model in Odin, and how does it compare to exceptions in other languages?",
+    "answer": "Odin utilizes a result type for error handling instead of exceptions, relying on explicit checks for errors after function calls.",
+    "explanation": "This model encourages developers to handle errors immediately, reducing the risk of unhandled exceptions and improving code clarity.",
+    "codeExample": "result, err := someFunction()\nif err != nil {\n    // handle the error\n}",
+    "language": "odin",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": [
+      "junior",
+      "odin",
+      "error handling"
+    ],
+    "bestPractices": [
+      "Always check for errors",
+      "Handle errors gracefully and log them"
+    ],
+    "commonMistakes": [
+      "Ignoring error checks",
+      "Using exceptions instead of the result type"
+    ],
+    "interviewTips": [
+      "Explain the advantages of the result type model",
+      "Provide examples of error handling in real scenarios"
+    ],
+    "relatedQuestions": []
+  }
+]
