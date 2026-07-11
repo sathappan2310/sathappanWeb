@@ -158,5 +158,165 @@
       "Discuss benefits and drawbacks of C interoperability"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 6,
+    "title": "Zig Build System",
+    "question": "What is the purpose of the Zig build system and how does it differ from traditional build systems?",
+    "answer": "The Zig build system is designed to simplify the process of compiling code, managing dependencies, and producing binaries. Unlike traditional systems that may rely heavily on Makefiles or complex configurations, Zig's build system uses a straightforward approach with a single build.zig file.",
+    "explanation": "Zig's build system integrates closely with the language itself, allowing developers to specify build configurations in Zig code. This enhances type safety and provides better tooling support.",
+    "codeExample": "const std = @import(\"std\");\n\npub fn build(b: *std.build.Builder) void {\n    const exe = b.addExecutable(\"my_app\", \"src/main.zig\");\n    exe.addIncludeDir(\"src/include\");\n    exe.install();\n}",
+    "language": "Zig",
+    "difficulty": "Intermediate",
+    "category": "Build System",
+    "tags": [
+      "senior",
+      "build",
+      "zig"
+    ],
+    "bestPractices": [
+      "Use descriptive names for executables",
+      "Organize dependencies clearly",
+      "Use version control for build files"
+    ],
+    "commonMistakes": [
+      "Ignoring errors during build",
+      "Not using the Zig build system features",
+      "Neglecting to test build configurations"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with the Zig build system documentation",
+      "Understand common build scenarios",
+      "Practice creating and modifying build.zig files"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Zig Type System",
+    "question": "Can you explain the differences between Zig's type system and that of C?",
+    "answer": "Zig's type system provides strong compile-time guarantees and includes features like optional types, error unions, and compile-time evaluation, which are not present in C's type system.",
+    "explanation": "These features help prevent common programming errors and allow for more expressive code, enabling developers to catch issues early in the development process.",
+    "codeExample": "const std = @import(\"std\");\n\nfn divide(x: i32, y: i32) !i32 {\n    if (y == 0) return error.DivideByZero;\n    return x / y;\n}",
+    "language": "Zig",
+    "difficulty": "Advanced",
+    "category": "Type System",
+    "tags": [
+      "mid",
+      "types",
+      "zig"
+    ],
+    "bestPractices": [
+      "Leverage optional types for clarity",
+      "Use error unions for robust error handling",
+      "Understand the implications of pointer types"
+    ],
+    "commonMistakes": [
+      "Using uninitialized variables",
+      "Ignoring type safety features",
+      "Misunderstanding pointer arithmetic"
+    ],
+    "interviewTips": [
+      "Review Zig's type system documentation",
+      "Practice with type-related exercises",
+      "Discuss how type safety improves code quality"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "Zig Standard Library",
+    "question": "What are the key features of the Zig standard library, and how can they enhance application development?",
+    "answer": "The Zig standard library offers a variety of utilities such as data structures, I/O operations, and networking functionalities, all designed to be efficient and straightforward.",
+    "explanation": "By providing a robust set of tools, the standard library allows developers to focus more on application logic rather than low-level implementation details.",
+    "codeExample": "const std = @import(\"std\");\n\npub fn main() !void {\n    const allocator = std.heap.page_allocator;\n    const string = try allocator.alloc(u8, 10);\n    std.debug.print(\"Allocated string: {}\n\", .{string});\n}",
+    "language": "Zig",
+    "difficulty": "Beginner",
+    "category": "Standard Library",
+    "tags": [
+      "junior",
+      "library",
+      "zig"
+    ],
+    "bestPractices": [
+      "Utilize the standard library for common tasks",
+      "Understand memory management in the library",
+      "Explore documentation for advanced functions"
+    ],
+    "commonMistakes": [
+      "Overusing custom implementations instead of library functions",
+      "Neglecting error handling with allocator functions",
+      "Mismanaging memory allocations"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with common library functions",
+      "Be prepared to discuss specific use cases",
+      "Practice writing small programs using the standard library"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Zig Optimizations",
+    "question": "What are some common optimization techniques in Zig, and how can they improve performance?",
+    "answer": "Common optimization techniques in Zig include using compile-time evaluations, optimizing memory usage, and employing inlining for frequently called functions.",
+    "explanation": "These techniques allow developers to fine-tune their applications for performance, especially in resource-constrained environments.",
+    "codeExample": "const std = @import(\"std\");\n\ninline fn square(x: i32) i32 {\n    return x * x;\n}\n\npub fn main() void {\n    const result = square(5);\n    std.debug.print(\"Square: {}\n\", .{result});\n}",
+    "language": "Zig",
+    "difficulty": "Advanced",
+    "category": "Optimization",
+    "tags": [
+      "senior",
+      "performance",
+      "zig"
+    ],
+    "bestPractices": [
+      "Profile applications to find bottlenecks",
+      "Use inline functions judiciously",
+      "Optimize memory access patterns"
+    ],
+    "commonMistakes": [
+      "Optimizing prematurely",
+      "Ignoring compiler warnings",
+      "Neglecting to measure performance improvements"
+    ],
+    "interviewTips": [
+      "Understand the principles of performance tuning",
+      "Be ready to explain trade-offs in optimization",
+      "Discuss real-world examples of optimization"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "Using Zig for System Programming",
+    "question": "How does Zig facilitate system programming compared to other languages?",
+    "answer": "Zig offers low-level control over system resources, safety features like memory safety checks, and a simple syntax, making it an excellent choice for system programming.",
+    "explanation": "With its focus on performance and safety, Zig helps developers create reliable systems code while avoiding common pitfalls associated with manual memory management.",
+    "codeExample": "const std = @import(\"std\");\n\npub fn main() void {\n    const file = try std.fs.cwd().openFile(\"example.txt\", .{ .read = true });\n    defer file.close();\n    // Read and process file...\n}",
+    "language": "Zig",
+    "difficulty": "Intermediate",
+    "category": "System Programming",
+    "tags": [
+      "mid",
+      "system",
+      "zig"
+    ],
+    "bestPractices": [
+      "Understand low-level resource management",
+      "Employ safety features wisely",
+      "Keep up-to-date with system programming trends"
+    ],
+    "commonMistakes": [
+      "Forgetting to release resources",
+      "Overlooking platform-specific considerations",
+      "Not leveraging Zig's safety features"
+    ],
+    "interviewTips": [
+      "Be familiar with system programming concepts",
+      "Discuss Zig's advantages in system code",
+      "Prepare examples of Zig in system projects"
+    ],
+    "relatedQuestions": []
   }
 ]
