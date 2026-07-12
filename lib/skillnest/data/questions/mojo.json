@@ -145,5 +145,150 @@
       "Highlight challenges and solutions in interop scenarios"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 6,
+    "title": "Mojo Memory Management",
+    "question": "How does Mojo handle memory management, and what are the key differences compared to garbage-collected languages?",
+    "answer": "Mojo uses a combination of manual and automated memory management techniques, allowing for fine-grained control over resource allocation while also providing safety features to avoid memory leaks.",
+    "explanation": "Unlike traditional garbage-collected languages, Mojo provides developers the ability to manage memory explicitly, which can lead to performance gains, especially in resource-constrained environments. This requires a good understanding of memory allocation and deallocation.",
+    "codeExample": "def allocateMemory():\n    ptr = allocate(1024)  # Allocating 1024 bytes\n    # Use the memory\n    deallocate(ptr)  # Deallocate when done",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Memory Management",
+    "tags": [
+      "senior",
+      "memory",
+      "performance"
+    ],
+    "bestPractices": [
+      "Always match allocate with deallocate",
+      "Use tools to track memory usage"
+    ],
+    "commonMistakes": [
+      "Failing to deallocate memory",
+      "Over-allocating memory resources"
+    ],
+    "interviewTips": [
+      "Discuss real-world scenarios",
+      "Be prepared to explain trade-offs"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Error Handling in Mojo",
+    "question": "What strategies does Mojo provide for error handling, and how can they be effectively utilized?",
+    "answer": "Mojo provides structured error handling through exceptions, allowing developers to define try/catch blocks to manage errors gracefully.",
+    "explanation": "Understanding the error handling mechanisms is crucial for writing robust applications. Effective use of exceptions can prevent crashes and allow the program to recover from unexpected issues.",
+    "codeExample": "try:\n    riskyOperation()\nexcept Exception as e:\n    handleError(e)",
+    "language": "Mojo",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": [
+      "junior",
+      "error handling",
+      "best practices"
+    ],
+    "bestPractices": [
+      "Use specific exceptions for clarity",
+      "Always clean up resources in finally blocks"
+    ],
+    "commonMistakes": [
+      "Using generic exceptions",
+      "Neglecting to catch exceptions"
+    ],
+    "interviewTips": [
+      "Provide examples of error handling in projects",
+      "Explain the rationale behind your choice of error handling technique"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "Mojo's Type System",
+    "question": "Can you explain the differences between Mojo's static and dynamic typing, and when you would use each?",
+    "answer": "Mojo supports both static and dynamic typing; static typing is used for performance-critical areas, while dynamic typing offers flexibility and ease of use during prototyping.",
+    "explanation": "Understanding when to use static vs. dynamic typing is fundamental in Mojo. Static typing catches errors at compile time, whereas dynamic typing allows for more rapid development.",
+    "codeExample": "def add(a: Int, b: Int) -> Int:\n    return a + b  # Static typing\n\ndef dynamicAdd(a, b):\n    return a + b  # Dynamic typing",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Type System",
+    "tags": [
+      "mid",
+      "type system",
+      "performance"
+    ],
+    "bestPractices": [
+      "Use static typing for performance-critical code",
+      "Leverage dynamic typing for rapid development"
+    ],
+    "commonMistakes": [
+      "Mixing static and dynamic types incorrectly",
+      "Ignoring type hints"
+    ],
+    "interviewTips": [
+      "Discuss personal experiences with type systems",
+      "Explain the benefits and drawbacks of each typing method"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Building Mojo Packages",
+    "question": "What are the steps involved in creating a reusable package in Mojo, and how can it be distributed?",
+    "answer": "To create a reusable package in Mojo, define the package structure, write the necessary modules, and use the Mojo package manager for distribution.",
+    "explanation": "Creating and distributing packages allows developers to share code efficiently. Familiarity with the package management system is essential for collaboration.",
+    "codeExample": "# Directory structure:\n# mypackage/\n# ├── __init__.mojo\n# └── module.mojo\n\n# In __init__.mojo:\nmodule mymodule:\n    def hello():\n        return 'Hello, Mojo!'",
+    "language": "Mojo",
+    "difficulty": "Advanced",
+    "category": "Package Management",
+    "tags": [
+      "senior",
+      "packages",
+      "distribution"
+    ],
+    "bestPractices": [
+      "Follow naming conventions",
+      "Include documentation and tests"
+    ],
+    "commonMistakes": [
+      "Neglecting to version the package",
+      "Not including a README file"
+    ],
+    "interviewTips": [
+      "Discuss experiences with package creation",
+      "Be prepared to explain versioning and dependency management"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "Testing Strategies in Mojo",
+    "question": "What testing strategies are recommended for Mojo applications, and how can they improve code quality?",
+    "answer": "Recommended testing strategies in Mojo include unit testing, integration testing, and using continuous integration tools to automate tests.",
+    "explanation": "Testing is crucial to ensure code quality and reliability. Effective testing strategies help catch bugs early and provide confidence during deployments.",
+    "codeExample": "def test_add():\n    assert add(2, 3) == 5  # Unit test for add function",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Testing",
+    "tags": [
+      "mid",
+      "testing",
+      "quality assurance"
+    ],
+    "bestPractices": [
+      "Write tests for every function",
+      "Use CI/CD pipelines for automated testing"
+    ],
+    "commonMistakes": [
+      "Not writing tests",
+      "Ignoring edge cases in tests"
+    ],
+    "interviewTips": [
+      "Discuss the importance of tests in your projects",
+      "Provide examples of testing frameworks you have used"
+    ],
+    "relatedQuestions": []
   }
 ]
