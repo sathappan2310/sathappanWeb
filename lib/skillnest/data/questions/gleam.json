@@ -143,5 +143,165 @@
       "Explain how modules can enhance collaboration in teams"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 6,
+    "title": "Gleam and Functional Programming",
+    "question": "How does Gleam incorporate functional programming principles and what benefits do these principles provide?",
+    "answer": "Gleam emphasizes immutability, first-class functions, and higher-order functions, which are core concepts of functional programming. These principles help in writing predictable and testable code.",
+    "explanation": "Functional programming promotes using functions as first-class citizens, enabling developers to pass functions as arguments, return them from other functions, and store them in data structures. This results in cleaner code and reduced side effects.",
+    "codeExample": "fn double(x: Int) -> Int {\n    x * 2\n}\n\nfn map(f: fn(Int) -> Int, list: List(Int)) -> List(Int) {\n    list.map(|x| f(x))\n}",
+    "language": "Gleam",
+    "difficulty": "Intermediate",
+    "category": "Functional Programming",
+    "tags": [
+      "mid",
+      "gleam",
+      "functional programming"
+    ],
+    "bestPractices": [
+      "Use higher-order functions",
+      "Prefer immutability",
+      "Keep side effects to a minimum"
+    ],
+    "commonMistakes": [
+      "Mixing mutable and immutable state",
+      "Overusing side effects",
+      "Neglecting pure functions"
+    ],
+    "interviewTips": [
+      "Understand the core concepts of functional programming",
+      "Be prepared to discuss real-world applications",
+      "Practice coding examples with higher-order functions"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Gleam's Testing Framework",
+    "question": "What testing framework does Gleam provide, and how can you implement unit tests effectively?",
+    "answer": "Gleam provides a built-in testing framework that allows you to write unit tests using assertions. You can define test cases and group them effectively.",
+    "explanation": "Unit testing in Gleam can be accomplished with the `gleam test` command, where you can assert expected outcomes using built-in assertions to ensure your code behaves as expected.",
+    "codeExample": "test \"double function test\" {\n    assert double(2) == 4\n    assert double(3) == 6\n}",
+    "language": "Gleam",
+    "difficulty": "Beginner",
+    "category": "Testing",
+    "tags": [
+      "junior",
+      "gleam",
+      "testing"
+    ],
+    "bestPractices": [
+      "Write tests for all public functions",
+      "Use descriptive test names",
+      "Keep tests isolated"
+    ],
+    "commonMistakes": [
+      "Forgetting to test edge cases",
+      "Not using clear assertions",
+      "Neglecting to run tests regularly"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with Gleam's testing commands",
+      "Practice writing tests for various functions",
+      "Be prepared to explain your testing strategy"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "Interoperability with Erlang",
+    "question": "How does Gleam enable interoperability with Erlang, and why is this beneficial?",
+    "answer": "Gleam is designed to run on the Erlang VM, allowing it to interoperate seamlessly with Erlang libraries and applications, which enhances its capabilities.",
+    "explanation": "By leveraging the Erlang ecosystem, Gleam can utilize established libraries, take advantage of Erlang's fault tolerance, and use features like hot code swapping.",
+    "codeExample": "import gleam/erlang\n\nfn use_erlang() {\n    let result = erlang:some_function()\n    // process result\n}",
+    "language": "Gleam",
+    "difficulty": "Advanced",
+    "category": "Interoperability",
+    "tags": [
+      "senior",
+      "gleam",
+      "Erlang"
+    ],
+    "bestPractices": [
+      "Utilize existing Erlang libraries",
+      "Understand the Erlang concurrency model",
+      "Handle errors gracefully when interfacing"
+    ],
+    "commonMistakes": [
+      "Ignoring Erlang's concurrency model",
+      "Neglecting performance implications",
+      "Overcomplicating interoperation"
+    ],
+    "interviewTips": [
+      "Study the Erlang ecosystem",
+      "Be ready to discuss examples of interoperation",
+      "Understand the implications of running on the Erlang VM"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Gleam's Type Inference",
+    "question": "Explain how type inference works in Gleam and its advantages over explicit typing.",
+    "answer": "Gleam's type inference automatically deduces the types of expressions, allowing developers to write less boilerplate code while maintaining type safety.",
+    "explanation": "Type inference helps reduce redundancy in code, as developers do not need to specify types for every variable. It improves code readability and reduces the likelihood of type-related errors.",
+    "codeExample": "fn add(a, b) {\n    a + b\n}\n\nlet sum = add(3, 4)  // Type inferred as Int",
+    "language": "Gleam",
+    "difficulty": "Intermediate",
+    "category": "Type System",
+    "tags": [
+      "mid",
+      "gleam",
+      "type inference"
+    ],
+    "bestPractices": [
+      "Use type inference for cleaner code",
+      "Avoid overly complex type definitions",
+      "Leverage type hints when necessary"
+    ],
+    "commonMistakes": [
+      "Relying solely on type inference in complex scenarios",
+      "Neglecting to use type hints for clarity",
+      "Assuming type inference always works as expected"
+    ],
+    "interviewTips": [
+      "Understand the differences between explicit and inferred types",
+      "Practice coding examples that utilize type inference",
+      "Be prepared to discuss scenarios where explicit types are beneficial"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "Using Gleam with WebAssembly",
+    "question": "How can Gleam be compiled to WebAssembly, and what are the potential use cases?",
+    "answer": "Gleam can be compiled to WebAssembly to run code in web browsers, enabling high-performance applications like games or complex computations.",
+    "explanation": "By compiling to WebAssembly, developers can create applications that run natively in browsers, providing increased performance and security. It opens up possibilities for cross-platform applications.",
+    "codeExample": "// Main entry point for WebAssembly\nexport fn main() {\n    // Code to run in the browser\n}",
+    "language": "Gleam",
+    "difficulty": "Advanced",
+    "category": "WebAssembly",
+    "tags": [
+      "senior",
+      "gleam",
+      "WebAssembly"
+    ],
+    "bestPractices": [
+      "Optimize code for performance",
+      "Understand the limitations of WebAssembly",
+      "Test thoroughly in different browsers"
+    ],
+    "commonMistakes": [
+      "Assuming all libraries are WebAssembly compatible",
+      "Neglecting browser-specific behaviors",
+      "Not considering performance implications"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with the WebAssembly compilation process",
+      "Be prepared to discuss potential use cases",
+      "Understand the trade-offs of using WebAssembly"
+    ],
+    "relatedQuestions": []
   }
 ]
