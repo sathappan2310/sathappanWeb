@@ -153,5 +153,145 @@
     "relatedQuestions": [
       4
     ]
+  },
+  {
+    "id": 6,
+    "title": "Nim's Memory Management",
+    "question": "How does Nim handle memory management, and what are the implications of using manual versus automatic memory management?",
+    "answer": "Nim uses a combination of garbage collection and manual memory management. Developers can choose to manage memory automatically using the garbage collector or manually using 'new' and 'dispose'.",
+    "explanation": "Understanding Nim's memory management is crucial as it allows developers to optimize performance and avoid memory leaks. The choice between automatic and manual management depends on the application's needs.",
+    "codeExample": "var myArray = newSeq[int](10)\n\n# Using manual memory management\nvar ptr = new(int)\nptr[] = 5\ndispose(ptr)",
+    "language": "Nim",
+    "difficulty": "Intermediate",
+    "category": "Memory Management",
+    "tags": [
+      "mid",
+      "developer"
+    ],
+    "bestPractices": [
+      "Use garbage collection for simpler applications",
+      "Profile memory usage for performance-critical applications"
+    ],
+    "commonMistakes": [
+      "Neglecting to dispose of manually allocated memory",
+      "Assuming garbage collection is always efficient"
+    ],
+    "interviewTips": [
+      "Be prepared to discuss trade-offs between manual and automatic memory management",
+      "Know when to use each approach"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Nim's Concurrency Model",
+    "question": "Explain how Nim supports concurrency and the model it uses to handle concurrent programming.",
+    "answer": "Nim supports concurrency through its asynchronous programming model and the use of 'async' and 'await'. It employs a lightweight threading model based on the concept of coroutines.",
+    "explanation": "Nim's concurrency model allows for efficient execution of tasks without the overhead of traditional threading, making it suitable for I/O-bound applications.",
+    "codeExample": "import asyncns\n\nproc fetchData(url: string): Future[string] =\n  await httpGet(url)\n\nproc main() {.async.} =\n  let data = await fetchData(\"http://example.com\")\n  echo data\n\nasyncMain(main)",
+    "language": "Nim",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "developer"
+    ],
+    "bestPractices": [
+      "Use async for I/O-bound tasks",
+      "Avoid blocking calls within async procedures"
+    ],
+    "commonMistakes": [
+      "Not handling exceptions in async code",
+      "Confusing async and parallel execution"
+    ],
+    "interviewTips": [
+      "Understand the async/await syntax and its use cases",
+      "Be ready to discuss challenges in concurrent programming"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "Nim's Type System",
+    "question": "What are type classes in Nim, and how do they differ from traditional object-oriented inheritance?",
+    "answer": "Type classes in Nim are a way to define generic behavior for different types without the need for inheritance, allowing for polymorphism through interfaces.",
+    "explanation": "This feature provides flexibility by allowing types to be treated as instances of type classes, enabling code reuse and reducing coupling.",
+    "codeExample": "type\n  Showable = ref object\n    value: int\n\nproc `show`(s: Showable): string =\n  return $s.value\n\nlet obj = Showable(value: 42)\necho show(obj)",
+    "language": "Nim",
+    "difficulty": "Intermediate",
+    "category": "Type System",
+    "tags": [
+      "mid",
+      "developer"
+    ],
+    "bestPractices": [
+      "Use type classes for abstraction over behavior",
+      "Prefer type classes for polymorphic behavior over inheritance"
+    ],
+    "commonMistakes": [
+      "Overcomplicating designs with unnecessary type classes",
+      "Not leveraging type class capabilities fully"
+    ],
+    "interviewTips": [
+      "Be clear about the benefits of type classes over inheritance",
+      "Discuss scenarios where type classes simplify code"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Nim's Macros and Templates",
+    "question": "How do macros in Nim work, and what are their advantages compared to templates?",
+    "answer": "Macros in Nim allow for code generation at compile time, providing powerful metaprogramming capabilities. They differ from templates, which are evaluated at runtime.",
+    "explanation": "Using macros can lead to more efficient code and reduce boilerplate, but they can also make code harder to understand if overused.",
+    "codeExample": "import macros\n\nmacro log(msg: untyped): untyped =\n  let formatted = fmt\"Log: {msg}\"\n  result = quote do:\n    echo formatted\n\nproc test() =\n  log(\"Hello, Nim\")\ntest()",
+    "language": "Nim",
+    "difficulty": "Advanced",
+    "category": "Metaprogramming",
+    "tags": [
+      "senior",
+      "developer"
+    ],
+    "bestPractices": [
+      "Use macros sparingly to avoid complexity",
+      "Document macro behavior clearly"
+    ],
+    "commonMistakes": [
+      "Creating overly complex macros",
+      "Not testing macros thoroughly"
+    ],
+    "interviewTips": [
+      "Discuss the scenarios where you would choose macros over templates",
+      "Be prepared with examples of both"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "Testing in Nim",
+    "question": "What testing frameworks are available in Nim, and how do you structure tests for a Nim application?",
+    "answer": "Nim has built-in support for testing through the 'unittest' module and other libraries like 'Nimble'. Tests can be structured in separate files or within the same module.",
+    "explanation": "Organizing tests effectively is key to maintaining code quality and ensuring that new changes do not break existing functionality.",
+    "codeExample": "import unittest\n\nsuite \"My Tests\":\n  test \"simple test\":\n    check(1 + 1 == 2)\n\nrunTests()",
+    "language": "Nim",
+    "difficulty": "Beginner",
+    "category": "Testing",
+    "tags": [
+      "junior",
+      "developer"
+    ],
+    "bestPractices": [
+      "Write tests alongside development",
+      "Use descriptive names for test cases"
+    ],
+    "commonMistakes": [
+      "Neglecting to run tests frequently",
+      "Writing tests that do not cover edge cases"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with common testing patterns in Nim",
+      "Be ready to discuss the importance of testing"
+    ],
+    "relatedQuestions": []
   }
 ]
