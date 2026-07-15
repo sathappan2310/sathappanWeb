@@ -143,5 +143,167 @@
       "Discuss how you handle errors in real projects"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 6,
+    "title": "Performance Optimization Techniques",
+    "question": "What are some performance optimization techniques you can use in Crystal?",
+    "answer": "You can use inlining functions, avoid unnecessary allocations, and utilize the built-in profiling tools.",
+    "explanation": "Inlining functions can reduce overhead from function calls, while minimizing allocations helps in improving runtime performance. Profiling tools can help identify bottlenecks.",
+    "codeExample": "def example_function\n  # This function does something\nend\n\ninline def optimized_function\n  # This inline function reduces calling overhead\nend",
+    "language": "Crystal",
+    "difficulty": "Intermediate",
+    "category": "Performance",
+    "tags": [
+      "mid",
+      "performance",
+      "optimization"
+    ],
+    "bestPractices": [
+      "Profile your code",
+      "Use inlining carefully",
+      "Minimize memory allocations"
+    ],
+    "commonMistakes": [
+      "Over-optimizing prematurely",
+      "Neglecting to profile",
+      "Ignoring compiler warnings"
+    ],
+    "interviewTips": [
+      "Focus on explaining why each technique improves performance",
+      "Be prepared to discuss trade-offs"
+    ],
+    "relatedQuestions": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Crystal's Type System",
+    "question": "How does Crystal's type system differ from other languages like Ruby?",
+    "answer": "Crystal has a static type system while Ruby is dynamically typed. In Crystal, types are checked at compile time.",
+    "explanation": "This leads to better performance and fewer runtime errors in Crystal, as types are enforced during compilation, unlike Ruby.",
+    "codeExample": "class User\n  @name :String\n\n  def initialize(@name :String)\n  end\nend",
+    "language": "Crystal",
+    "difficulty": "Beginner",
+    "category": "Type System",
+    "tags": [
+      "junior",
+      "type system",
+      "comparison"
+    ],
+    "bestPractices": [
+      "Leverage static typing for better performance",
+      "Utilize type annotations effectively"
+    ],
+    "commonMistakes": [
+      "Misunderstanding type inference",
+      "Using dynamic types unnecessarily"
+    ],
+    "interviewTips": [
+      "Discuss examples from both languages",
+      "Highlight advantages of static typing"
+    ],
+    "relatedQuestions": [
+      1,
+      4
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Building Web Applications",
+    "question": "What are the key considerations when building a web application using Crystal?",
+    "answer": "Key considerations include routing, error handling, and using an appropriate web framework like Amber or Kemal.",
+    "explanation": "Using a web framework simplifies the development process, while understanding routing and error handling is critical for building robust applications.",
+    "codeExample": "require \"kemal\"\n\nget \"/\" do |env|\n  env.response.print \"Hello, Crystal!\"\nend\n\nKemal.run",
+    "language": "Crystal",
+    "difficulty": "Intermediate",
+    "category": "Web Development",
+    "tags": [
+      "mid",
+      "web development",
+      "frameworks"
+    ],
+    "bestPractices": [
+      "Choose a web framework that fits project needs",
+      "Implement robust error handling"
+    ],
+    "commonMistakes": [
+      "Ignoring security best practices",
+      "Not structuring code properly"
+    ],
+    "interviewTips": [
+      "Mention specific frameworks and their pros/cons",
+      "Discuss error handling strategies"
+    ],
+    "relatedQuestions": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Interfacing with C Libraries",
+    "question": "How can you interface Crystal code with C libraries?",
+    "answer": "You can use the `lib LibName` syntax along with the appropriate bindings to call C functions.",
+    "explanation": "This allows leveraging existing C libraries, expanding functionality without rewriting code in Crystal.",
+    "codeExample": "lib C\n  fun printf(format : C::Pointer(UInt8), ...) : Int32\nend\n\nC.printf(\"Hello, Crystal!\\n\")",
+    "language": "Crystal",
+    "difficulty": "Advanced",
+    "category": "Interoperability",
+    "tags": [
+      "senior",
+      "interoperability",
+      "C integration"
+    ],
+    "bestPractices": [
+      "Ensure proper memory management",
+      "Follow C API conventions"
+    ],
+    "commonMistakes": [
+      "Not checking return values",
+      "Ignoring type mismatches"
+    ],
+    "interviewTips": [
+      "Explain the process clearly",
+      "Discuss common pitfalls"
+    ],
+    "relatedQuestions": [
+      1,
+      3
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Concurrency Models",
+    "question": "What concurrency models are supported in Crystal and how do they differ?",
+    "answer": "Crystal supports fibers and channels for concurrency, allowing lightweight concurrent programming.",
+    "explanation": "Fibers are used for cooperative multitasking while channels facilitate communication between fibers, enabling safe data sharing.",
+    "codeExample": "channel = Channel(Int32).new\n\nspawn do\n  channel.send(1)\nend\n\nvalue = channel.receive",
+    "language": "Crystal",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "concurrency",
+      "async programming"
+    ],
+    "bestPractices": [
+      "Use channels for safe communication",
+      "Understand fiber lifecycle management"
+    ],
+    "commonMistakes": [
+      "Blocking on channels incorrectly",
+      "Overusing fibers leading to complexity"
+    ],
+    "interviewTips": [
+      "Discuss real-world use cases",
+      "Be prepared to write code examples"
+    ],
+    "relatedQuestions": [
+      2,
+      4
+    ]
   }
 ]
