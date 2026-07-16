@@ -143,5 +143,155 @@
       "Show practical use cases for Lwt"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 6,
+    "title": "Immutable Data Structures",
+    "question": "How do immutable data structures work in OCaml, and what are their advantages?",
+    "answer": "Immutable data structures in OCaml cannot be modified after they are created. Instead, operations that would change the structure return a new instance with the modification applied.",
+    "explanation": "OCaml's immutability helps to avoid side effects, making programs easier to reason about and less prone to bugs. It also allows for safe concurrent programming as data can be shared across threads without risk of modification.",
+    "codeExample": "let lst = [1; 2; 3];\nlet new_lst = 0 :: lst;\n(* lst is still [1; 2; 3], new_lst is [0; 1; 2; 3] *)",
+    "language": "OCaml",
+    "difficulty": "Beginner",
+    "category": "Languages",
+    "tags": [
+      "junior",
+      "ocaml",
+      "data structures",
+      "functional programming"
+    ],
+    "bestPractices": [
+      "Leverage immutability to avoid unintended side effects",
+      "Use persistent data structures for efficiency"
+    ],
+    "commonMistakes": [
+      "Trying to modify an immutable structure",
+      "Not understanding the performance implications of copying data"
+    ],
+    "interviewTips": [
+      "Understand how immutability affects function design",
+      "Be ready to discuss real-world use cases"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Higher-Order Functions",
+    "question": "What are higher-order functions in OCaml, and how are they used?",
+    "answer": "Higher-order functions are functions that can take other functions as arguments or return them as results. They are foundational in functional programming and allow for more abstract and reusable code.",
+    "explanation": "In OCaml, higher-order functions enable powerful abstractions, such as map, filter, and fold. They allow developers to write concise and expressive code by combining behaviors.",
+    "codeExample": "let apply_twice f x = f (f x);\nlet double x = x * 2;\napply_twice double 3;;  (* Result will be 12 *)",
+    "language": "OCaml",
+    "difficulty": "Intermediate",
+    "category": "Languages",
+    "tags": [
+      "mid",
+      "ocaml",
+      "functional programming",
+      "higher-order"
+    ],
+    "bestPractices": [
+      "Use higher-order functions to reduce code duplication",
+      "Favor function composition over loops"
+    ],
+    "commonMistakes": [
+      "Forgetting to apply functions with parentheses",
+      "Confusing function arguments and return values"
+    ],
+    "interviewTips": [
+      "Prepare examples of higher-order functions you have used",
+      "Understand the implications on performance"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "OCaml's Type System",
+    "question": "Can you explain the impact of OCaml's strong static type system on software development?",
+    "answer": "OCaml's strong static type system catches many errors at compile time, leading to safer code. Types are inferred, reducing the need for explicit type annotations while maintaining robustness.",
+    "explanation": "The type system helps in creating reliable software by ensuring that type errors are caught early. It encourages developers to think critically about data types and program structure.",
+    "codeExample": "let add x y = x + y;;  (* OCaml infers the types as int -> int -> int *)",
+    "language": "OCaml",
+    "difficulty": "Advanced",
+    "category": "Languages",
+    "tags": [
+      "senior",
+      "ocaml",
+      "type system",
+      "software design"
+    ],
+    "bestPractices": [
+      "Utilize type annotations for complex functions",
+      "Embrace type inference for simpler code"
+    ],
+    "commonMistakes": [
+      "Ignoring compiler warnings related to types",
+      "Not using polymorphism effectively"
+    ],
+    "interviewTips": [
+      "Be prepared to discuss how you resolved type-related issues",
+      "Understand the trade-offs between type safety and flexibility"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Error Handling in OCaml",
+    "question": "How is error handling typically performed in OCaml, and what are some common approaches?",
+    "answer": "Error handling in OCaml can be done through exceptions or using algebraic data types such as Option or Result to represent success and failure.",
+    "explanation": "Using exceptions allows for control flow when errors occur, while Result types enable a more functional approach where errors are handled explicitly without disrupting the flow.",
+    "codeExample": "let divide x y = if y = 0 then Error \"Division by zero\" else Ok (x / y);\nlet result = divide 10 0;;",
+    "language": "OCaml",
+    "difficulty": "Intermediate",
+    "category": "Languages",
+    "tags": [
+      "mid",
+      "ocaml",
+      "error handling",
+      "functional programming"
+    ],
+    "bestPractices": [
+      "Use Result types for functions that can fail",
+      "Limit the use of exceptions for unexpected errors"
+    ],
+    "commonMistakes": [
+      "Relying solely on exceptions for control flow",
+      "Not handling all possible error cases"
+    ],
+    "interviewTips": [
+      "Discuss your preferred method of error handling",
+      "Provide examples of how you've handled errors in past projects"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "OCaml and Functional Reactive Programming",
+    "question": "What is Functional Reactive Programming (FRP) in OCaml, and how can it be applied?",
+    "answer": "FRP in OCaml combines functional programming with reactive programming techniques to create dynamic systems that respond to changes over time, often used in GUIs or event-driven applications.",
+    "explanation": "FRP allows developers to model time-varying values and event streams in a declarative way, improving the clarity and maintainability of code in applications requiring real-time updates.",
+    "codeExample": "(* Example using a library like React *)\nlet ticker = Signal.make ~init:0 ();;\nSignal.map (fun time -> time + 1) ticker;;",
+    "language": "OCaml",
+    "difficulty": "Advanced",
+    "category": "Languages",
+    "tags": [
+      "senior",
+      "ocaml",
+      "reactive programming",
+      "functional programming"
+    ],
+    "bestPractices": [
+      "Use FRP for interactive applications",
+      "Combine FRP with OCaml's strong type system for safety"
+    ],
+    "commonMistakes": [
+      "Forgetting to manage state changes correctly",
+      "Overcomplicating event handling"
+    ],
+    "interviewTips": [
+      "Explore how you've used FRP in projects",
+      "Understand the benefits of FRP over traditional approaches"
+    ],
+    "relatedQuestions": []
   }
 ]
