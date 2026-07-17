@@ -156,5 +156,165 @@
       2,
       4
     ]
+  },
+  {
+    "id": 6,
+    "title": "Elm's Runtime Performance",
+    "question": "What are the key factors that affect the runtime performance of an Elm application?",
+    "answer": "Key factors include the size of the application, the number of subscriptions and messages, the complexity of the model, and efficient use of the Elm architecture.",
+    "explanation": "Understanding these factors helps developers optimize their Elm applications for better performance, which is crucial for user experience, especially in large applications.",
+    "codeExample": "text\n-- Example demonstrating message processing efficiency\nupdate : Msg -> Model -> (Model, Cmd Msg)\nupdate msg model =\n    case msg of\n        Increment ->\n            (model + 1, Cmd.none)\n        Decrement ->\n            (model - 1, Cmd.none)\n",
+    "language": "Elm",
+    "difficulty": "Intermediate",
+    "category": "Performance",
+    "tags": [
+      "mid",
+      "developer",
+      "performance"
+    ],
+    "bestPractices": [
+      "Minimize the number of subscriptions",
+      "Use efficient data structures",
+      "Optimize update functions"
+    ],
+    "commonMistakes": [
+      "Overusing subscriptions",
+      "Neglecting model complexity",
+      "Ignoring lazy loading of modules"
+    ],
+    "interviewTips": [
+      "Discuss specific performance metrics",
+      "Provide examples of optimization techniques",
+      "Mention tools for profiling Elm apps"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Elm and WebSockets",
+    "question": "How can you implement WebSocket communication in an Elm application?",
+    "answer": "You can implement WebSocket communication by using the `elm/websocket` package, establishing a connection, handling messages, and updating the model accordingly.",
+    "explanation": "WebSockets allow for real-time communication in web applications, and knowing how to implement this in Elm is crucial for creating interactive applications.",
+    "codeExample": "text\nmodule Main exposing (..)\nimport WebSocket exposing (WebSocket)\n\n-- Establish a WebSocket connection\ninit : (WebSocket, Cmd Msg)\ninit =\n    WebSocket.connect \"ws://example.com/socket\"\n",
+    "language": "Elm",
+    "difficulty": "Advanced",
+    "category": "Networking",
+    "tags": [
+      "mid",
+      "developer",
+      "networking"
+    ],
+    "bestPractices": [
+      "Handle connection errors gracefully",
+      "Use dedicated update functions for WebSocket messages",
+      "Clean up connections on program termination"
+    ],
+    "commonMistakes": [
+      "Ignoring WebSocket connection states",
+      "Not validating incoming messages",
+      "Overloading the main update function"
+    ],
+    "interviewTips": [
+      "Explain the significance of WebSockets",
+      "Discuss potential use cases in Elm",
+      "Show familiarity with handling connection states"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "Custom Types and Patterns",
+    "question": "How do you create and use custom types in Elm, and what are their benefits?",
+    "answer": "You create custom types using the `type` keyword. Custom types can represent complex data structures and improve code readability and type safety.",
+    "explanation": "Using custom types allows for better organization of data and can prevent bugs by ensuring only valid data structures are used.",
+    "codeExample": "text\ntype Shape = Circle Float | Rectangle Float Float\n\n-- Example usage\narea : Shape -> Float\narea shape =\n    case shape of\n        Circle radius ->\n            3.14 * radius * radius\n        Rectangle width height ->\n            width * height\n",
+    "language": "Elm",
+    "difficulty": "Beginner",
+    "category": "Data Types",
+    "tags": [
+      "junior",
+      "developer",
+      "data structures"
+    ],
+    "bestPractices": [
+      "Use descriptive names for custom types",
+      "Keep the number of constructors manageable",
+      "Document custom types for clarity"
+    ],
+    "commonMistakes": [
+      "Overcomplicating custom types",
+      "Neglecting to handle all cases in pattern matching",
+      "Using ambiguous type names"
+    ],
+    "interviewTips": [
+      "Explain the concept of algebraic data types",
+      "Provide examples from real projects",
+      "Discuss how custom types enhance type safety"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Elm and CSS Integration",
+    "question": "What are the best practices for integrating CSS with Elm applications?",
+    "answer": "Best practices include using Elm's `Html.Attributes.style` for inline styles, leveraging the `elm-css` package for type-safe styles, and organizing styles into modular files.",
+    "explanation": "Proper CSS integration enhances the visual aspects of Elm applications and ensures maintainability as the application grows.",
+    "codeExample": "text\nmodule Main exposing (..)\nimport Html exposing (div, text)\nimport Html.Attributes exposing (style)\n\nview : Html msg\nview =\n    div [ style \"color\" \"blue\" ] [ text \"Hello, Elm!\" ]\n",
+    "language": "Elm",
+    "difficulty": "Intermediate",
+    "category": "Styling",
+    "tags": [
+      "mid",
+      "developer",
+      "styling"
+    ],
+    "bestPractices": [
+      "Use modular stylesheets",
+      "Avoid inline styles for large projects",
+      "Consider using CSS preprocessors"
+    ],
+    "commonMistakes": [
+      "Inconsistent styling practices",
+      "Overusing inline styles",
+      "Neglecting responsive design"
+    ],
+    "interviewTips": [
+      "Discuss the importance of maintainable styles",
+      "Provide examples of styling strategies",
+      "Mention tools that can assist with styling in Elm"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "Using JSON with Elm",
+    "question": "How can you decode and encode JSON data in Elm?",
+    "answer": "You can use the `elm/json` package to decode JSON into Elm types and encode Elm types back to JSON using `Json.Decode` and `Json.Encode` modules.",
+    "explanation": "Knowing how to work with JSON is essential in modern web applications, as data is often transmitted in this format.",
+    "codeExample": "text\nimport Json.Decode exposing (Decoder, field, string)\n\n-- Example of a decoder for a User type\nuserDecoder : Decoder User\nuserDecoder =\n    Json.Decode.map User (\n        field \"name\" string\n    )\n",
+    "language": "Elm",
+    "difficulty": "Intermediate",
+    "category": "Data Handling",
+    "tags": [
+      "mid",
+      "developer",
+      "data handling"
+    ],
+    "bestPractices": [
+      "Use descriptive field names",
+      "Handle decoding errors gracefully",
+      "Test decoders thoroughly"
+    ],
+    "commonMistakes": [
+      "Forgetting to handle optional fields",
+      "Neglecting to define types for decoded data",
+      "Ignoring error handling in decoding"
+    ],
+    "interviewTips": [
+      "Explain JSON data structures",
+      "Show familiarity with Elm's encoding/decoding process",
+      "Discuss common pitfalls with JSON in Elm"
+    ],
+    "relatedQuestions": []
   }
 ]
