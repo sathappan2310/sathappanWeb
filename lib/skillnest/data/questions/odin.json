@@ -143,5 +143,165 @@
       "Provide examples of error handling in real scenarios"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 6,
+    "title": "Asynchronous Programming",
+    "question": "What is the difference between callbacks, promises, and async/await in asynchronous JavaScript?",
+    "answer": "Callbacks are functions passed as arguments to other functions, promises represent the eventual completion or failure of an asynchronous operation, and async/await allows you to write asynchronous code that looks synchronous.",
+    "explanation": "Understanding these concepts is crucial for managing asynchronous operations effectively in JavaScript. Callbacks can lead to 'callback hell', while promises offer a more manageable alternative. Async/await is built on promises and allows for cleaner, more readable code.",
+    "codeExample": "function fetchData(url) {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            resolve(`Data from ${url}`);\n        }, 2000);\n    });\n}\n\nasync function getData(url) {\n    const data = await fetchData(url);\n    console.log(data);\n}",
+    "language": "JavaScript",
+    "difficulty": "Intermediate",
+    "category": "Languages",
+    "tags": [
+      "senior",
+      "JavaScript",
+      "Asynchronous"
+    ],
+    "bestPractices": [
+      "Use async/await for cleaner code",
+      "Avoid callback hell by using promises",
+      "Handle errors with try/catch"
+    ],
+    "commonMistakes": [
+      "Forgetting to return promises",
+      "Using await in non-async functions",
+      "Not properly handling rejected promises"
+    ],
+    "interviewTips": [
+      "Explain the flow of asynchronous code clearly",
+      "Provide examples from your experience",
+      "Discuss performance implications"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 7,
+    "title": "Functional Programming",
+    "question": "How does immutability benefit functional programming?",
+    "answer": "Immutability helps avoid side effects, making functions easier to reason about, test, and debug since they do not alter external states.",
+    "explanation": "Immutability is a core principle of functional programming, ensuring that data structures cannot be modified after creation. This leads to more predictable code behavior, enhancing maintainability and facilitating concurrency.",
+    "codeExample": "const originalArray = [1, 2, 3];\nconst newArray = [...originalArray, 4];\nconsole.log(originalArray); // [1, 2, 3]\nconsole.log(newArray); // [1, 2, 3, 4]",
+    "language": "JavaScript",
+    "difficulty": "Intermediate",
+    "category": "Languages",
+    "tags": [
+      "mid",
+      "JavaScript",
+      "Functional Programming"
+    ],
+    "bestPractices": [
+      "Use immutable data structures",
+      "Favor pure functions",
+      "Encapsulate side effects"
+    ],
+    "commonMistakes": [
+      "Modifying existing data structures",
+      "Overlooking the importance of pure functions",
+      "Failing to embrace higher-order functions"
+    ],
+    "interviewTips": [
+      "Discuss real-world applications",
+      "Provide examples of immutability in frameworks",
+      "Highlight performance considerations"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 8,
+    "title": "Type Safety",
+    "question": "What are the main advantages of using TypeScript over JavaScript?",
+    "answer": "TypeScript provides static type checking, better tooling support, improved code readability, and early detection of errors during development.",
+    "explanation": "Type safety helps catch errors at compile time, which can significantly reduce runtime errors and improve the overall quality of the code. Additionally, TypeScript's type system enables better documentation and understanding of the codebase.",
+    "codeExample": "function greet(name: string): string {\n    return `Hello, ${name}!`;\n}\nconst greeting = greet('World');\nconsole.log(greeting); // Hello, World!",
+    "language": "TypeScript",
+    "difficulty": "Beginner",
+    "category": "Languages",
+    "tags": [
+      "junior",
+      "TypeScript",
+      "Type Safety"
+    ],
+    "bestPractices": [
+      "Use strong typing for function parameters",
+      "Leverage interfaces and types for clarity",
+      "Keep TypeScript config strict"
+    ],
+    "commonMistakes": [
+      "Using 'any' type excessively",
+      "Not leveraging interfaces",
+      "Ignoring type errors during development"
+    ],
+    "interviewTips": [
+      "Illustrate the benefits with examples",
+      "Compare TypeScript with JavaScript directly",
+      "Discuss adoption challenges in a project"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 9,
+    "title": "Language Paradigms",
+    "question": "Can you explain the differences between imperative and declarative programming?",
+    "answer": "Imperative programming focuses on how to perform tasks using statements that change a program's state, while declarative programming focuses on what the outcome should be without explicitly stating how to achieve it.",
+    "explanation": "Understanding the distinction helps programmers choose the right approach based on the problem at hand. Imperative programming is more about control flow, while declarative programming emphasizes high-level expressions.",
+    "codeExample": "const numbers = [1, 2, 3, 4];\n// Imperative\nlet sum = 0;\nnumbers.forEach(num => {\n    sum += num;\n});\n// Declarative\nconst total = numbers.reduce((acc, num) => acc + num, 0);",
+    "language": "JavaScript",
+    "difficulty": "Advanced",
+    "category": "Languages",
+    "tags": [
+      "senior",
+      "JavaScript",
+      "Programming Paradigms"
+    ],
+    "bestPractices": [
+      "Choose the appropriate paradigm based on the task",
+      "Use declarative approaches where possible to enhance readability",
+      "Balance between performance and clarity"
+    ],
+    "commonMistakes": [
+      "Overusing imperative when declarative would suffice",
+      "Neglecting readability in favor of control flow",
+      "Failing to understand the implications of each paradigm"
+    ],
+    "interviewTips": [
+      "Provide examples from different languages",
+      "Discuss real-world applications of each paradigm",
+      "Explain your reasoning for choosing one over the other"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 10,
+    "title": "Modern JavaScript Features",
+    "question": "What are the benefits of using ES6 modules over traditional script tags?",
+    "answer": "ES6 modules offer better encapsulation, improved dependency management, and the ability to use import/export syntax, which enhances code organization and maintainability.",
+    "explanation": "Modules help in structuring large applications by promoting separation of concerns. They also allow for tree-shaking, reducing the size of the final bundle by eliminating unused code.",
+    "codeExample": "// math.js\nexport const add = (a, b) => a + b;\n\n// main.js\nimport { add } from './math.js';\nconsole.log(add(2, 3)); // 5",
+    "language": "JavaScript",
+    "difficulty": "Beginner",
+    "category": "Languages",
+    "tags": [
+      "junior",
+      "JavaScript",
+      "Modules"
+    ],
+    "bestPractices": [
+      "Use module imports for better readability",
+      "Keep modules small and focused",
+      "Avoid circular dependencies"
+    ],
+    "commonMistakes": [
+      "Neglecting to use 'type=module' in HTML",
+      "Using global scope instead of modules",
+      "Not managing dependencies properly"
+    ],
+    "interviewTips": [
+      "Discuss the transition from CommonJS to ES6",
+      "Explain the impact on build processes",
+      "Provide examples from popular frameworks"
+    ],
+    "relatedQuestions": []
   }
 ]
