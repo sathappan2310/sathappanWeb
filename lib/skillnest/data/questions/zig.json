@@ -318,5 +318,153 @@
       "Prepare examples of Zig in system projects"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 11,
+    "title": "Zig's Compile-Time Reflection",
+    "question": "How does Zig support compile-time reflection, and what are its implications for code generation?",
+    "answer": "Zig allows for compile-time reflection using the `@TypeOf` and `@field` functions, enabling developers to inspect and manipulate types at compile time.",
+    "explanation": "Compile-time reflection in Zig can be used for generating code dynamically based on types, improving code reusability and reducing boilerplate.",
+    "codeExample": "const std = @import(\"std\");\n\nfn printTypeInfo(comptime T: type) void {\n    std.debug.print(\"Type: {}\n\", .{@typeName(T)});\n}\n\npub fn main() void {\n    printTypeInfo(u32);\n}",
+    "language": "zig",
+    "difficulty": "Intermediate",
+    "category": "Language Features",
+    "tags": [
+      "senior",
+      "zig",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use reflection cautiously to ensure code maintainability",
+      "Prefer static types for clarity"
+    ],
+    "commonMistakes": [
+      "Overusing reflection leading to complicated code",
+      "Neglecting performance implications of dynamic features"
+    ],
+    "interviewTips": [
+      "Discuss practical applications of compile-time reflection",
+      "Be prepared to explain type safety in context"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 12,
+    "title": "Zig's Error Handling Philosophy",
+    "question": "What is Zig's approach to error handling, and how does it differ from traditional exception handling in other languages?",
+    "answer": "Zig uses a combination of error unions and error return values, allowing functions to return errors as a part of their return type rather than relying on exceptions.",
+    "explanation": "This approach provides clearer control flow and requires the programmer to handle errors explicitly, thus improving code reliability.",
+    "codeExample": "const std = @import(\"std\");\n\nfn mightFail() !void {\n    return error.SomeError;\n}\n\npub fn main() void {\n    const result = mightFail();\n    if (result) |err| {\n        std.debug.print(\"Error: {}\n\", .{err});\n    }\n}",
+    "language": "zig",
+    "difficulty": "Beginner",
+    "category": "Error Handling",
+    "tags": [
+      "junior",
+      "zig",
+      "programming"
+    ],
+    "bestPractices": [
+      "Always handle potential errors",
+      "Use descriptive error names"
+    ],
+    "commonMistakes": [
+      "Ignoring error return values",
+      "Using exceptions for control flow"
+    ],
+    "interviewTips": [
+      "Emphasize the contrast between Zig's method and traditional exceptions",
+      "Provide examples of error management in Zig"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 13,
+    "title": "Using Zig for WebAssembly",
+    "question": "How can Zig be utilized to compile to WebAssembly, and what are the benefits of using Zig for this purpose?",
+    "answer": "Zig can compile to WebAssembly by using the `--target=wasm32-unknown-unknown` flag, allowing developers to write high-performance web applications.",
+    "explanation": "Zig's low-level control over memory and optimization capabilities makes it a great choice for performance-critical WebAssembly applications.",
+    "codeExample": "// Zig code to compile to WebAssembly\nconst std = @import(\"std\");\n\npub fn main() void {\n    std.debug.print(\"Hello WebAssembly!\n\", .{});\n}",
+    "language": "zig",
+    "difficulty": "Advanced",
+    "category": "Web Development",
+    "tags": [
+      "senior",
+      "zig",
+      "webassembly",
+      "programming"
+    ],
+    "bestPractices": [
+      "Optimize memory usage in WebAssembly",
+      "Minimize binary size for faster downloads"
+    ],
+    "commonMistakes": [
+      "Neglecting WebAssembly limitations",
+      "Not testing across different browsers"
+    ],
+    "interviewTips": [
+      "Highlight Zig's performance advantages",
+      "Discuss potential pitfalls in WebAssembly"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 14,
+    "title": "Zig's Build Configuration",
+    "question": "What are build configurations in Zig, and how do they enable flexible project setups?",
+    "answer": "Build configurations in Zig are set using the `build.zig` file, which allows customization of the build process through target architectures, dependency management, and compilation flags.",
+    "explanation": "This flexibility enables developers to tailor their builds for different environments or deployment targets without changing source code.",
+    "codeExample": "const Builder = @import(\"std\").build;\n\npub fn build(b: *Builder) void {\n    const exe = b.addExecutable(\"my_program\", \"src/main.zig\");\n    exe.setTarget(b.getTarget());\n    // Additional settings can be applied here\n}",
+    "language": "zig",
+    "difficulty": "Intermediate",
+    "category": "Build System",
+    "tags": [
+      "mid",
+      "zig",
+      "buildsystem",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use build.zig for complex projects",
+      "Keep build logic separate from source code"
+    ],
+    "commonMistakes": [
+      "Hardcoding paths in build files",
+      "Ignoring cross-compilation needs"
+    ],
+    "interviewTips": [
+      "Discuss the importance of build configuration for team projects",
+      "Be prepared to explain how to optimize builds"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 15,
+    "title": "Memory Management in Zig",
+    "question": "Describe how Zig handles memory management compared to garbage-collected languages.",
+    "answer": "Zig uses manual memory management with an explicit allocator, allowing precise control over memory allocation and deallocation without a garbage collector.",
+    "explanation": "This approach gives developers the ability to optimize memory usage but requires careful management to avoid leaks and fragmentation.",
+    "codeExample": "const std = @import(\"std\");\n\npub fn main() void {\n    var allocator = std.heap.pageAllocator;\n    var mem = allocator.alloc(u32, 10) catch |err| {\n        std.debug.print(\"Allocation error: {}\n\", .{err});\n        return;\n    };\n    // Use memory...\n    allocator.free(mem);\n}",
+    "language": "zig",
+    "difficulty": "Advanced",
+    "category": "Memory Management",
+    "tags": [
+      "senior",
+      "zig",
+      "memory",
+      "programming"
+    ],
+    "bestPractices": [
+      "Always free allocated memory",
+      "Use custom allocators for performance-critical applications"
+    ],
+    "commonMistakes": [
+      "Forgetting to free memory",
+      "Overusing the default allocator without understanding its trade-offs"
+    ],
+    "interviewTips": [
+      "Explain the benefits of manual memory management",
+      "Discuss scenarios where Zig's approach is advantageous"
+    ],
+    "relatedQuestions": []
   }
 ]
