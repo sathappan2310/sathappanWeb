@@ -290,5 +290,165 @@
       "Provide examples of testing frameworks you have used"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 11,
+    "title": "Mojo's Functional Programming Features",
+    "question": "What are some key functional programming features in Mojo, and how can they be utilized in developing applications?",
+    "answer": "Mojo supports higher-order functions, first-class functions, and immutability, which allow developers to write cleaner and more maintainable code.",
+    "explanation": "Functional programming concepts such as higher-order functions and immutability promote a declarative style of programming that can lead to fewer side effects and easier debugging.",
+    "codeExample": "def applyFunction(func, value):\n    return func(value)\n\nresult = applyFunction(lambda x: x * 2, 5)  # result is 10",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Functional Programming",
+    "tags": [
+      "mid",
+      "functional",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use pure functions when possible",
+      "Minimize side effects",
+      "Leverage higher-order functions"
+    ],
+    "commonMistakes": [
+      "Neglecting immutability",
+      "Overcomplicating functions",
+      "Not using callbacks effectively"
+    ],
+    "interviewTips": [
+      "Discuss examples of functional programming in other languages",
+      "Highlight advantages of functional programming",
+      "Be prepared to write code on the spot"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 12,
+    "title": "Mojo's Integration with Web Technologies",
+    "question": "How can Mojo be used effectively to build modern web applications?",
+    "answer": "Mojo can be integrated with web technologies through frameworks and APIs that allow for building RESTful services and handling HTTP requests.",
+    "explanation": "Understanding how Mojo interacts with web protocols and frameworks is essential in modern application development, especially for creating scalable and responsive web applications.",
+    "codeExample": "import mojo.web\n\n@mojo.web.route('/api/data')\ndef getData():\n    return {'key': 'value'}",
+    "language": "Mojo",
+    "difficulty": "Beginner",
+    "category": "Web Development",
+    "tags": [
+      "junior",
+      "web",
+      "development"
+    ],
+    "bestPractices": [
+      "Follow RESTful conventions",
+      "Implement security measures",
+      "Optimize for performance"
+    ],
+    "commonMistakes": [
+      "Ignoring error handling",
+      "Not validating inputs",
+      "Mismanaging state"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with web protocols",
+      "Discuss your experience with web applications",
+      "Be ready to demonstrate a simple API endpoint"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 13,
+    "title": "Mojo's Asynchronous Programming",
+    "question": "What are the approaches to asynchronous programming in Mojo, and how do they compare to traditional synchronous methods?",
+    "answer": "Mojo employs async/await syntax, allowing developers to write non-blocking code that improves application responsiveness without the complexity of traditional callbacks.",
+    "explanation": "Asynchronous programming is crucial for handling I/O-bound tasks efficiently, and understanding its implementation in Mojo can significantly enhance application performance.",
+    "codeExample": "async def fetchData():\n    response = await http.get('https://api.example.com/data')\n    return response.json()",
+    "language": "Mojo",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "async",
+      "programming"
+    ],
+    "bestPractices": [
+      "Use async/await for I/O operations",
+      "Avoid blocking calls",
+      "Implement timeout and error handling"
+    ],
+    "commonMistakes": [
+      "Using blocking code inside async functions",
+      "Neglecting to await on promises",
+      "Misunderstanding event loop behavior"
+    ],
+    "interviewTips": [
+      "Explain the benefits of async programming",
+      "Show examples of async code",
+      "Prepare to discuss potential pitfalls and solutions"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 14,
+    "title": "Mojo's Ecosystem and Tooling",
+    "question": "What tools and libraries are available in the Mojo ecosystem, and how do they aid in development?",
+    "answer": "Mojo has a growing ecosystem that includes libraries for data manipulation, web frameworks, and testing tools, which streamline the development process.",
+    "explanation": "Familiarity with the tools and libraries in the Mojo ecosystem can enhance productivity and allow for more efficient development practices.",
+    "codeExample": "import mojo.testing as testing\n\n@testing.run\ndef test_example():\n    assert(1 + 1 == 2)",
+    "language": "Mojo",
+    "difficulty": "Intermediate",
+    "category": "Development Tools",
+    "tags": [
+      "mid",
+      "tools",
+      "development"
+    ],
+    "bestPractices": [
+      "Stay updated with the latest libraries",
+      "Leverage community resources",
+      "Read documentation thoroughly"
+    ],
+    "commonMistakes": [
+      "Not using available libraries",
+      "Ignoring community contributions",
+      "Underestimating the importance of testing tools"
+    ],
+    "interviewTips": [
+      "Be knowledgeable about popular libraries",
+      "Discuss how tools improve workflow",
+      "Demonstrate usage of a specific library"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 15,
+    "title": "Mojo for Data Processing",
+    "question": "How can Mojo be utilized for data processing tasks, and what advantages does it offer over other languages?",
+    "answer": "Mojo's efficiency and powerful syntax make it suitable for data processing tasks, especially when handling large datasets or requiring complex transformations.",
+    "explanation": "Mojo's design and performance characteristics can significantly enhance data processing workflows, making it a competitive choice for data-intensive applications.",
+    "codeExample": "data = [1, 2, 3, 4]\nprocessed = [x * 2 for x in data]",
+    "language": "Mojo",
+    "difficulty": "Advanced",
+    "category": "Data Processing",
+    "tags": [
+      "senior",
+      "data",
+      "processing"
+    ],
+    "bestPractices": [
+      "Utilize built-in functions for efficiency",
+      "Optimize data structures for processing",
+      "Profile code for performance"
+    ],
+    "commonMistakes": [
+      "Inefficient data handling",
+      "Not considering scalability",
+      "Neglecting memory management"
+    ],
+    "interviewTips": [
+      "Highlight specific data processing use cases",
+      "Discuss performance comparisons with other languages",
+      "Be ready to solve data manipulation problems live"
+    ],
+    "relatedQuestions": []
   }
 ]
