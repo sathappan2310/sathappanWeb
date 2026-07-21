@@ -303,5 +303,165 @@
       "Understand the trade-offs of using WebAssembly"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 11,
+    "title": "Gleam's Performance Optimization",
+    "question": "What are some strategies to optimize performance in Gleam applications?",
+    "answer": "Some strategies include leveraging immutable data structures, minimizing data copying, using efficient algorithms, and profiling the application to identify bottlenecks.",
+    "explanation": "Optimizing performance in Gleam can involve understanding how data is handled and utilizing the language's features effectively to enhance execution speed and reduce resource consumption.",
+    "codeExample": "fn optimize_example() {\n    let data = [1, 2, 3, 4, 5];\n    let result = data |> List.map(fn x -> x * 2);\n    // Efficiently processes the list without unnecessary copies\n}",
+    "language": "Gleam",
+    "difficulty": "Intermediate",
+    "category": "Performance",
+    "tags": [
+      "mid",
+      "performance",
+      "optimization"
+    ],
+    "bestPractices": [
+      "Profile your application regularly",
+      "Use immutable data structures",
+      "Avoid deep nested data access"
+    ],
+    "commonMistakes": [
+      "Neglecting to benchmark changes",
+      "Over-optimizing prematurely",
+      "Using mutable data where immutability is preferred"
+    ],
+    "interviewTips": [
+      "Explain your reasoning behind each optimization strategy",
+      "Provide examples from your experience",
+      "Mention tools you've used for profiling"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 12,
+    "title": "Integration with External APIs",
+    "question": "How would you design a Gleam application to integrate with an external REST API?",
+    "answer": "You would define a module for API interactions, handle HTTP requests, process responses, and implement error handling for different HTTP status codes.",
+    "explanation": "Designing API integrations requires understanding both the external API's structure and how to handle data exchange securely and efficiently in Gleam.",
+    "codeExample": "fn fetch_data(api_url) {\n    http.get(api_url)\n    |> Result.and_then(fn response ->\n        case response.status_code {\n            200 -> Result.ok(response.body);\n            _ -> Result.error(\"API error\");\n        }\n    );\n}",
+    "language": "Gleam",
+    "difficulty": "Intermediate",
+    "category": "Integration",
+    "tags": [
+      "mid",
+      "api",
+      "integration"
+    ],
+    "bestPractices": [
+      "Use a dedicated module for API logic",
+      "Implement rate limiting and retries",
+      "Follow API documentation closely"
+    ],
+    "commonMistakes": [
+      "Ignoring error handling",
+      "Not validating API responses",
+      "Hardcoding API URLs"
+    ],
+    "interviewTips": [
+      "Discuss your approach to handling different response types",
+      "Mention any libraries or tools you would use",
+      "Consider security in your design"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 13,
+    "title": "Gleam's Concurrency Model",
+    "question": "Explain how Gleam handles concurrency and how it differs from other languages.",
+    "answer": "Gleam uses a lightweight concurrency model based on the Erlang VM, leveraging actors for isolated state and message passing to handle concurrent operations.",
+    "explanation": "This model allows developers to build highly concurrent applications without the complexity of traditional threading models, reducing issues like race conditions.",
+    "codeExample": "fn actor_example() {\n    let actor = Actor.spawn(fn msg ->\n        case msg {\n            \"do_something\" -> /* handle message */\n        }\n    );\n    Actor.send(actor, \"do_something\");\n}",
+    "language": "Gleam",
+    "difficulty": "Advanced",
+    "category": "Concurrency",
+    "tags": [
+      "senior",
+      "concurrency",
+      "actors"
+    ],
+    "bestPractices": [
+      "Use message passing for communication",
+      "Keep actor state isolated",
+      "Test concurrency scenarios thoroughly"
+    ],
+    "commonMistakes": [
+      "Mixing actor state with global state",
+      "Not considering message ordering",
+      "Ignoring error handling in messages"
+    ],
+    "interviewTips": [
+      "Provide comparisons with other languages' concurrency models",
+      "Discuss the advantages of using actors",
+      "Share experiences of working on concurrent systems"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 14,
+    "title": "Gleam and its Ecosystem",
+    "question": "What is the importance of Gleam's ecosystem and how do you leverage it in projects?",
+    "answer": "The Gleam ecosystem provides libraries, tools, and community resources that enhance development efficiency and enable code reuse across projects.",
+    "explanation": "Understanding the ecosystem allows developers to avoid reinventing the wheel, utilizing existing solutions and contributing to the community.",
+    "codeExample": "fn use_library_example() {\n    let result = some_gleam_library.perform_action();\n    // Using an external library for enhanced functionality\n}",
+    "language": "Gleam",
+    "difficulty": "Beginner",
+    "category": "Ecosystem",
+    "tags": [
+      "junior",
+      "ecosystem",
+      "libraries"
+    ],
+    "bestPractices": [
+      "Explore community libraries early",
+      "Contribute back to open-source projects",
+      "Stay updated with ecosystem changes"
+    ],
+    "commonMistakes": [
+      "Overlooking library documentation",
+      "Not checking for library updates",
+      "Duplicating existing functionality"
+    ],
+    "interviewTips": [
+      "Mention libraries you've used and their impact",
+      "Discuss how you stay informed about the ecosystem",
+      "Consider the impact of third-party tools on your code"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 15,
+    "title": "Gleam's Debugging Techniques",
+    "question": "What debugging techniques are effective in Gleam and how do they differ from other languages?",
+    "answer": "Effective debugging techniques in Gleam include using logging, leveraging the Erlang VM's debugging tools, and employing unit tests to catch issues early.",
+    "explanation": "Debugging in Gleam can be different due to its functional nature and the tools available in the Erlang ecosystem, making it crucial to adopt appropriate strategies.",
+    "codeExample": "fn debug_example() {\n    let data = some_function();\n    gleam.log(data); // Using logging for debugging\n}",
+    "language": "Gleam",
+    "difficulty": "Intermediate",
+    "category": "Debugging",
+    "tags": [
+      "mid",
+      "debugging",
+      "logging"
+    ],
+    "bestPractices": [
+      "Use logging consistently",
+      "Write unit tests for critical functions",
+      "Familiarize yourself with Erlang's debugging tools"
+    ],
+    "commonMistakes": [
+      "Relying solely on print statements",
+      "Neglecting error cases in tests",
+      "Ignoring the importance of reproducible tests"
+    ],
+    "interviewTips": [
+      "Discuss specific debugging experiences",
+      "Explain how you prioritize debugging tasks",
+      "Mention tools or strategies you've found helpful"
+    ],
+    "relatedQuestions": []
   }
 ]
