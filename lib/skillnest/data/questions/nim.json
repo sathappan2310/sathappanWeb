@@ -293,5 +293,167 @@
       "Be ready to discuss the importance of testing"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 11,
+    "title": "Nim Packages and Modules",
+    "question": "How do you create and use packages in Nim, and what is the role of the `nimble` package manager?",
+    "answer": "Packages in Nim are created by defining a `.nimble` file, which describes the package, its dependencies, and metadata. You can use `nimble` to install, build, and manage packages.",
+    "explanation": "Nimble is the package manager for Nim, allowing developers to easily share and manage Nim packages. Understanding how to create and utilize packages is essential for code organization and reuse.",
+    "codeExample": "import nimble\n\n# Example of defining a simple package\n# my_package.nimble\nname=\"my_package\"\ndescription=\"A simple package\"\nmaturity=\"unstable\"\ndepends=\"some_dependency\"\n",
+    "language": "Nim",
+    "difficulty": "Intermediate",
+    "category": "Development",
+    "tags": [
+      "mid",
+      "Nim",
+      "package management"
+    ],
+    "bestPractices": [
+      "Use clear naming conventions for packages",
+      "Regularly update dependencies",
+      "Document package functionalities"
+    ],
+    "commonMistakes": [
+      "Not specifying dependencies",
+      "Neglecting package documentation",
+      "Forgetting to update .nimble file after changes"
+    ],
+    "interviewTips": [
+      "Be prepared to discuss your experience with package management",
+      "Highlight any packages you've created or contributed to",
+      "Understand common Nimble commands"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 12,
+    "title": "Nim's FFI (Foreign Function Interface)",
+    "question": "Explain how to use Nim's FFI to interact with C libraries. What are the benefits of doing so?",
+    "answer": "Nim's FFI allows you to call C functions directly by using `importc` to declare external C functions. This enables the use of existing C libraries, enhancing performance and functionality.",
+    "explanation": "Using FFI can save development time by allowing Nim developers to leverage existing C libraries, which are often highly optimized and well-tested.",
+    "codeExample": "importc \"printf\" # Importing C's printf function\n\nproc main() =\n  printf(\"Hello from Nim!\\n\")\n\nmain()",
+    "language": "Nim",
+    "difficulty": "Advanced",
+    "category": "Development",
+    "tags": [
+      "senior",
+      "Nim",
+      "FFI",
+      "C interoperability"
+    ],
+    "bestPractices": [
+      "Ensure correct data types are used",
+      "Handle memory management carefully",
+      "Check for compatibility issues"
+    ],
+    "commonMistakes": [
+      "Mismatched data types between Nim and C",
+      "Ignoring error handling from C functions",
+      "Not considering cross-platform compatibility"
+    ],
+    "interviewTips": [
+      "Familiarize yourself with common C libraries",
+      "Be prepared to explain memory management between Nim and C",
+      "Discuss your experience with FFI in projects"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 13,
+    "title": "Nim's Code Optimization Techniques",
+    "question": "What techniques can be utilized to optimize code performance in Nim?",
+    "answer": "Code optimization techniques in Nim include using `inline` for frequently called functions, avoiding unnecessary allocations, and leveraging the compiler's optimization flags.",
+    "explanation": "Understanding and applying optimization techniques can significantly enhance the performance of Nim applications, making them more efficient.",
+    "codeExample": "proc inlineExample(a: int, b: int): int {.inline.} =\n  return a + b\n\nlet result = inlineExample(3, 5)",
+    "language": "Nim",
+    "difficulty": "Intermediate",
+    "category": "Performance",
+    "tags": [
+      "mid",
+      "Nim",
+      "performance optimization"
+    ],
+    "bestPractices": [
+      "Profile code before optimizing",
+      "Avoid premature optimizations",
+      "Use compiler options for optimization"
+    ],
+    "commonMistakes": [
+      "Not testing after optimizations",
+      "Over-optimizing small sections of code",
+      "Ignoring compiler warnings"
+    ],
+    "interviewTips": [
+      "Be ready to discuss specific optimizations you've implemented",
+      "Understand trade-offs of different optimization strategies",
+      "Show familiarity with performance profiling tools"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 14,
+    "title": "Nim's Reflection and RTTI",
+    "question": "What is Runtime Type Information (RTTI) in Nim, and how can it be utilized?",
+    "answer": "RTTI in Nim provides information about types at runtime, allowing for dynamic type checks and type conversions, facilitating more flexible code.",
+    "explanation": "Understanding RTTI empowers developers to create more dynamic and adaptable code, which can be crucial for applications requiring runtime flexibility.",
+    "codeExample": "import typetraits\n\nproc checkType[T](value: T) =\n  echo getTypeName(value)\n\ncheckType(42)\ncheckType(\"Hello\")",
+    "language": "Nim",
+    "difficulty": "Advanced",
+    "category": "Development",
+    "tags": [
+      "senior",
+      "Nim",
+      "RTTI",
+      "dynamic typing"
+    ],
+    "bestPractices": [
+      "Use RTTI judiciously to avoid performance overhead",
+      "Document usage of RTTI in your code",
+      "Combine RTTI with design patterns where applicable"
+    ],
+    "commonMistakes": [
+      "Excessive reliance on RTTI",
+      "Not checking for type safety",
+      "Ignoring performance implications of RTTI usage"
+    ],
+    "interviewTips": [
+      "Discuss scenarios where RTTI can be beneficial",
+      "Be prepared to demonstrate RTTI with examples",
+      "Understand the implications of using RTTI in performance-critical applications"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 15,
+    "title": "Nim's Asynchronous Programming",
+    "question": "How does asynchronous programming work in Nim, and what constructs are available for it?",
+    "answer": "Asynchronous programming in Nim is facilitated through the `async` and `await` constructs, allowing for non-blocking execution of tasks.",
+    "explanation": "Mastering asynchronous programming is essential for developing responsive applications, especially those that involve I/O operations.",
+    "codeExample": "import asyncdispatch\n\nproc mainAsync() {.async.} =\n  echo \"Starting async task...\"\n  await sleepAsync(1000)\n  echo \"Async task completed.\"\n\nasyncMain(mainAsync)",
+    "language": "Nim",
+    "difficulty": "Intermediate",
+    "category": "Development",
+    "tags": [
+      "mid",
+      "Nim",
+      "async programming"
+    ],
+    "bestPractices": [
+      "Avoid blocking calls in async code",
+      "Handle exceptions in async tasks",
+      "Use structured concurrency patterns"
+    ],
+    "commonMistakes": [
+      "Forgetting to `await` on async calls",
+      "Creating too many concurrent tasks",
+      "Not handling errors properly in async code"
+    ],
+    "interviewTips": [
+      "Explain the difference between synchronous and asynchronous execution",
+      "Discuss your experience with async code patterns",
+      "Prepare to demonstrate async functionality with examples"
+    ],
+    "relatedQuestions": []
   }
 ]
