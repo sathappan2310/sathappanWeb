@@ -305,5 +305,150 @@
       2,
       4
     ]
+  },
+  {
+    "id": 11,
+    "title": "Metaprogramming in Crystal",
+    "question": "What is metaprogramming in Crystal and how can it be utilized to enhance code reuse?",
+    "answer": "Metaprogramming in Crystal allows developers to write code that can modify itself during compilation. It enhances code reuse by enabling the generation of repetitive code patterns based on defined templates.",
+    "explanation": "In Crystal, metaprogramming is achieved using macros. This feature can automate tasks that would otherwise require manual coding, thus reducing errors and increasing maintainability.",
+    "codeExample": "macro create_method(name)\n  def {{name}}(arg : String)\n    \"This is method #{name}\"\n  end\nend\n\ncreate_method('greet')\n\nputs greet('World')",
+    "language": "Crystal",
+    "difficulty": "Intermediate",
+    "category": "Metaprogramming",
+    "tags": [
+      "mid",
+      "crystal",
+      "metaprogramming"
+    ],
+    "bestPractices": [
+      "Document metaprogramming code clearly",
+      "Avoid overusing macros to maintain readability"
+    ],
+    "commonMistakes": [
+      "Creating overly complex macros",
+      "Not testing generated code thoroughly"
+    ],
+    "interviewTips": [
+      "Be prepared to explain when to use metaprogramming",
+      "Provide examples of practical use cases"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 12,
+    "title": "Crystal and Type Safety",
+    "question": "How does Crystal ensure type safety, and what practices should be followed to maintain it?",
+    "answer": "Crystal ensures type safety through its strict type system, which checks types at compile time. Developers should use explicit type annotations and avoid dynamic typing where possible.",
+    "explanation": "Type safety in Crystal helps catch errors early in the development process. Using clear type declarations allows the compiler to effectively validate code and prevent runtime errors.",
+    "codeExample": "def add(a : Int32, b : Int32) : Int32\n  a + b\nend\n\nputs add(2, 3)",
+    "language": "Crystal",
+    "difficulty": "Beginner",
+    "category": "Type Safety",
+    "tags": [
+      "junior",
+      "crystal",
+      "type safety"
+    ],
+    "bestPractices": [
+      "Use explicit types for function parameters",
+      "Avoid using 'Any' type unless necessary"
+    ],
+    "commonMistakes": [
+      "Neglecting type annotations",
+      "Mixing incompatible types without checks"
+    ],
+    "interviewTips": [
+      "Discuss the benefits of a strong type system",
+      "Mention examples from your experience with type safety"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 13,
+    "title": "Crystal's Concurrency Model",
+    "question": "Explain how Crystal's concurrency model differs from traditional threading models.",
+    "answer": "Crystal uses fibers for concurrency, allowing lightweight concurrent execution without the overhead of OS threads. This model simplifies concurrency by using cooperative multitasking.",
+    "explanation": "Unlike traditional threading models, which can lead to issues like deadlocks or race conditions, Crystal's fibers provide a more controlled and straightforward approach to concurrent programming.",
+    "codeExample": "fiber1 = spawn do\n  puts \"Fiber 1\"\nend\n\nfiber2 = spawn do\n  puts \"Fiber 2\"\nend\n\nfiber1.wait\nfiber2.wait",
+    "language": "Crystal",
+    "difficulty": "Intermediate",
+    "category": "Concurrency",
+    "tags": [
+      "mid",
+      "crystal",
+      "concurrency"
+    ],
+    "bestPractices": [
+      "Use fibers for lightweight concurrent tasks",
+      "Avoid blocking operations inside fibers"
+    ],
+    "commonMistakes": [
+      "Assuming fibers are the same as threads",
+      "Neglecting synchronization when accessing shared data"
+    ],
+    "interviewTips": [
+      "Explain the advantages of using fibers",
+      "Discuss potential pitfalls of concurrency"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 14,
+    "title": "Building CLI Tools in Crystal",
+    "question": "What are the key considerations when building command-line interface (CLI) tools in Crystal?",
+    "answer": "Key considerations include user input handling, argument parsing, and providing clear help documentation. Utilizing Crystal's built-in libraries for CLI development can streamline the process.",
+    "explanation": "Crystal provides libraries like `OptionParser` to handle command-line arguments efficiently. Proper documentation enhances usability and helps users understand tool functionality.",
+    "codeExample": "require \"option_parser\"\n\noptions = {\n  verbose: false\n}\n\nOptionParser.parse do |parser|\n  parser.on(\"--verbose\", \"Enable verbose output\") do\n    options[:verbose] = true\n  end\nend\n\nputs options[:verbose] ? \"Verbose mode on\" : \"Verbose mode off\"",
+    "language": "Crystal",
+    "difficulty": "Beginner",
+    "category": "CLI Development",
+    "tags": [
+      "junior",
+      "crystal",
+      "cli"
+    ],
+    "bestPractices": [
+      "Provide clear usage instructions",
+      "Handle errors gracefully"
+    ],
+    "commonMistakes": [
+      "Ignoring edge cases in user input",
+      "Failing to validate command-line arguments"
+    ],
+    "interviewTips": [
+      "Share any CLI tools you've built",
+      "Discuss the importance of user experience in CLI design"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 15,
+    "title": "Working with Crystal's JSON Module",
+    "question": "How does Crystal handle JSON serialization and deserialization, and what are the best practices?",
+    "answer": "Crystal provides the `JSON` module for easy serialization and deserialization. Best practices include defining clear structs for JSON mapping and ensuring error handling during parsing.",
+    "explanation": "Using the `JSON` module, developers can convert Crystal objects to JSON and vice versa, making it simple to work with web APIs and data interchange formats.",
+    "codeExample": "require \"json\"\n\nstruct User\n  JSON::Serializable\n  getter name : String\n  getter age : Int32\nend\n\nuser = User.new(\"Alice\", 30)\njson_output = user.to_json\nputs json_output\n\nparsed_user = User.from_json(json_output)",
+    "language": "Crystal",
+    "difficulty": "Intermediate",
+    "category": "Data Handling",
+    "tags": [
+      "mid",
+      "crystal",
+      "json"
+    ],
+    "bestPractices": [
+      "Define clear structs for serialization",
+      "Handle potential parsing errors"
+    ],
+    "commonMistakes": [
+      "Neglecting to validate JSON structure",
+      "Using dynamic types without proper checks"
+    ],
+    "interviewTips": [
+      "Discuss your experience with APIs",
+      "Mention how you ensure data integrity when handling JSON"
+    ],
+    "relatedQuestions": []
   }
 ]
