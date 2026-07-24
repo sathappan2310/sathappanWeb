@@ -293,5 +293,158 @@
       "Understand the benefits of FRP over traditional approaches"
     ],
     "relatedQuestions": []
+  },
+  {
+    "id": 11,
+    "title": "Using OCaml's Standard Library",
+    "question": "What are some common modules in OCaml's standard library, and how can they be used effectively?",
+    "answer": "OCaml's standard library includes modules such as List, Array, and Option. The List module provides functions for list manipulation, Array for mutable arrays, and Option for handling optional values without nulls.",
+    "explanation": "Familiarity with the standard library is crucial for effective OCaml programming. It provides built-in functions and types that can simplify common tasks.",
+    "codeExample": "open List\n\nlet example_list = [1; 2; 3; 4; 5]\nlet doubled = map (fun x -> x * 2) example_list\n(* doubled is now [2; 4; 6; 8; 10] *)",
+    "language": "OCaml",
+    "difficulty": "Beginner",
+    "category": "Core Language",
+    "tags": [
+      "junior",
+      "ocaml",
+      "libraries"
+    ],
+    "bestPractices": [
+      "Familiarize with standard modules",
+      "Use built-in functions to avoid reinventing the wheel"
+    ],
+    "commonMistakes": [
+      "Not checking module documentation",
+      "Overlooking performance implications of certain functions"
+    ],
+    "interviewTips": [
+      "Demonstrate knowledge of various modules",
+      "Provide examples of using modules in real scenarios"
+    ],
+    "relatedQuestions": []
+  },
+  {
+    "id": 12,
+    "title": "OCaml's Functor Mechanism",
+    "question": "Can you explain what functors are in OCaml and provide an example of their use?",
+    "answer": "Functors in OCaml are modules that are parameterized by other modules. They allow for the creation of generic and reusable module components.",
+    "explanation": "Understanding functors is important for modular programming in OCaml, enabling code that can operate on different types while maintaining type safety.",
+    "codeExample": "module type Comparable = sig\n  type t\n  val compare : t -> t -> int\nend\n\nmodule MakeSet (C : Comparable) = struct\n  type element = C.t\n  type t = ... (* Set implementation using C.compare *)\nend\n",
+    "language": "OCaml",
+    "difficulty": "Intermediate",
+    "category": "Advanced Concepts",
+    "tags": [
+      "mid",
+      "ocaml",
+      "functors"
+    ],
+    "bestPractices": [
+      "Use functors to create reusable components",
+      "Clearly define module types for parameters"
+    ],
+    "commonMistakes": [
+      "Confusing functors with first-class functions",
+      "Not providing clear signatures for functors"
+    ],
+    "interviewTips": [
+      "Discuss practical use cases for functors",
+      "Be prepared to write a simple functor during the interview"
+    ],
+    "relatedQuestions": [
+      1
+    ]
+  },
+  {
+    "id": 13,
+    "title": "OCaml's GADTs",
+    "question": "What are Generalized Algebraic Data Types (GADTs) in OCaml, and how do they differ from regular algebraic data types?",
+    "answer": "GADTs allow you to specify the return type of constructors, enabling more precise type-checking and supporting more complex data structures.",
+    "explanation": "Understanding GADTs is crucial for advanced type manipulation and can significantly enhance type safety in OCaml applications.",
+    "codeExample": "type _ expr =\n  | Int : int -> int expr\n  | Add : ('a expr * 'a expr) -> 'a expr\n\nlet rec eval : type a. a expr -> a = function\n  | Int n -> n\n  | Add (x, y) -> eval x + eval y",
+    "language": "OCaml",
+    "difficulty": "Advanced",
+    "category": "Type System",
+    "tags": [
+      "senior",
+      "ocaml",
+      "type-safety"
+    ],
+    "bestPractices": [
+      "Use GADTs for more precise type representations",
+      "Leverage GADTs in complex type scenarios"
+    ],
+    "commonMistakes": [
+      "Misunderstanding the type implications of GADTs",
+      "Overusing GADTs where simple types would suffice"
+    ],
+    "interviewTips": [
+      "Explain GADTs with examples",
+      "Discuss the benefits of type safety in OCaml"
+    ],
+    "relatedQuestions": [
+      2
+    ]
+  },
+  {
+    "id": 14,
+    "title": "OCaml's Type-Driven Development",
+    "question": "What is type-driven development in OCaml, and how does it affect the software development process?",
+    "answer": "Type-driven development emphasizes leveraging the type system to guide design decisions, resulting in safer and more maintainable code.",
+    "explanation": "This approach can lead to fewer runtime errors and better documentation through types, making it an essential practice in OCaml programming.",
+    "codeExample": "type user = { name : string; age : int }\nlet create_user name age = { name; age }\n(* The types guide the creation of a user record *)",
+    "language": "OCaml",
+    "difficulty": "Intermediate",
+    "category": "Development Methodologies",
+    "tags": [
+      "mid",
+      "ocaml",
+      "development"
+    ],
+    "bestPractices": [
+      "Design interfaces that reflect usage",
+      "Use types to communicate intent and constraints"
+    ],
+    "commonMistakes": [
+      "Ignoring the type system",
+      "Overcomplicating types leading to confusion"
+    ],
+    "interviewTips": [
+      "Share experiences where types improved your code",
+      "Discuss how types helped catch bugs early"
+    ],
+    "relatedQuestions": [
+      3
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Metaprogramming in OCaml",
+    "question": "How does metaprogramming work in OCaml, and what are its practical applications?",
+    "answer": "Metaprogramming in OCaml can be achieved through macros, ppx extensions, and other metaprogramming techniques to generate code at compile time.",
+    "explanation": "These techniques allow developers to write less code, enforce constraints, or create domain-specific languages tailored to specific problems.",
+    "codeExample": "// Example with ppx to generate a simple logging function\nlet%ppx log x = Printf.printf \"%s\\n\" x\n(* This macro can generate logging calls automatically *)",
+    "language": "OCaml",
+    "difficulty": "Advanced",
+    "category": "Metaprogramming",
+    "tags": [
+      "senior",
+      "ocaml",
+      "metaprogramming"
+    ],
+    "bestPractices": [
+      "Use metaprogramming to reduce boilerplate",
+      "Create reusable code generation patterns"
+    ],
+    "commonMistakes": [
+      "Overusing metaprogramming leading to complexity",
+      "Not documenting generated code properly"
+    ],
+    "interviewTips": [
+      "Discuss specific projects where you applied metaprogramming",
+      "Be prepared to showcase a simple metaprogramming example"
+    ],
+    "relatedQuestions": [
+      4
+    ]
   }
 ]
